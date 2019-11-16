@@ -1,37 +1,32 @@
-## Welcome to GitHub Pages
+# Generating Kernel Modules.
 
-You can use the [editor on GitHub](https://github.com/vroncevic/gen_kernel_module/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+The README is used to introduce the modules and provide instructions on
+how to install the modules, any machine dependencies it may have and any
+other information that should be provided before the modules are installed.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+### INSTALLATION
 
-### Markdown
+To install this set of modules type the following:
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+```
+cp -R ~/gen_kerenel_module/bin/   /root/scripts/gen_kerenel_module/ver.1.0/
+cp -R ~/gen_kerenel_module/conf/  /root/scripts/gen_kerenel_module/ver.1.0/
+cp -R ~/gen_kerenel_module/log/   /root/scripts/gen_kerenel_module/ver.1.0/
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+### DEPENDENCIES
 
-### Jekyll Themes
+This module requires these other modules and libraries:
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/vroncevic/gen_kernel_module/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+* ats_utilities https://vroncevic.github.io/ats_utilities
 
-### Support or Contact
+### COPYRIGHT AND LICENCE
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+Copyright (C) 2018 by https://vroncevic.github.io/gen_kernel_module
+
+This tool is free software; you can redistribute it and/or modify
+it under the same terms as Python itself, either Python version 2.7/3.4 or,
+at your option, any later version of Python 3 you may have available.
+
+:sparkles:
+
