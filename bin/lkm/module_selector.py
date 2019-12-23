@@ -46,7 +46,8 @@ class ModuleSelector(object):
                 VERBOSE - Console text indicator for current process-phase
                 CharDev - 0 LKM Charachter Device
                 BlkDev - 1 LKM Block Device
-                NetDev - 3 LKM Network Interface
+                NetDev - 2 LKM Network Interface
+                VMADev - 3 LKM Virtual Memory Address
                 Cancel - 4 Cancel option
                 __MODULES - Dictionary with option/description
             method:
@@ -58,15 +59,17 @@ class ModuleSelector(object):
         'CharDev',
         'BlkDev',
         'NetDev',
+        'VMADev',
         'Cancel',
         '__MODULES'
     )
     VERBOSE = 'GEN_KERNEL_MODULE::LKM::MODULE_SELECTOR'
-    CharDev, BlkDev, NetDev, Cancel = range(4)
+    CharDev, BlkDev, NetDev, VMADev, Cancel = range(5)
     __MODULES = {
         CharDev: "LKM Charachter Device",
         BlkDev: "LKM Block Device",
         NetDev: 'LKM Network Interface',
+        VMADev: 'LKM Virtual Memory Address',
         Cancel: "Cancel"
     }
 
@@ -76,7 +79,7 @@ class ModuleSelector(object):
             Choose type of kernel module.
             :param verbose: Enable/disable verbose option
             :type verbose: <bool>
-            :return: Type of data model (0, 1, 2)
+            :return: Type of data model {0, 1, 2, 3, 4}
             :rtype: <int>
             :exceptions: None
         """

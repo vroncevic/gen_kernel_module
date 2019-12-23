@@ -82,6 +82,11 @@ class ReadTemplate(FileChecking):
             'lkm_network_interfaces/Makefile.template',
             'lkm_network_interfaces/lkm.template',
             'lkm_network_interfaces/test_lkm.template'
+        ],
+        3:[
+            'lkm_vma/Makefile.template',
+            'lkm_vma/lkm.template',
+            'lkm_vma/test_lkm.template'
         ]
     }
     __FORMAT = 'template'
