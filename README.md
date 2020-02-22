@@ -1,5 +1,9 @@
 # Generating Kernel Modules.
 
+gen_kernel_module is toolset for generation Linux Kernel Module project.
+
+Developed in python code: 100%.
+
 The README is used to introduce the modules and provide instructions on
 how to install the modules, any machine dependencies it may have and any
 other information that should be provided before the modules are installed.
@@ -20,9 +24,19 @@ This module requires these other modules and libraries:
 
 * ats_utilities https://vroncevic.github.io/ats_utilities
 
-### Tool structure
+### GENERATION FLOW OF LINUX KERNEL MODULE
+
+Base flow of generation process:
+
+![alt tag](https://raw.githubusercontent.com/vroncevic/gen_kernel_module/dev/python-tool-docs/gen_kernel_module_flow.png)
+
+### TOOL STRUCTURE
+
+gen_kernel_module is based on Template mechanism:
 
 ![alt tag](https://raw.githubusercontent.com/vroncevic/gen_kernel_module/dev/python-tool-docs/gen_kernel_module.png)
+
+Generator structure:
 
 ```
 .
