@@ -8,14 +8,19 @@ The README is used to introduce the modules and provide instructions on
 how to install the modules, any machine dependencies it may have and any
 other information that should be provided before the modules are installed.
 
+![Python package](https://github.com/vroncevic/gen_kernel_module/workflows/Python%20package/badge.svg)
+
 ### INSTALLATION
+Navigate to release [page](https://github.com/vroncevic/gen_kernel_module/releases/tag/v1.0) download and extract release archive.
 
 To install this set of modules type the following:
 
 ```
-cp -R ~/gen_kernel_module/bin/   /root/scripts/gen_kernel_module/ver.1.0/
-cp -R ~/gen_kernel_module/conf/  /root/scripts/gen_kernel_module/ver.1.0/
-cp -R ~/gen_kernel_module/log/   /root/scripts/gen_kernel_module/ver.1.0/
+tar xvzf gen_kernel_module-1.0.tar.gz
+cd gen_kernel_module-1.0/python-tool
+cp -R ~/bin/   /root/scripts/gen_kernel_module/
+cp -R ~/conf/  /root/scripts/gen_kernel_module/
+cp -R ~/log/   /root/scripts/gen_kernel_module/
 ```
 
 ### DEPENDENCIES
@@ -52,26 +57,26 @@ Generator structure:
 ├── conf
 │   ├── gen_kernel_module.cfg
 │   ├── gen_kernel_module_util.cfg
+│   ├── project.yaml
 │   └── template
 │       ├── lkm_block_device
 │       │   ├── lkm.template
 │       │   ├── Makefile.template
-│       │   └── test_lkm.template
+│       │   └── test.template
 │       ├── lkm_charachter_device
 │       │   ├── lkm.template
 │       │   ├── Makefile.template
-│       │   └── test_lkm.template
+│       │   └── test.template
 │       ├── lkm_network_interfaces
 │       │   ├── lkm.template
 │       │   ├── Makefile.template
-│       │   └── test_lkm.template
+│       │   └── test.template
 │       └── lkm_vma
 │           ├── lkm.template
 │           ├── Makefile.template
-│           └── test_lkm.template
+│           └── test.template
 └── log
     └── gen_kernel_module.log
-
 ```
 
 ### COPYRIGHT AND LICENCE
