@@ -3,4 +3,3 @@
 """
     Generating kernel module
 """
-
