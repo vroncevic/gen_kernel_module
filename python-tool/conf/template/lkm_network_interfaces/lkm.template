@@ -26,7 +26,7 @@
 
 #define    DRIVER_AUTHOR    "Vladimir Roncevic <elektron.ronca@gmail.com>"
 #define    DRIVER_DESC      "LKM Network Interface"
-#define    DRIVER_LICENSE   "GPLv3"
+#define    DRIVER_LICENSE   "GPL"
 #define    DRIVER_VERSION   "1.0.0"
 #define    DEVICE_NAME      "${LKM}_ni"
 #define    CLASS_NAME       "${LKM}"
