@@ -9,6 +9,8 @@ how to install the modules, any machine dependencies it may have and any
 other information that should be provided before the modules are installed.
 
 ![Python package](https://github.com/vroncevic/gen_kernel_module/workflows/Python%20package/badge.svg?branch=master)
+ [![GitHub issues open](https://img.shields.io/github/issues/vroncevic/gen_kernel_module.svg)](https://github.com/vroncevic/gen_kernel_module/issues)
+ [![GitHub contributors](https://img.shields.io/github/contributors/vroncevic/gen_kernel_module.svg)](https://github.com/vroncevic/gen_kernel_module/graphs/contributors)
 
 ### INSTALLATION
 Navigate to release [page](https://github.com/vroncevic/gen_kernel_module/releases/tag/v1.0) download and extract release archive.
@@ -80,6 +82,8 @@ Generator structure:
 ```
 
 ### COPYRIGHT AND LICENCE
+
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 Copyright (C) 2018 by https://vroncevic.github.io/gen_kernel_module
 
