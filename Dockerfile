@@ -23,7 +23,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends \
  python-wheel \
  libyaml-dev \
  build-essential \
- linux-headers-$(uname -r)
+ linux-headers-4.19.0-11-amd64
 
 RUN pip install --upgrade setuptools
 RUN mkdir /gen_kernel_module/
