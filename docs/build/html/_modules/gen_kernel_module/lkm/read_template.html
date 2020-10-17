@@ -1,0 +1,408 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>gen_kernel_module.lkm.read_template &mdash; gen_kernel_module https://github.com/vroncevic/gen_kernel_module/releases/ documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> gen_kernel_module
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Generating Kernel Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">gen_kernel_module</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">gen_kernel_module</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+          <li><a href="../../gen_kernel_module.html">gen_kernel_module</a> &raquo;</li>
+        
+      <li>gen_kernel_module.lkm.read_template</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for gen_kernel_module.lkm.read_template</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: UTF-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd"> Module</span>
+<span class="sd">     read_template.py</span>
+<span class="sd"> Copyright</span>
+<span class="sd">     Copyright (C) 2018 Vladimir Roncevic &lt;elektron.ronca@gmail.com&gt;</span>
+<span class="sd">     gen_kernel_module is free software: you can redistribute it and/or</span>
+<span class="sd">     modify it under the terms of the GNU General Public License as published</span>
+<span class="sd">     by the Free Software Foundation, either version 3 of the License, or</span>
+<span class="sd">     (at your option) any later version.</span>
+<span class="sd">     gen_kernel_module is distributed in the hope that it will be useful,</span>
+<span class="sd">     but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="sd">     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</span>
+<span class="sd">     See the GNU General Public License for more details.</span>
+<span class="sd">     You should have received a copy of the GNU General Public License along</span>
+<span class="sd">     with this program. If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<span class="sd"> Info</span>
+<span class="sd">     Define class ReadTemplate with attribute(s) and method(s).</span>
+<span class="sd">     Read a template file (setup.template) and return a content.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">inspect</span> <span class="kn">import</span> <span class="n">stack</span>
+<span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">isdir</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+    <span class="kn">from</span> <span class="nn">ats_utilities.config.yaml.yaml2object</span> <span class="kn">import</span> <span class="n">Yaml2Object</span>
+    <span class="kn">from</span> <span class="nn">ats_utilities.config.file_checking</span> <span class="kn">import</span> <span class="n">FileChecking</span>
+    <span class="kn">from</span> <span class="nn">ats_utilities.console_io.verbose</span> <span class="kn">import</span> <span class="n">verbose_message</span>
+    <span class="kn">from</span> <span class="nn">ats_utilities.exceptions.ats_type_error</span> <span class="kn">import</span> <span class="n">ATSTypeError</span>
+    <span class="kn">from</span> <span class="nn">ats_utilities.exceptions.ats_bad_call_error</span> <span class="kn">import</span> <span class="n">ATSBadCallError</span>
+<span class="k">except</span> <span class="ne">ImportError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+    <span class="n">MESSAGE</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="si">{0}</span><span class="se">\n</span><span class="si">{1}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="vm">__file__</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="n">MESSAGE</span><span class="p">)</span>  <span class="c1"># Force close python ATS ##############################</span>
+
+<span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Vladimir Roncevic&#39;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s1">&#39;Copyright 2018, Free software to use and distributed it.&#39;</span>
+<span class="n">__credits__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Vladimir Roncevic&#39;</span><span class="p">]</span>
+<span class="n">__license__</span> <span class="o">=</span> <span class="s1">&#39;GNU General Public License (GPL)&#39;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;1.0.0&#39;</span>
+<span class="n">__maintainer__</span> <span class="o">=</span> <span class="s1">&#39;Vladimir Roncevic&#39;</span>
+<span class="n">__email__</span> <span class="o">=</span> <span class="s1">&#39;elektron.ronca@gmail.com&#39;</span>
+<span class="n">__status__</span> <span class="o">=</span> <span class="s1">&#39;Updated&#39;</span>
+
+
+<div class="viewcode-block" id="ReadTemplate"><a class="viewcode-back" href="../../../gen_kernel_module.lkm.read_template.html#gen_kernel_module.lkm.read_template.ReadTemplate">[docs]</a><span class="k">class</span> <span class="nc">ReadTemplate</span><span class="p">(</span><span class="n">FileChecking</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Define class ReadTemplate with attribute(s) and method(s).</span>
+<span class="sd">        Read a template file (setup.template) and return a content.</span>
+<span class="sd">        It defines:</span>
+
+<span class="sd">            :attributes:</span>
+<span class="sd">                | __slots__ - Setting class slots</span>
+<span class="sd">                | VERBOSE - Console text indicator for current process-phase</span>
+<span class="sd">                | CharDev - 0</span>
+<span class="sd">                | BlkDev - 1</span>
+<span class="sd">                | NetDev - 2</span>
+<span class="sd">                | VMADev - 3</span>
+<span class="sd">                | __MODULES - Mapped choice and template key</span>
+<span class="sd">                | __TEMPLATE_DIR - Template dir path</span>
+<span class="sd">                | __PROJECT - template/project structure</span>
+<span class="sd">                | __FORMAT - File format for template</span>
+<span class="sd">                | __template_dir - Absolute file path of template dir</span>
+<span class="sd">                | __pro_cfg - Yaml object for template/project description</span>
+<span class="sd">            :methods:</span>
+<span class="sd">                | __init__ - Initial constructor</span>
+<span class="sd">                | get_template_directory - Getter for template directory object</span>
+<span class="sd">                | get_project_configurtion - Getter for project configuration</span>
+<span class="sd">                | get_check_cfg - Getter for status of project configuration</span>
+<span class="sd">                | read - Read a template and return a string representation</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="s1">&#39;VERBOSE&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;CharDev&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;BlkDev&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;NetDev&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;VMADev&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;__MODULES&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;__TEMPLATE_DIR&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;__PROJECT&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;__FORMAT&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;__check_cfg&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;__template_dir&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;__pro_cfg&#39;</span>
+    <span class="p">)</span>
+    <span class="n">VERBOSE</span> <span class="o">=</span> <span class="s1">&#39;GEN_KERNEL_MODULE::LKM::READ_TEMPLATE&#39;</span>
+    <span class="n">CharDev</span><span class="p">,</span> <span class="n">BlkDev</span><span class="p">,</span> <span class="n">NetDev</span><span class="p">,</span> <span class="n">VMADev</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+    <span class="n">__MODULES</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">CharDev</span><span class="p">:</span> <span class="s1">&#39;lkm_charachter_device&#39;</span><span class="p">,</span>
+        <span class="n">BlkDev</span><span class="p">:</span> <span class="s1">&#39;lkm_block_device&#39;</span><span class="p">,</span>
+        <span class="n">NetDev</span><span class="p">:</span> <span class="s1">&#39;lkm_network_interfaces&#39;</span><span class="p">,</span>
+        <span class="n">VMADev</span><span class="p">:</span> <span class="s1">&#39;lkm_vma&#39;</span>
+    <span class="p">}</span>
+    <span class="n">__TEMPLATE_DIR</span> <span class="o">=</span> <span class="s1">&#39;/../conf/template/&#39;</span>
+    <span class="n">__PROJECT</span> <span class="o">=</span> <span class="s1">&#39;project.yaml&#39;</span>
+    <span class="n">__FORMAT</span> <span class="o">=</span> <span class="s1">&#39;template&#39;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Setting template dir from configuration directory.</span>
+
+<span class="sd">            :param verbose: Enable/disable verbose option</span>
+<span class="sd">            :type verbose: &lt;bool&gt;</span>
+<span class="sd">            :exceptions: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">verbose_message</span><span class="p">(</span><span class="n">ReadTemplate</span><span class="o">.</span><span class="n">VERBOSE</span><span class="p">,</span> <span class="n">verbose</span><span class="p">,</span> <span class="s1">&#39;Initial reader&#39;</span><span class="p">)</span>
+        <span class="n">FileChecking</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+        <span class="n">current_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span>
+        <span class="n">template_dir</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{0}{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">current_dir</span><span class="p">,</span> <span class="n">ReadTemplate</span><span class="o">.</span><span class="n">__TEMPLATE_DIR</span>
+        <span class="p">)</span>
+        <span class="n">check_template_dir</span> <span class="o">=</span> <span class="n">isdir</span><span class="p">(</span><span class="n">template_dir</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__check_cfg</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="n">check_template_dir</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__template_dir</span> <span class="o">=</span> <span class="n">template_dir</span>
+            <span class="n">pro</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">/../../conf/</span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">current_dir</span><span class="p">,</span> <span class="n">ReadTemplate</span><span class="o">.</span><span class="n">__PROJECT</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__pro_cfg</span> <span class="o">=</span> <span class="n">Yaml2Object</span><span class="p">(</span><span class="n">pro</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__template_dir</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__pro_cfg</span> <span class="o">=</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="ReadTemplate.get_template_directory"><a class="viewcode-back" href="../../../gen_kernel_module.lkm.read_template.html#gen_kernel_module.lkm.read_template.ReadTemplate.get_template_directory">[docs]</a>    <span class="k">def</span> <span class="nf">get_template_directory</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Getter for template directory object.</span>
+
+<span class="sd">            :return: Template directory</span>
+<span class="sd">            :rtype: &lt;str&gt;</span>
+<span class="sd">            :exceptions: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__template_dir</span></div>
+
+<div class="viewcode-block" id="ReadTemplate.get_project_configurtion"><a class="viewcode-back" href="../../../gen_kernel_module.lkm.read_template.html#gen_kernel_module.lkm.read_template.ReadTemplate.get_project_configurtion">[docs]</a>    <span class="k">def</span> <span class="nf">get_project_configurtion</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Getter for project configuration.</span>
+
+<span class="sd">            :return: Project configuration</span>
+<span class="sd">            :rtype: &lt;Yaml2Object&gt;</span>
+<span class="sd">            :exceptions: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__pro_cfg</span></div>
+
+<div class="viewcode-block" id="ReadTemplate.get_check_cfg"><a class="viewcode-back" href="../../../gen_kernel_module.lkm.read_template.html#gen_kernel_module.lkm.read_template.ReadTemplate.get_check_cfg">[docs]</a>    <span class="k">def</span> <span class="nf">get_check_cfg</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Getter for status of project configuration.</span>
+
+<span class="sd">            :return: Project configuration status</span>
+<span class="sd">            :rtype: &lt;bool&gt;</span>
+<span class="sd">            :exceptions: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__check_cfg</span></div>
+
+<div class="viewcode-block" id="ReadTemplate.read"><a class="viewcode-back" href="../../../gen_kernel_module.lkm.read_template.html#gen_kernel_module.lkm.read_template.ReadTemplate.read">[docs]</a>    <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">module_type</span><span class="p">,</span> <span class="n">module_name</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Read template structure.</span>
+
+<span class="sd">            :param module_type: Type of kernel module</span>
+<span class="sd">            :type module_type: &lt;int&gt;</span>
+<span class="sd">            :param module_name: Parameter module name</span>
+<span class="sd">            :type module_name: &lt;str&gt;</span>
+<span class="sd">            :param verbose: Enable/disable verbose option</span>
+<span class="sd">            :type verbose: &lt;bool&gt;</span>
+<span class="sd">            :return: Template content for setup module | None</span>
+<span class="sd">            :rtype: &lt;str&gt; | &lt;NoneType&gt;</span>
+<span class="sd">            :exceptions: ATSBadCallError | ATSTypeError</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">func</span><span class="p">,</span> <span class="n">setup_content</span> <span class="o">=</span> <span class="n">stack</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="mi">3</span><span class="p">],</span> <span class="p">{}</span>
+        <span class="n">type_txt</span> <span class="o">=</span> <span class="s1">&#39;First argument: expected module_type &lt;int&gt; object&#39;</span>
+        <span class="n">type_msg</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2"> </span><span class="si">{1}</span><span class="s2"> </span><span class="si">{2}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;def&#39;</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">type_txt</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">module_type</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ATSBadCallError</span><span class="p">(</span><span class="n">type_msg</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">module_type</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">ATSTypeError</span><span class="p">(</span><span class="n">type_msg</span><span class="p">)</span>
+        <span class="n">verbose_message</span><span class="p">(</span><span class="n">ReadTemplate</span><span class="o">.</span><span class="n">VERBOSE</span><span class="p">,</span> <span class="n">verbose</span><span class="p">,</span> <span class="s1">&#39;Loading templates&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__check_cfg</span> <span class="o">=</span> <span class="nb">all</span><span class="p">(</span>
+            <span class="p">[</span><span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__template_dir</span><span class="p">),</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__pro_cfg</span><span class="p">)]</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__check_cfg</span><span class="p">:</span>
+            <span class="n">pro_cfg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__pro_cfg</span><span class="o">.</span><span class="n">read_configuration</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">pro_sec</span> <span class="ow">in</span> <span class="n">pro_cfg</span><span class="p">:</span>
+                <span class="n">pro_cfg</span><span class="p">[</span><span class="n">pro_sec</span><span class="p">]</span> <span class="o">=</span> <span class="n">pro_cfg</span><span class="p">[</span><span class="n">pro_sec</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">template</span> <span class="ow">in</span> <span class="n">pro_cfg</span><span class="p">[</span><span class="n">ReadTemplate</span><span class="o">.</span><span class="n">__MODULES</span><span class="p">[</span><span class="n">module_type</span><span class="p">]]:</span>
+                <span class="n">template_file</span><span class="p">,</span> <span class="n">template_file_exists</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">False</span>
+                <span class="n">template_file</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{0}{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__template_dir</span><span class="p">,</span> <span class="n">template</span><span class="p">)</span>
+                <span class="n">template_file_exists</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_file</span><span class="p">(</span>
+                    <span class="n">file_path</span><span class="o">=</span><span class="n">template_file</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span>
+                <span class="p">)</span>
+                <span class="k">if</span> <span class="n">template_file_exists</span><span class="p">:</span>
+                    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">template_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">tmpl</span><span class="p">:</span>
+                        <span class="n">template_list</span> <span class="o">=</span> <span class="p">[]</span>
+                        <span class="k">if</span> <span class="s1">&#39;Makefile.template&#39;</span> <span class="ow">in</span> <span class="n">template_file</span><span class="p">:</span>
+                            <span class="n">template_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Makefile&#39;</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="s1">&#39;lkm.template&#39;</span> <span class="ow">in</span> <span class="n">template_file</span><span class="p">:</span>
+                            <span class="n">template_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">.c&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">module_name</span><span class="p">))</span>
+                        <span class="k">if</span> <span class="s1">&#39;test.template&#39;</span> <span class="ow">in</span> <span class="n">template_file</span><span class="p">:</span>
+                            <span class="n">template_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;main.c&#39;</span><span class="p">)</span>
+                        <span class="n">template_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tmpl</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+                        <span class="n">setup_content</span><span class="p">[</span><span class="n">template</span><span class="p">]</span> <span class="o">=</span> <span class="n">template_list</span>
+        <span class="k">return</span> <span class="n">setup_content</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Vladimir Roncevic &lt;elektron.ronca@gmail.com&gt;
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
