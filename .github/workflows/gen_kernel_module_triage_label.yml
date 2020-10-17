@@ -5,7 +5,7 @@ on:
 jobs:
   applyTriageLabel:
     name: Apply Triage Label
-    runs-on: debian-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Apply Triage Label

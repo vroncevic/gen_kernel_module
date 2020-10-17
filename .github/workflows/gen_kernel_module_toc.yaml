@@ -5,6 +5,6 @@ on: push
 jobs:
   generateTOC:
     name: TOC Generator
-    runs-on: debian-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: technote-space/toc-generator@v2
