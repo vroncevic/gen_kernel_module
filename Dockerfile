@@ -26,8 +26,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
  python3-pip \
  python3-wheel \
  libyaml-dev \
- build-essential \
- linux-headers-4.19.0-11-amd64
+ build-essential
 
 RUN pip install --upgrade setuptools
 RUN pip3 install --upgrade setuptools
