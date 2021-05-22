@@ -1,13 +1,18 @@
 gen\_kernel\_module.lkm package
 ===============================
 
+Subpackages
+-----------
+
+.. toctree::
+
+    gen_kernel_module.lkm.config
+
 Submodules
 ----------
 
 .. toctree::
 
-   gen_kernel_module.lkm.gen_lkm
-   gen_kernel_module.lkm.module_selector
    gen_kernel_module.lkm.read_template
    gen_kernel_module.lkm.write_template
 

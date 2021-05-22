@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                1.0.0
+                1.2.0
               </div>
             
           
@@ -138,6 +138,8 @@
         
           <li><a href="../../gen_kernel_module.html">gen_kernel_module</a> &raquo;</li>
         
+          <li><a href="../lkm.html">gen_kernel_module.lkm</a> &raquo;</li>
+        
       <li>gen_kernel_module.lkm.write_template</li>
     
     
@@ -156,11 +158,11 @@
   <h1>Source code for gen_kernel_module.lkm.write_template</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: UTF-8 -*-</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">&#39;&#39;&#39;</span>
 <span class="sd"> Module</span>
 <span class="sd">     write_template.py</span>
 <span class="sd"> Copyright</span>
-<span class="sd">     Copyright (C) 2018 Vladimir Roncevic &lt;elektron.ronca@gmail.com&gt;</span>
+<span class="sd">     Copyright (C) 2017 Vladimir Roncevic &lt;elektron.ronca@gmail.com&gt;</span>
 <span class="sd">     gen_kernel_module is free software: you can redistribute it and/or</span>
 <span class="sd">     modify it under the terms of the GNU General Public License as published</span>
 <span class="sd">     by the Free Software Foundation, either version 3 of the License, or</span>
@@ -172,121 +174,135 @@
 <span class="sd">     You should have received a copy of the GNU General Public License along</span>
 <span class="sd">     with this program. If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
 <span class="sd"> Info</span>
-<span class="sd">     Define class WriteTemplate with attribute(s) and method(s).</span>
-<span class="sd">     Write template content with parameters to a file setup.py.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">     Defined class WriteTemplate with attribute(s) and method(s).</span>
+<span class="sd">     Defined API for Writing template content with parameters to files.</span>
+<span class="sd">&#39;&#39;&#39;</span>
 
 <span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">from</span> <span class="nn">inspect</span> <span class="kn">import</span> <span class="n">stack</span>
-<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">getcwd</span><span class="p">,</span> <span class="n">chmod</span>
+<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">getcwd</span><span class="p">,</span> <span class="n">chmod</span><span class="p">,</span> <span class="n">mkdir</span>
 <span class="kn">from</span> <span class="nn">string</span> <span class="kn">import</span> <span class="n">Template</span>
 
 <span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">ats_utilities.checker</span> <span class="kn">import</span> <span class="n">ATSChecker</span>
+    <span class="kn">from</span> <span class="nn">ats_utilities.config_io.base_check</span> <span class="kn">import</span> <span class="n">FileChecking</span>
     <span class="kn">from</span> <span class="nn">ats_utilities.console_io.verbose</span> <span class="kn">import</span> <span class="n">verbose_message</span>
     <span class="kn">from</span> <span class="nn">ats_utilities.exceptions.ats_type_error</span> <span class="kn">import</span> <span class="n">ATSTypeError</span>
     <span class="kn">from</span> <span class="nn">ats_utilities.exceptions.ats_bad_call_error</span> <span class="kn">import</span> <span class="n">ATSBadCallError</span>
-<span class="k">except</span> <span class="ne">ImportError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
-    <span class="n">MESSAGE</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="si">{0}</span><span class="se">\n</span><span class="si">{1}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="vm">__file__</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">ImportError</span> <span class="k">as</span> <span class="n">ats_error_message</span><span class="p">:</span>
+    <span class="n">MESSAGE</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="si">{0}</span><span class="se">\n</span><span class="si">{1}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="vm">__file__</span><span class="p">,</span> <span class="n">ats_error_message</span><span class="p">)</span>
     <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="n">MESSAGE</span><span class="p">)</span>  <span class="c1"># Force close python ATS ##############################</span>
 
 <span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Vladimir Roncevic&#39;</span>
-<span class="n">__copyright__</span> <span class="o">=</span> <span class="s1">&#39;Copyright 2018, Free software to use and distributed it.&#39;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s1">&#39;Copyright 2017, Free software to use and distributed it.&#39;</span>
 <span class="n">__credits__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Vladimir Roncevic&#39;</span><span class="p">]</span>
-<span class="n">__license__</span> <span class="o">=</span> <span class="s1">&#39;GNU General Public License (GPL)&#39;</span>
-<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;1.0.0&#39;</span>
+<span class="n">__license__</span> <span class="o">=</span> <span class="s1">&#39;https://github.com/vroncevic/gen_kernel_module/blob/dev/LICENSE&#39;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;1.2.0&#39;</span>
 <span class="n">__maintainer__</span> <span class="o">=</span> <span class="s1">&#39;Vladimir Roncevic&#39;</span>
 <span class="n">__email__</span> <span class="o">=</span> <span class="s1">&#39;elektron.ronca@gmail.com&#39;</span>
 <span class="n">__status__</span> <span class="o">=</span> <span class="s1">&#39;Updated&#39;</span>
 
 
-<div class="viewcode-block" id="WriteTemplate"><a class="viewcode-back" href="../../../gen_kernel_module.lkm.write_template.html#gen_kernel_module.lkm.write_template.WriteTemplate">[docs]</a><span class="k">class</span> <span class="nc">WriteTemplate</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Define class WriteTemplate with attribute(s) and method(s).</span>
-<span class="sd">        Write template content with parameters to a file setup.py.</span>
+<div class="viewcode-block" id="WriteTemplate"><a class="viewcode-back" href="../../../gen_kernel_module.lkm.write_template.html#gen_kernel_module.lkm.write_template.WriteTemplate">[docs]</a><span class="k">class</span> <span class="nc">WriteTemplate</span><span class="p">(</span><span class="n">FileChecking</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Defined class WriteTemplate with attribute(s) and method(s).</span>
+<span class="sd">        Defined API for Writing template content with parameters to files.</span>
 <span class="sd">        It defines:</span>
 
 <span class="sd">            :attributes:</span>
-<span class="sd">                | __slots__ - Setting class slots</span>
-<span class="sd">                | VERBOSE - Console text indicator for current process-phase</span>
-<span class="sd">                | __check_setup - Flag for checking setup</span>
+<span class="sd">                | GEN_VERBOSE - console text indicator for process-phase.</span>
 <span class="sd">            :methods:</span>
-<span class="sd">                | __init__ - Initial constructor</span>
-<span class="sd">                | get_check_setup - Getter status of checking setup</span>
-<span class="sd">                | write - Write a template content to a file setup.py</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">                | __init__ - initial constructor.</span>
+<span class="sd">                | write - write a template content to a file setup.py.</span>
+<span class="sd">                | __str__ - dunder method for WriteTemplate.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
 
-    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;VERBOSE&#39;</span><span class="p">,</span> <span class="s1">&#39;__check_setup&#39;</span><span class="p">)</span>
-    <span class="n">VERBOSE</span> <span class="o">=</span> <span class="s1">&#39;GEN_KERNEL_MODULE::LKM::WRITE_TEMPLATE&#39;</span>
+    <span class="n">GEN_VERBOSE</span> <span class="o">=</span> <span class="s1">&#39;GEN_KERNEL_MODULE::LKM::WRITE_TEMPLATE&#39;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+        <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">            Initial constructor.</span>
 
-<span class="sd">            :param verbose: Enable/disable verbose option</span>
+<span class="sd">            :param verbose: enable/disable verbose option.</span>
 <span class="sd">            :type verbose: &lt;bool&gt;</span>
 <span class="sd">            :exceptions: None</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">verbose_message</span><span class="p">(</span><span class="n">WriteTemplate</span><span class="o">.</span><span class="n">VERBOSE</span><span class="p">,</span> <span class="n">verbose</span><span class="p">,</span> <span class="s1">&#39;Initial writer&#39;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__check_setup</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">FileChecking</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+        <span class="n">verbose_message</span><span class="p">(</span><span class="n">WriteTemplate</span><span class="o">.</span><span class="n">GEN_VERBOSE</span><span class="p">,</span> <span class="n">verbose</span><span class="p">,</span> <span class="s1">&#39;init writer&#39;</span><span class="p">)</span>
 
-<div class="viewcode-block" id="WriteTemplate.get_check_setup"><a class="viewcode-back" href="../../../gen_kernel_module.lkm.write_template.html#gen_kernel_module.lkm.write_template.WriteTemplate.get_check_setup">[docs]</a>    <span class="k">def</span> <span class="nf">get_check_setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">            Getter status of checking setup.</span>
-
-<span class="sd">            :return: Status of checking setup</span>
-<span class="sd">            :rtype: &lt;bool&gt;</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__check_setup</span></div>
-
-<div class="viewcode-block" id="WriteTemplate.write"><a class="viewcode-back" href="../../../gen_kernel_module.lkm.write_template.html#gen_kernel_module.lkm.write_template.WriteTemplate.write">[docs]</a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">setup_content</span><span class="p">,</span> <span class="n">module_name</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="WriteTemplate.write"><a class="viewcode-back" href="../../../gen_kernel_module.lkm.write_template.html#gen_kernel_module.lkm.write_template.WriteTemplate.write">[docs]</a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">template_content</span><span class="p">,</span> <span class="n">module_name</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">            Write setup content to file.</span>
 
-<span class="sd">            :param setup_content: Template content</span>
-<span class="sd">            :type setup_content: &lt;dict&gt;</span>
-<span class="sd">            :param module_name: Parameter module name</span>
+<span class="sd">            :param template_content: parameter template content.</span>
+<span class="sd">            :type template_content: &lt;list&gt;</span>
+<span class="sd">            :param module_name: parameter module name.</span>
 <span class="sd">            :type module_name: &lt;str&gt;</span>
-<span class="sd">            :param verbose: Enable/disable verbose option</span>
+<span class="sd">            :param verbose: enable/disable verbose option.</span>
 <span class="sd">            :type verbose: &lt;bool&gt;</span>
-<span class="sd">            :return: True (success) | False</span>
+<span class="sd">            :return: boolean status, True (success) | False.</span>
 <span class="sd">            :rtype: &lt;bool&gt;</span>
-<span class="sd">            :exception: ATSBadCallError | ATSTypeError</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">status</span><span class="p">,</span> <span class="n">setup</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">None</span>
-        <span class="n">func</span><span class="p">,</span> <span class="n">current_dir</span> <span class="o">=</span> <span class="n">stack</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="mi">3</span><span class="p">],</span> <span class="n">getcwd</span><span class="p">()</span>
-        <span class="n">setup_txt</span> <span class="o">=</span> <span class="s1">&#39;First argument: expected setup_content &lt;dict&gt; object&#39;</span>
-        <span class="n">setup_msg</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2"> </span><span class="si">{1}</span><span class="s2"> </span><span class="si">{2}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;def&#39;</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">setup_txt</span><span class="p">)</span>
-        <span class="n">module_txt</span> <span class="o">=</span> <span class="s1">&#39;First argument: expected module_name &lt;str&gt; object&#39;</span>
-        <span class="n">module_msg</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2"> </span><span class="si">{1}</span><span class="s2"> </span><span class="si">{2}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;def&#39;</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">module_txt</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">setup_content</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">setup_content</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">ATSBadCallError</span><span class="p">(</span><span class="n">setup_msg</span><span class="p">)</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">setup_content</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="n">ATSTypeError</span><span class="p">(</span><span class="n">setup_msg</span><span class="p">)</span>
-        <span class="k">if</span>     <span class="n">module_name</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">module_name</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">ATSBadCallError</span><span class="p">(</span><span class="n">module_msg</span><span class="p">)</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">module_name</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="n">ATSTypeError</span><span class="p">(</span><span class="n">module_msg</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__check_setup</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="n">verbose_message</span><span class="p">(</span>
-            <span class="n">WriteTemplate</span><span class="o">.</span><span class="n">VERBOSE</span><span class="p">,</span> <span class="n">verbose</span><span class="p">,</span> <span class="s1">&#39;Generate module&#39;</span><span class="p">,</span> <span class="n">module_name</span>
-        <span class="p">)</span>
-        <span class="k">for</span> <span class="n">setup</span> <span class="ow">in</span> <span class="n">setup_content</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-            <span class="n">template_content</span> <span class="o">=</span> <span class="n">Template</span><span class="p">(</span><span class="n">setup</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-            <span class="n">template_path</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">/</span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">current_dir</span><span class="p">,</span> <span class="n">setup</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-            <span class="k">if</span> <span class="n">template_content</span><span class="p">:</span>
-                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">template_path</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">setup_file</span><span class="p">:</span>
+<span class="sd">            :exception: ATSTypeError | ATSBadCallError</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">checker</span><span class="p">,</span> <span class="n">error</span><span class="p">,</span> <span class="n">status</span> <span class="o">=</span> <span class="n">ATSChecker</span><span class="p">(),</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">False</span>
+        <span class="n">error</span><span class="p">,</span> <span class="n">status</span> <span class="o">=</span> <span class="n">checker</span><span class="o">.</span><span class="n">check_params</span><span class="p">([</span>
+            <span class="p">(</span><span class="s1">&#39;list:template_content&#39;</span><span class="p">,</span> <span class="n">template_content</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;str:module_name&#39;</span><span class="p">,</span> <span class="n">module_name</span><span class="p">)</span>
+        <span class="p">])</span>
+        <span class="k">if</span> <span class="n">status</span> <span class="o">==</span> <span class="n">ATSChecker</span><span class="o">.</span><span class="n">TYPE_ERROR</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ATSTypeError</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">status</span> <span class="o">==</span> <span class="n">ATSChecker</span><span class="o">.</span><span class="n">VALUE_ERROR</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ATSBadCallError</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+        <span class="n">status</span><span class="p">,</span> <span class="n">statuses</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="p">[]</span>
+        <span class="n">module_pro_dir</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">/</span><span class="si">{1}</span><span class="s1">/&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">getcwd</span><span class="p">(),</span> <span class="n">module_name</span><span class="p">)</span>
+        <span class="n">mkdir</span><span class="p">(</span><span class="n">module_pro_dir</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">template_setup</span> <span class="ow">in</span> <span class="n">template_content</span><span class="p">:</span>
+            <span class="n">lkm_type</span> <span class="o">=</span> <span class="n">template_setup</span><span class="o">.</span><span class="n">keys</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">template_factory</span> <span class="o">=</span> <span class="n">Template</span><span class="p">(</span><span class="n">template_setup</span><span class="p">[</span><span class="n">lkm_type</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">module_path</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">/</span><span class="si">{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">getcwd</span><span class="p">(),</span> <span class="n">template_setup</span><span class="p">[</span><span class="n">lkm_type</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="nb">bool</span><span class="p">(</span><span class="n">template_factory</span><span class="p">):</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">module_path</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">module_file</span><span class="p">:</span>
                     <span class="n">verbose_message</span><span class="p">(</span>
-                        <span class="n">WriteTemplate</span><span class="o">.</span><span class="n">VERBOSE</span><span class="p">,</span> <span class="n">verbose</span><span class="p">,</span>
-                        <span class="s2">&quot;Write source module: </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">setup</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                        <span class="n">WriteTemplate</span><span class="o">.</span><span class="n">GEN_VERBOSE</span><span class="p">,</span> <span class="n">verbose</span><span class="p">,</span>
+                        <span class="s1">&#39;write module: </span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">module_path</span><span class="p">)</span>
                     <span class="p">)</span>
-                    <span class="n">setup_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
-                        <span class="n">template_content</span><span class="o">.</span><span class="n">substitute</span><span class="p">(</span>
-                            <span class="p">{</span><span class="s1">&#39;LKM&#39;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">module_name</span><span class="p">)}</span>
+                    <span class="n">module_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
+                        <span class="n">template_factory</span><span class="o">.</span><span class="n">substitute</span><span class="p">({</span>
+                            <span class="s1">&#39;LKM&#39;</span><span class="p">:</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">module_name</span><span class="p">)</span>
+                        <span class="p">})</span>
+                    <span class="p">)</span>
+                    <span class="n">chmod</span><span class="p">(</span><span class="n">module_path</span><span class="p">,</span> <span class="mo">0o666</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">check_path</span><span class="p">(</span><span class="n">module_path</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">check_mode</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="s1">&#39;makefile&#39;</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span> <span class="ow">in</span> <span class="n">module_path</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">check_format</span><span class="p">(</span>
+                            <span class="n">module_path</span><span class="p">,</span> <span class="s1">&#39;makefile&#39;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span>
                         <span class="p">)</span>
-                    <span class="p">)</span>
-                    <span class="n">chmod</span><span class="p">(</span><span class="n">template_path</span><span class="p">,</span> <span class="mo">0o666</span><span class="p">)</span>
-                    <span class="n">status</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="k">return</span> <span class="kc">True</span> <span class="k">if</span> <span class="n">status</span> <span class="k">else</span> <span class="kc">False</span></div></div>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">check_format</span><span class="p">(</span>
+                            <span class="n">module_path</span><span class="p">,</span> <span class="n">module_path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">],</span>
+                            <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span>
+                        <span class="p">)</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_file_ok</span><span class="p">():</span>
+                        <span class="n">statuses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">statuses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">statuses</span><span class="p">):</span>
+            <span class="n">status</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="n">status</span></div>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">            Dunder method for WriteTemplate.</span>
+
+<span class="sd">            :return: object in a human-readable format.</span>
+<span class="sd">            :rtype: &lt;str&gt;</span>
+<span class="sd">            :exceptions: None</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1"> (</span><span class="si">{1}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">FileChecking</span><span class="o">.</span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="p">)</span></div>
 </pre></div>
 
            </div>
@@ -300,7 +316,7 @@
   <div role="contentinfo">
     <p>
         
-        &copy; Copyright 2020, Vladimir Roncevic &lt;elektron.ronca@gmail.com&gt;
+        &copy; Copyright 2017, Vladimir Roncevic &lt;elektron.ronca@gmail.com&gt;
 
     </p>
   </div>

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>gen_kernel_module.lkm.module_selector module &mdash; gen_kernel_module https://github.com/vroncevic/gen_kernel_module/releases/ documentation</title>
+  <title>gen_kernel_module.lkm.config.pro_name module &mdash; gen_kernel_module https://github.com/vroncevic/gen_kernel_module/releases/ documentation</title>
   
 
   
@@ -37,7 +37,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="gen_kernel_module.lkm.read_template module" href="gen_kernel_module.lkm.read_template.html" />
-    <link rel="prev" title="gen_kernel_module.lkm.gen_lkm module" href="gen_kernel_module.lkm.gen_lkm.html" /> 
+    <link rel="prev" title="gen_kernel_module.lkm.config package" href="gen_kernel_module.lkm.config.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                1.0.0
+                1.2.0
               </div>
             
           
@@ -152,13 +152,15 @@
         
           <li><a href="gen_kernel_module.lkm.html">gen_kernel_module.lkm package</a> &raquo;</li>
         
-      <li>gen_kernel_module.lkm.module_selector module</li>
+          <li><a href="gen_kernel_module.lkm.config.html">gen_kernel_module.lkm.config package</a> &raquo;</li>
+        
+      <li>gen_kernel_module.lkm.config.pro_name module</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/gen_kernel_module.lkm.module_selector.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/gen_kernel_module.lkm.config.pro_name.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -171,13 +173,13 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-gen_kernel_module.lkm.module_selector">
-<span id="gen-kernel-module-lkm-module-selector-module"></span><h1>gen_kernel_module.lkm.module_selector module<a class="headerlink" href="#module-gen_kernel_module.lkm.module_selector" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-gen_kernel_module.lkm.config.pro_name">
+<span id="gen-kernel-module-lkm-config-pro-name-module"></span><h1>gen_kernel_module.lkm.config.pro_name module<a class="headerlink" href="#module-gen_kernel_module.lkm.config.pro_name" title="Permalink to this headline">¶</a></h1>
 <dl class="docutils">
 <dt>Module</dt>
-<dd>module_selector.py</dd>
+<dd>pro_name.py</dd>
 <dt>Copyright</dt>
-<dd>Copyright (C) 2018 Vladimir Roncevic &lt;<a class="reference external" href="mailto:elektron&#46;ronca&#37;&#52;&#48;gmail&#46;com">elektron<span>&#46;</span>ronca<span>&#64;</span>gmail<span>&#46;</span>com</a>&gt;
+<dd>Copyright (C) 2017 Vladimir Roncevic &lt;<a class="reference external" href="mailto:elektron&#46;ronca&#37;&#52;&#48;gmail&#46;com">elektron<span>&#46;</span>ronca<span>&#64;</span>gmail<span>&#46;</span>com</a>&gt;
 gen_kernel_module is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by the
 Free Software Foundation, either version 3 of the License, or
@@ -189,15 +191,14 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU General Public License along
 with this program. If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</dd>
 <dt>Info</dt>
-<dd>Define class ModuleSelector with attribute(s) and method(s).
-Selecting kernel module type for generating process.</dd>
+<dd>Defined class ProName with attribute(s) and method(s).
+Defined API for project name with preparations for generation.</dd>
 </dl>
 <dl class="class">
-<dt id="gen_kernel_module.lkm.module_selector.ModuleSelector">
-<em class="property">class </em><code class="descclassname">gen_kernel_module.lkm.module_selector.</code><code class="descname">ModuleSelector</code><a class="reference internal" href="_modules/gen_kernel_module/lkm/module_selector.html#ModuleSelector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gen_kernel_module.lkm.module_selector.ModuleSelector" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Define class ModuleSelector with attribute(s) and method(s).
-Selecting kernel module type for generating process.
+<dt id="gen_kernel_module.lkm.config.pro_name.ProName">
+<em class="property">class </em><code class="descclassname">gen_kernel_module.lkm.config.pro_name.</code><code class="descname">ProName</code><span class="sig-paren">(</span><em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gen_kernel_module/lkm/config/pro_name.html#ProName"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gen_kernel_module.lkm.config.pro_name.ProName" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defined class ProName with attribute(s) and method(s).
+Defined API for project name with preparations for generation.
 It defines:</p>
 <blockquote>
 <div><table class="docutils field-list" frame="void" rules="none">
@@ -205,84 +206,57 @@ It defines:</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">attributes:</th><td class="field-body"><div class="first last line-block">
-<div class="line">__slots__ - Setting class slots</div>
-<div class="line">VERBOSE - Console text indicator for current process-phase</div>
-<div class="line">CharDev - 0 LKM Charachter Device</div>
-<div class="line">BlkDev - 1 LKM Block Device</div>
-<div class="line">NetDev - 2 LKM Network Interface</div>
-<div class="line">VMADev - 3 LKM Virtual Memory Address</div>
-<div class="line">Cancel - 4 Cancel option</div>
-<div class="line">__MODULES - Dictionary with option/description</div>
+<div class="line">GEN_VERBOSE - console text indicator for process-phase.</div>
+<div class="line">__verbose - enable/disable verbose option.</div>
+<div class="line">__pro_name - project name.</div>
 </div>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">methods:</th><td class="field-body">get_modules - Getter for class attribute __MODULES
-choose_module - Selecting module-type for generating process</td>
+<tr class="field-even field"><th class="field-name">methods:</th><td class="field-body"><div class="first last line-block">
+<div class="line">__init__ - initial constructor.</div>
+<div class="line">pro_name - property methods for set/get operations.</div>
+<div class="line">is_pro_name_ok - checking is project name ok.</div>
+<div class="line">__str__ - dunder method for ProName.</div>
+</div>
+</td>
 </tr>
 </tbody>
 </table>
 </div></blockquote>
 <dl class="attribute">
-<dt id="gen_kernel_module.lkm.module_selector.ModuleSelector.BlkDev">
-<code class="descname">BlkDev</code><em class="property"> = 1</em><a class="headerlink" href="#gen_kernel_module.lkm.module_selector.ModuleSelector.BlkDev" title="Permalink to this definition">¶</a></dt>
+<dt id="gen_kernel_module.lkm.config.pro_name.ProName.GEN_VERBOSE">
+<code class="descname">GEN_VERBOSE</code><em class="property"> = 'GEN_KERNEL_MODULE::LKM::CONFIG::PRO_NAME'</em><a class="headerlink" href="#gen_kernel_module.lkm.config.pro_name.ProName.GEN_VERBOSE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
-<dt id="gen_kernel_module.lkm.module_selector.ModuleSelector.Cancel">
-<code class="descname">Cancel</code><em class="property"> = 4</em><a class="headerlink" href="#gen_kernel_module.lkm.module_selector.ModuleSelector.Cancel" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="gen_kernel_module.lkm.module_selector.ModuleSelector.CharDev">
-<code class="descname">CharDev</code><em class="property"> = 0</em><a class="headerlink" href="#gen_kernel_module.lkm.module_selector.ModuleSelector.CharDev" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="gen_kernel_module.lkm.module_selector.ModuleSelector.NetDev">
-<code class="descname">NetDev</code><em class="property"> = 2</em><a class="headerlink" href="#gen_kernel_module.lkm.module_selector.ModuleSelector.NetDev" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="gen_kernel_module.lkm.module_selector.ModuleSelector.VERBOSE">
-<code class="descname">VERBOSE</code><em class="property"> = 'GEN_KERNEL_MODULE::LKM::MODULE_SELECTOR'</em><a class="headerlink" href="#gen_kernel_module.lkm.module_selector.ModuleSelector.VERBOSE" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="gen_kernel_module.lkm.module_selector.ModuleSelector.VMADev">
-<code class="descname">VMADev</code><em class="property"> = 3</em><a class="headerlink" href="#gen_kernel_module.lkm.module_selector.ModuleSelector.VMADev" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="classmethod">
-<dt id="gen_kernel_module.lkm.module_selector.ModuleSelector.choose_module">
-<em class="property">classmethod </em><code class="descname">choose_module</code><span class="sig-paren">(</span><em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gen_kernel_module/lkm/module_selector.html#ModuleSelector.choose_module"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gen_kernel_module.lkm.module_selector.ModuleSelector.choose_module" title="Permalink to this definition">¶</a></dt>
-<dd><p>Choose type of kernel module.</p>
+<dl class="method">
+<dt id="gen_kernel_module.lkm.config.pro_name.ProName.is_pro_name_ok">
+<code class="descname">is_pro_name_ok</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gen_kernel_module/lkm/config/pro_name.html#ProName.is_pro_name_ok"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gen_kernel_module.lkm.config.pro_name.ProName.is_pro_name_ok" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checking is project name ok.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>verbose</strong> (<em>&lt;bool&gt;</em>) – Enable/disable verbose option</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">boolean status, True (not None) | False.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Type of data model {0, 1, 2, 3, 4}</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">&lt;bool&gt;</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">&lt;int&gt;</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Exceptions:</th><td class="field-body">None</td>
+<tr class="field-odd field"><th class="field-name">Exceptions:</th><td class="field-body">None</td>
 </tr>
 </tbody>
 </table>
 </dd></dl>
 
-<dl class="classmethod">
-<dt id="gen_kernel_module.lkm.module_selector.ModuleSelector.get_modules">
-<em class="property">classmethod </em><code class="descname">get_modules</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gen_kernel_module/lkm/module_selector.html#ModuleSelector.get_modules"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gen_kernel_module.lkm.module_selector.ModuleSelector.get_modules" title="Permalink to this definition">¶</a></dt>
-<dd><p>Getter for class attribute __MODULES.</p>
+<dl class="attribute">
+<dt id="gen_kernel_module.lkm.config.pro_name.ProName.pro_name">
+<code class="descname">pro_name</code><a class="headerlink" href="#gen_kernel_module.lkm.config.pro_name.ProName.pro_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property method for getting project name.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Modules</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">formatted project name | None.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">&lt;dict&gt;</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">&lt;str&gt; | &lt;NoneType&gt;</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Exceptions:</th><td class="field-body">None</td>
 </tr>
@@ -305,7 +279,7 @@ choose_module - Selecting module-type for generating process</td>
         <a href="gen_kernel_module.lkm.read_template.html" class="btn btn-neutral float-right" title="gen_kernel_module.lkm.read_template module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="gen_kernel_module.lkm.gen_lkm.html" class="btn btn-neutral float-left" title="gen_kernel_module.lkm.gen_lkm module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="gen_kernel_module.lkm.config.html" class="btn btn-neutral float-left" title="gen_kernel_module.lkm.config package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -315,7 +289,7 @@ choose_module - Selecting module-type for generating process</td>
   <div role="contentinfo">
     <p>
         
-        &copy; Copyright 2020, Vladimir Roncevic &lt;elektron.ronca@gmail.com&gt;
+        &copy; Copyright 2017, Vladimir Roncevic &lt;elektron.ronca@gmail.com&gt;
 
     </p>
   </div>

@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                1.0.0
+                1.2.0
               </div>
             
           
@@ -176,7 +176,7 @@
 <dt>Module</dt>
 <dd>write_template.py</dd>
 <dt>Copyright</dt>
-<dd>Copyright (C) 2018 Vladimir Roncevic &lt;<a class="reference external" href="mailto:elektron&#46;ronca&#37;&#52;&#48;gmail&#46;com">elektron<span>&#46;</span>ronca<span>&#64;</span>gmail<span>&#46;</span>com</a>&gt;
+<dd>Copyright (C) 2017 Vladimir Roncevic &lt;<a class="reference external" href="mailto:elektron&#46;ronca&#37;&#52;&#48;gmail&#46;com">elektron<span>&#46;</span>ronca<span>&#64;</span>gmail<span>&#46;</span>com</a>&gt;
 gen_kernel_module is free software: you can redistribute it and/or
 modify it under the terms of the GNU General Public License as published
 by the Free Software Foundation, either version 3 of the License, or
@@ -188,15 +188,15 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU General Public License along
 with this program. If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</dd>
 <dt>Info</dt>
-<dd>Define class WriteTemplate with attribute(s) and method(s).
-Write template content with parameters to a file setup.py.</dd>
+<dd>Defined class WriteTemplate with attribute(s) and method(s).
+Defined API for Writing template content with parameters to files.</dd>
 </dl>
 <dl class="class">
 <dt id="gen_kernel_module.lkm.write_template.WriteTemplate">
 <em class="property">class </em><code class="descclassname">gen_kernel_module.lkm.write_template.</code><code class="descname">WriteTemplate</code><span class="sig-paren">(</span><em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gen_kernel_module/lkm/write_template.html#WriteTemplate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gen_kernel_module.lkm.write_template.WriteTemplate" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Define class WriteTemplate with attribute(s) and method(s).
-Write template content with parameters to a file setup.py.
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ats_utilities.config_io.base_check.FileChecking</span></code></p>
+<p>Defined class WriteTemplate with attribute(s) and method(s).
+Defined API for Writing template content with parameters to files.
 It defines:</p>
 <blockquote>
 <div><table class="docutils field-list" frame="void" rules="none">
@@ -204,16 +204,14 @@ It defines:</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">attributes:</th><td class="field-body"><div class="first last line-block">
-<div class="line">__slots__ - Setting class slots</div>
-<div class="line">VERBOSE - Console text indicator for current process-phase</div>
-<div class="line">__check_setup - Flag for checking setup</div>
+<div class="line">GEN_VERBOSE - console text indicator for process-phase.</div>
 </div>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">methods:</th><td class="field-body"><div class="first last line-block">
-<div class="line">__init__ - Initial constructor</div>
-<div class="line">get_check_setup - Getter status of checking setup</div>
-<div class="line">write - Write a template content to a file setup.py</div>
+<div class="line">__init__ - initial constructor.</div>
+<div class="line">write - write a template content to a file setup.py.</div>
+<div class="line">__str__ - dunder method for WriteTemplate.</div>
 </div>
 </td>
 </tr>
@@ -221,48 +219,37 @@ It defines:</p>
 </table>
 </div></blockquote>
 <dl class="attribute">
+<dt id="gen_kernel_module.lkm.write_template.WriteTemplate.GEN_VERBOSE">
+<code class="descname">GEN_VERBOSE</code><em class="property"> = 'GEN_KERNEL_MODULE::LKM::WRITE_TEMPLATE'</em><a class="headerlink" href="#gen_kernel_module.lkm.write_template.WriteTemplate.GEN_VERBOSE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
 <dt id="gen_kernel_module.lkm.write_template.WriteTemplate.VERBOSE">
-<code class="descname">VERBOSE</code><em class="property"> = 'GEN_KERNEL_MODULE::LKM::WRITE_TEMPLATE'</em><a class="headerlink" href="#gen_kernel_module.lkm.write_template.WriteTemplate.VERBOSE" title="Permalink to this definition">¶</a></dt>
+<code class="descname">VERBOSE</code><em class="property"> = 'ATS_UTILITIES'</em><a class="headerlink" href="#gen_kernel_module.lkm.write_template.WriteTemplate.VERBOSE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="gen_kernel_module.lkm.write_template.WriteTemplate.get_check_setup">
-<code class="descname">get_check_setup</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gen_kernel_module/lkm/write_template.html#WriteTemplate.get_check_setup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gen_kernel_module.lkm.write_template.WriteTemplate.get_check_setup" title="Permalink to this definition">¶</a></dt>
-<dd><p>Getter status of checking setup.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Status of checking setup</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">&lt;bool&gt;</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
 <dt id="gen_kernel_module.lkm.write_template.WriteTemplate.write">
-<code class="descname">write</code><span class="sig-paren">(</span><em>setup_content</em>, <em>module_name</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gen_kernel_module/lkm/write_template.html#WriteTemplate.write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gen_kernel_module.lkm.write_template.WriteTemplate.write" title="Permalink to this definition">¶</a></dt>
+<code class="descname">write</code><span class="sig-paren">(</span><em>template_content</em>, <em>module_name</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gen_kernel_module/lkm/write_template.html#WriteTemplate.write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gen_kernel_module.lkm.write_template.WriteTemplate.write" title="Permalink to this definition">¶</a></dt>
 <dd><p>Write setup content to file.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>setup_content</strong> (<em>&lt;dict&gt;</em>) – Template content</li>
-<li><strong>module_name</strong> (<em>&lt;str&gt;</em>) – Parameter module name</li>
-<li><strong>verbose</strong> (<em>&lt;bool&gt;</em>) – Enable/disable verbose option</li>
+<li><strong>template_content</strong> (<em>&lt;list&gt;</em>) – parameter template content.</li>
+<li><strong>module_name</strong> (<em>&lt;str&gt;</em>) – parameter module name.</li>
+<li><strong>verbose</strong> (<em>&lt;bool&gt;</em>) – enable/disable verbose option.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">True (success) | False</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">boolean status, True (success) | False.</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">&lt;bool&gt;</p>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Exception:</th><td class="field-body"><p class="first last">ATSBadCallError | ATSTypeError</p>
+<tr class="field-even field"><th class="field-name">Exception:</th><td class="field-body"><p class="first last">ATSTypeError | ATSBadCallError</p>
 </td>
 </tr>
 </tbody>
@@ -292,7 +279,7 @@ It defines:</p>
   <div role="contentinfo">
     <p>
         
-        &copy; Copyright 2020, Vladimir Roncevic &lt;elektron.ronca@gmail.com&gt;
+        &copy; Copyright 2017, Vladimir Roncevic &lt;elektron.ronca@gmail.com&gt;
 
     </p>
   </div>

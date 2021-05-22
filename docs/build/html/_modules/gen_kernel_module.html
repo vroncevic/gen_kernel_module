@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                1.0.0
+                1.2.0
               </div>
             
           
@@ -154,11 +154,11 @@
   <h1>Source code for gen_kernel_module</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: UTF-8 -*-</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">&#39;&#39;&#39;</span>
 <span class="sd"> Module</span>
 <span class="sd">     gen_kernel_module.py</span>
 <span class="sd"> Copyright</span>
-<span class="sd">     Copyright (C) 2018 Vladimir Roncevic &lt;elektron.ronca@gmail.com&gt;</span>
+<span class="sd">     Copyright (C) 2017 Vladimir Roncevic &lt;elektron.ronca@gmail.com&gt;</span>
 <span class="sd">     gen_kernel_module is free software: you can redistribute it and/or modify</span>
 <span class="sd">     it under the terms of the GNU General Public License as published by the</span>
 <span class="sd">     Free Software Foundation, either version 3 of the License, or</span>
@@ -171,123 +171,173 @@
 <span class="sd">     with this program. If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
 <span class="sd"> Info</span>
 <span class="sd">     Define class GenKernelModule with attribute(s) and method(s).</span>
-<span class="sd">     Load a settings, create a CL interface and run operation(s).</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">     Load a base info, create an CLI interface and run operation(s).</span>
+<span class="sd">&#39;&#39;&#39;</span>
 
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">getcwd</span>
 
 <span class="k">try</span><span class="p">:</span>
     <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
-    <span class="kn">from</span> <span class="nn">gen_kernel_module.lkm.gen_lkm</span> <span class="kn">import</span> <span class="n">GenLKM</span>
-    <span class="kn">from</span> <span class="nn">ats_utilities.cfg_base</span> <span class="kn">import</span> <span class="n">CfgBase</span>
+    <span class="kn">from</span> <span class="nn">gen_kernel_module.lkm</span> <span class="kn">import</span> <span class="n">GenLKM</span>
+    <span class="kn">from</span> <span class="nn">ats_utilities.logging</span> <span class="kn">import</span> <span class="n">ATSLogger</span>
+    <span class="kn">from</span> <span class="nn">ats_utilities.cli.cfg_cli</span> <span class="kn">import</span> <span class="n">CfgCLI</span>
+    <span class="kn">from</span> <span class="nn">ats_utilities.cooperative</span> <span class="kn">import</span> <span class="n">CooperativeMeta</span>
     <span class="kn">from</span> <span class="nn">ats_utilities.console_io.error</span> <span class="kn">import</span> <span class="n">error_message</span>
     <span class="kn">from</span> <span class="nn">ats_utilities.console_io.verbose</span> <span class="kn">import</span> <span class="n">verbose_message</span>
     <span class="kn">from</span> <span class="nn">ats_utilities.console_io.success</span> <span class="kn">import</span> <span class="n">success_message</span>
-<span class="k">except</span> <span class="ne">ImportError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
-    <span class="n">MESSAGE</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="si">{0}</span><span class="se">\n</span><span class="si">{1}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="vm">__file__</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">ImportError</span> <span class="k">as</span> <span class="n">ats_error_message</span><span class="p">:</span>
+    <span class="n">MESSAGE</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="si">{0}</span><span class="se">\n</span><span class="si">{1}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="vm">__file__</span><span class="p">,</span> <span class="n">ats_error_message</span><span class="p">)</span>
     <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="n">MESSAGE</span><span class="p">)</span>  <span class="c1"># Force close python ATS ##############################</span>
 
 <span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Vladimir Roncevic&#39;</span>
-<span class="n">__copyright__</span> <span class="o">=</span> <span class="s1">&#39;Copyright 2018, Free software to use and distributed it.&#39;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s1">&#39;Copyright 2017, Free software to use and distributed it.&#39;</span>
 <span class="n">__credits__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Vladimir Roncevic&#39;</span><span class="p">]</span>
-<span class="n">__license__</span> <span class="o">=</span> <span class="s1">&#39;GNU General Public License (GPL)&#39;</span>
-<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;1.0.0&#39;</span>
+<span class="n">__license__</span> <span class="o">=</span> <span class="s1">&#39;https://github.com/vroncevic/gen_kernel_module/blob/dev/LICENSE&#39;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;1.2.0&#39;</span>
 <span class="n">__maintainer__</span> <span class="o">=</span> <span class="s1">&#39;Vladimir Roncevic&#39;</span>
 <span class="n">__email__</span> <span class="o">=</span> <span class="s1">&#39;elektron.ronca@gmail.com&#39;</span>
 <span class="n">__status__</span> <span class="o">=</span> <span class="s1">&#39;Updated&#39;</span>
 
 
-<div class="viewcode-block" id="GenKernelModule"><a class="viewcode-back" href="../gen_kernel_module.html#gen_kernel_module.GenKernelModule">[docs]</a><span class="k">class</span> <span class="nc">GenKernelModule</span><span class="p">(</span><span class="n">CfgBase</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="GenKernelModule"><a class="viewcode-back" href="../gen_kernel_module.html#gen_kernel_module.GenKernelModule">[docs]</a><span class="k">class</span> <span class="nc">GenKernelModule</span><span class="p">(</span><span class="n">CfgCLI</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Define class GenKernelModule with attribute(s) and method(s).</span>
-<span class="sd">        Load a settings, create a CL interface and run operation(s).</span>
+<span class="sd">        Load a base info, create an CLI interface and run operation(s).</span>
 <span class="sd">        It defines:</span>
 
 <span class="sd">            :attributes:</span>
-<span class="sd">                | __slots__ - Setting class slots</span>
-<span class="sd">                | VERBOSE - Console text indicator for current process-phase</span>
-<span class="sd">                | __CONFIG - Configuration file path</span>
-<span class="sd">                | __OPS - Tool options (list)</span>
+<span class="sd">                | __metaclass__ - setting cooperative metaclasses.</span>
+<span class="sd">                | GEN_VERBOSE - console text indicator for process-phase.</span>
+<span class="sd">                | CONFIG - tool info file path.</span>
+<span class="sd">                | LOG - tool log file path.</span>
+<span class="sd">                | OPS - list of tool options.</span>
+<span class="sd">                | logger - logger object API.</span>
 <span class="sd">            :methods:</span>
-<span class="sd">                | __init__ - Initial constructor</span>
-<span class="sd">                | process - Process and run tool option(s)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">                | __init__ - initial constructor.</span>
+<span class="sd">                | process - process and generate module setup.py.</span>
+<span class="sd">                | __str__ - dunder method for GenKernelModule.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
 
-    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;VERBOSE&#39;</span><span class="p">,</span> <span class="s1">&#39;__CONFIG&#39;</span><span class="p">,</span> <span class="s1">&#39;__OPS&#39;</span><span class="p">)</span>
-    <span class="n">VERBOSE</span> <span class="o">=</span> <span class="s1">&#39;GEN_KERNEL_MODULE&#39;</span>
-    <span class="n">__CONFIG</span> <span class="o">=</span> <span class="s1">&#39;/conf/gen_kernel_module.cfg&#39;</span>
-    <span class="n">__OPS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;-g&#39;</span><span class="p">,</span> <span class="s1">&#39;--gen&#39;</span><span class="p">,</span> <span class="s1">&#39;-h&#39;</span><span class="p">,</span> <span class="s1">&#39;--version&#39;</span><span class="p">,</span> <span class="s1">&#39;--verbose&#39;</span><span class="p">]</span>
+    <span class="n">__metaclass__</span> <span class="o">=</span> <span class="n">CooperativeMeta</span>
+    <span class="n">GEN_VERBOSE</span> <span class="o">=</span> <span class="s1">&#39;GEN_KERNEL_MODULE&#39;</span>
+    <span class="n">CONFIG</span> <span class="o">=</span> <span class="s1">&#39;/conf/gen_kernel_module.cfg&#39;</span>
+    <span class="n">LOG</span> <span class="o">=</span> <span class="s1">&#39;/log/gen_kernel_module.log&#39;</span>
+    <span class="n">OPS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;-g&#39;</span><span class="p">,</span> <span class="s1">&#39;--gen&#39;</span><span class="p">,</span> <span class="s1">&#39;-v&#39;</span><span class="p">,</span> <span class="s1">&#39;--verbose&#39;</span><span class="p">,</span> <span class="s1">&#39;--version&#39;</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">            Loading configuration and setting argument options.</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">            Initial constructor.</span>
 
-<span class="sd">            :param verbose: Enable/disable verbose option</span>
+<span class="sd">            :param verbose: enable/disable verbose option</span>
 <span class="sd">            :type verbose: &lt;bool&gt;</span>
 <span class="sd">            :exceptions: None</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">verbose_message</span><span class="p">(</span>
-            <span class="n">GenKernelModule</span><span class="o">.</span><span class="n">VERBOSE</span><span class="p">,</span> <span class="n">verbose</span><span class="p">,</span> <span class="s1">&#39;Initial configuration&#39;</span>
-        <span class="p">)</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">current_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span><span class="o">.</span><span class="n">parent</span>
-        <span class="n">base_config_file</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{0}{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-            <span class="n">current_dir</span><span class="p">,</span> <span class="n">GenKernelModule</span><span class="o">.</span><span class="n">__CONFIG</span>
+        <span class="n">base_info</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{0}{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">current_dir</span><span class="p">,</span> <span class="n">GenKernelModule</span><span class="o">.</span><span class="n">CONFIG</span><span class="p">)</span>
+        <span class="n">CfgCLI</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_info</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+        <span class="n">verbose_message</span><span class="p">(</span><span class="n">GenKernelModule</span><span class="o">.</span><span class="n">GEN_VERBOSE</span><span class="p">,</span> <span class="n">verbose</span><span class="p">,</span> <span class="s1">&#39;init tool info&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">ATSLogger</span><span class="p">(</span>
+            <span class="n">GenKernelModule</span><span class="o">.</span><span class="n">GEN_VERBOSE</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span>
+            <span class="s1">&#39;</span><span class="si">{0}{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">current_dir</span><span class="p">,</span> <span class="n">GenKernelModule</span><span class="o">.</span><span class="n">LOG</span><span class="p">),</span>
+            <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span>
         <span class="p">)</span>
-        <span class="n">CfgBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_config_file</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tool_status</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tool_operational</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">add_new_option</span><span class="p">(</span>
-                <span class="n">GenKernelModule</span><span class="o">.</span><span class="n">__OPS</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-                <span class="n">GenKernelModule</span><span class="o">.</span><span class="n">__OPS</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
-                <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;gen&#39;</span><span class="p">,</span>
-                <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Generate Linux Kernel Module&#39;</span>
+                <span class="n">GenKernelModule</span><span class="o">.</span><span class="n">OPS</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">GenKernelModule</span><span class="o">.</span><span class="n">OPS</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;gen&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;generate Linux Kernel Module&#39;</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_new_option</span><span class="p">(</span>
+                <span class="n">GenKernelModule</span><span class="o">.</span><span class="n">OPS</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">GenKernelModule</span><span class="o">.</span><span class="n">OPS</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+                <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                <span class="n">help</span><span class="o">=</span><span class="s1">&#39;activate verbose mode for generation&#39;</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_new_option</span><span class="p">(</span>
+                <span class="n">GenKernelModule</span><span class="o">.</span><span class="n">OPS</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;version&#39;</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="n">__version__</span>
             <span class="p">)</span>
 
 <div class="viewcode-block" id="GenKernelModule.process"><a class="viewcode-back" href="../gen_kernel_module.html#gen_kernel_module.GenKernelModule.process">[docs]</a>    <span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+        <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">            Process and run operation.</span>
 
-<span class="sd">            :param verbose: Enable/disable verbose option</span>
+<span class="sd">            :param verbose: enable/disable verbose option</span>
 <span class="sd">            :type verbose: &lt;bool&gt;</span>
 <span class="sd">            :return: True (success) | False</span>
 <span class="sd">            :rtype: &lt;bool&gt;</span>
 <span class="sd">            :exceptions: None</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">status</span> <span class="o">=</span> <span class="kc">False</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tool_status</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tool_operational</span><span class="p">:</span>
             <span class="n">num_of_args_sys</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">num_of_args_sys</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
                 <span class="n">operation</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-                <span class="k">if</span> <span class="n">operation</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">GenKernelModule</span><span class="o">.</span><span class="n">__OPS</span><span class="p">:</span>
-                    <span class="n">sys</span><span class="o">.</span><span class="n">argv</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">if</span> <span class="n">operation</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">GenKernelModule</span><span class="o">.</span><span class="n">OPS</span><span class="p">:</span>
                     <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;-h&#39;</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;-h&#39;</span><span class="p">)</span>
-            <span class="n">opts</span><span class="p">,</span> <span class="n">args</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_args</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
-            <span class="n">num_of_args</span><span class="p">,</span> <span class="n">current_dir</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">),</span> <span class="n">getcwd</span><span class="p">()</span>
-            <span class="n">setup_path</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">/</span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">current_dir</span><span class="p">,</span> <span class="n">opts</span><span class="o">.</span><span class="n">gen</span><span class="p">)</span>
+            <span class="n">args</span><span class="p">,</span> <span class="n">current_dir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_args</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:]),</span> <span class="n">getcwd</span><span class="p">()</span>
+            <span class="n">setup_path</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">/</span><span class="si">{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">current_dir</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">gen</span><span class="p">)</span>
             <span class="n">setup_exists</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">setup_path</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>
-            <span class="k">if</span> <span class="n">num_of_args</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">opts</span><span class="o">.</span><span class="n">gen</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">setup_exists</span><span class="p">:</span>
-                <span class="n">generator</span><span class="p">,</span> <span class="n">gen_status</span> <span class="o">=</span> <span class="n">GenLKM</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">),</span> <span class="kc">False</span>
-                <span class="nb">print</span><span class="p">(</span>
-                    <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2"> </span><span class="si">{1}</span><span class="s2"> [</span><span class="si">{2}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                        <span class="s2">&quot;[</span><span class="si">{0}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">GenKernelModule</span><span class="o">.</span><span class="n">VERBOSE</span><span class="p">),</span>
-                        <span class="s1">&#39;Generating kernel module&#39;</span><span class="p">,</span> <span class="n">opts</span><span class="o">.</span><span class="n">gen</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">setup_exists</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">bool</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">gen</span><span class="p">):</span>
+                    <span class="nb">print</span><span class="p">(</span>
+                        <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1"> </span><span class="si">{1}</span><span class="s1"> [</span><span class="si">{2}</span><span class="s1">]&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                            <span class="s1">&#39;[</span><span class="si">{0}</span><span class="s1">]&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">GenKernelModule</span><span class="o">.</span><span class="n">GEN_VERBOSE</span><span class="p">),</span>
+                            <span class="s1">&#39;generating kernel module&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">gen</span>
+                        <span class="p">)</span>
                     <span class="p">)</span>
-                <span class="p">)</span>
-                <span class="n">gen_status</span> <span class="o">=</span> <span class="n">generator</span><span class="o">.</span><span class="n">gen_module</span><span class="p">(</span>
-                    <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">opts</span><span class="o">.</span><span class="n">gen</span><span class="p">),</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span>
-                <span class="p">)</span>
-                <span class="k">if</span> <span class="n">gen_status</span><span class="p">:</span>
-                    <span class="n">success_message</span><span class="p">(</span><span class="n">GenKernelModule</span><span class="o">.</span><span class="n">VERBOSE</span><span class="p">,</span> <span class="s1">&#39;Done</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-                    <span class="n">status</span> <span class="o">=</span> <span class="kc">True</span>
+                    <span class="n">generator</span> <span class="o">=</span> <span class="n">GenLKM</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+                    <span class="n">status</span> <span class="o">=</span> <span class="n">generator</span><span class="o">.</span><span class="n">gen_module</span><span class="p">(</span>
+                        <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">gen</span><span class="p">),</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span>
+                    <span class="p">)</span>
+                    <span class="k">if</span> <span class="n">status</span><span class="p">:</span>
+                        <span class="n">success_message</span><span class="p">(</span><span class="n">GenKernelModule</span><span class="o">.</span><span class="n">GEN_VERBOSE</span><span class="p">,</span> <span class="s1">&#39;Done</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">write_log</span><span class="p">(</span>
+                            <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1"> </span><span class="si">{1}</span><span class="s1"> done&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                                <span class="s1">&#39;generating kernel module&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">gen</span>
+                            <span class="p">),</span> <span class="n">ATSLogger</span><span class="o">.</span><span class="n">ATS_INFO</span>
+                        <span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">error_message</span><span class="p">(</span>
+                            <span class="n">GenKernelModule</span><span class="o">.</span><span class="n">GEN_VERBOSE</span><span class="p">,</span> <span class="s1">&#39;generation failed&#39;</span>
+                        <span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">write_log</span><span class="p">(</span>
+                            <span class="s1">&#39;generation failed&#39;</span><span class="p">,</span> <span class="n">ATSLogger</span><span class="o">.</span><span class="n">ATS_ERROR</span>
+                        <span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">error_message</span><span class="p">(</span>
+                        <span class="n">GenKernelModule</span><span class="o">.</span><span class="n">GEN_VERBOSE</span><span class="p">,</span> <span class="s1">&#39;provide package name&#39;</span>
+                    <span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">write_log</span><span class="p">(</span>
+                        <span class="s1">&#39;provide package name&#39;</span><span class="p">,</span> <span class="n">ATSLogger</span><span class="o">.</span><span class="n">ATS_ERROR</span>
+                    <span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">error_message</span><span class="p">(</span>
-                    <span class="n">GenKernelModule</span><span class="o">.</span><span class="n">VERBOSE</span><span class="p">,</span> <span class="s1">&#39;setup.py already exist !&#39;</span>
+                    <span class="n">GenKernelModule</span><span class="o">.</span><span class="n">GEN_VERBOSE</span><span class="p">,</span> <span class="s1">&#39;project already exist&#39;</span>
+                <span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">write_log</span><span class="p">(</span>
+                    <span class="s1">&#39;project already exist&#39;</span><span class="p">,</span> <span class="n">ATSLogger</span><span class="o">.</span><span class="n">ATS_ERROR</span>
                 <span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">error_message</span><span class="p">(</span><span class="n">GenKernelModule</span><span class="o">.</span><span class="n">VERBOSE</span><span class="p">,</span> <span class="s1">&#39;Tool is not operational&#39;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="kc">True</span> <span class="k">if</span> <span class="n">status</span> <span class="k">else</span> <span class="kc">False</span></div></div>
+            <span class="n">error_message</span><span class="p">(</span>
+                <span class="n">GenKernelModule</span><span class="o">.</span><span class="n">GEN_VERBOSE</span><span class="p">,</span> <span class="s1">&#39;tool is not operational&#39;</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">write_log</span><span class="p">(</span>
+                <span class="s1">&#39;tool is not operational&#39;</span><span class="p">,</span> <span class="n">ATSLogger</span><span class="o">.</span><span class="n">ATS_ERROR</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="n">status</span></div>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">            Dunder method for GenKernelModule.</span>
+
+<span class="sd">            :return: object in a human-readable format.</span>
+<span class="sd">            :rtype: &lt;str&gt;</span>
+<span class="sd">            :exceptions: None</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1"> (</span><span class="si">{1}</span><span class="s1">, </span><span class="si">{2}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">CfgCLI</span><span class="o">.</span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="p">)</span>
+        <span class="p">)</span></div>
 </pre></div>
 
            </div>
@@ -301,7 +351,7 @@
   <div role="contentinfo">
     <p>
         
-        &copy; Copyright 2020, Vladimir Roncevic &lt;elektron.ronca@gmail.com&gt;
+        &copy; Copyright 2017, Vladimir Roncevic &lt;elektron.ronca@gmail.com&gt;
 
     </p>
   </div>

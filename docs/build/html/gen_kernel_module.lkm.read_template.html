@@ -37,7 +37,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="gen_kernel_module.lkm.write_template module" href="gen_kernel_module.lkm.write_template.html" />
-    <link rel="prev" title="gen_kernel_module.lkm.module_selector module" href="gen_kernel_module.lkm.module_selector.html" /> 
+    <link rel="prev" title="gen_kernel_module.lkm.config.pro_name module" href="gen_kernel_module.lkm.config.pro_name.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                1.0.0
+                1.2.0
               </div>
             
           
@@ -177,7 +177,7 @@
 <dt>Module</dt>
 <dd>read_template.py</dd>
 <dt>Copyright</dt>
-<dd>Copyright (C) 2018 Vladimir Roncevic &lt;<a class="reference external" href="mailto:elektron&#46;ronca&#37;&#52;&#48;gmail&#46;com">elektron<span>&#46;</span>ronca<span>&#64;</span>gmail<span>&#46;</span>com</a>&gt;
+<dd>Copyright (C) 2017 Vladimir Roncevic &lt;<a class="reference external" href="mailto:elektron&#46;ronca&#37;&#52;&#48;gmail&#46;com">elektron<span>&#46;</span>ronca<span>&#64;</span>gmail<span>&#46;</span>com</a>&gt;
 gen_kernel_module is free software: you can redistribute it and/or
 modify it under the terms of the GNU General Public License as published
 by the Free Software Foundation, either version 3 of the License, or
@@ -189,15 +189,15 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU General Public License along
 with this program. If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</dd>
 <dt>Info</dt>
-<dd>Define class ReadTemplate with attribute(s) and method(s).
-Read a template file (setup.template) and return a content.</dd>
+<dd>Defined class ReadTemplate with attribute(s) and method(s).
+Defined API for reading templates for LKM.</dd>
 </dl>
 <dl class="class">
 <dt id="gen_kernel_module.lkm.read_template.ReadTemplate">
 <em class="property">class </em><code class="descclassname">gen_kernel_module.lkm.read_template.</code><code class="descname">ReadTemplate</code><span class="sig-paren">(</span><em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gen_kernel_module/lkm/read_template.html#ReadTemplate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gen_kernel_module.lkm.read_template.ReadTemplate" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ats_utilities.config.file_checking.FileChecking</span></code></p>
-<p>Define class ReadTemplate with attribute(s) and method(s).
-Read a template file (setup.template) and return a content.
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ats_utilities.config_io.base_check.FileChecking</span></code></p>
+<p>Defined class ReadTemplate with attribute(s) and method(s).
+Defined API for reading templates for LKM.
 It defines:</p>
 <blockquote>
 <div><table class="docutils field-list" frame="void" rules="none">
@@ -205,27 +205,23 @@ It defines:</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">attributes:</th><td class="field-body"><div class="first last line-block">
-<div class="line">__slots__ - Setting class slots</div>
-<div class="line">VERBOSE - Console text indicator for current process-phase</div>
-<div class="line">CharDev - 0</div>
-<div class="line">BlkDev - 1</div>
-<div class="line">NetDev - 2</div>
-<div class="line">VMADev - 3</div>
-<div class="line">__MODULES - Mapped choice and template key</div>
-<div class="line">__TEMPLATE_DIR - Template dir path</div>
-<div class="line">__PROJECT - template/project structure</div>
-<div class="line">__FORMAT - File format for template</div>
-<div class="line">__template_dir - Absolute file path of template dir</div>
-<div class="line">__pro_cfg - Yaml object for template/project description</div>
+<div class="line">GEN_VERBOSE - console text indicator for process-phase.</div>
+<div class="line">TEMPLATE_DIR - template dir path.</div>
+<div class="line">ROOT_KEY - root key for template.</div>
+<div class="line">FORMAT - format extension for templates.</div>
+<div class="line">MAKEFILE - makefile template.</div>
+<div class="line">LKM - lkm template.</div>
+<div class="line">TEST - test template.</div>
+<div class="line">MAKEFILE_MOD - makefile module.</div>
+<div class="line">LKM_MOD - lkm module.</div>
+<div class="line">TEST_MOD - test module.</div>
 </div>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">methods:</th><td class="field-body"><div class="first last line-block">
-<div class="line">__init__ - Initial constructor</div>
-<div class="line">get_template_directory - Getter for template directory object</div>
-<div class="line">get_project_configurtion - Getter for project configuration</div>
-<div class="line">get_check_cfg - Getter for status of project configuration</div>
-<div class="line">read - Read a template and return a string representation</div>
+<div class="line">__init__ - initial constructor.</div>
+<div class="line">read - read a templates and return a string representations.</div>
+<div class="line">__str__ - dunder method for ReadTemplate.</div>
 </div>
 </td>
 </tr>
@@ -233,83 +229,59 @@ It defines:</p>
 </table>
 </div></blockquote>
 <dl class="attribute">
-<dt id="gen_kernel_module.lkm.read_template.ReadTemplate.BlkDev">
-<code class="descname">BlkDev</code><em class="property"> = 1</em><a class="headerlink" href="#gen_kernel_module.lkm.read_template.ReadTemplate.BlkDev" title="Permalink to this definition">¶</a></dt>
+<dt id="gen_kernel_module.lkm.read_template.ReadTemplate.FORMAT">
+<code class="descname">FORMAT</code><em class="property"> = 'template'</em><a class="headerlink" href="#gen_kernel_module.lkm.read_template.ReadTemplate.FORMAT" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="gen_kernel_module.lkm.read_template.ReadTemplate.CharDev">
-<code class="descname">CharDev</code><em class="property"> = 0</em><a class="headerlink" href="#gen_kernel_module.lkm.read_template.ReadTemplate.CharDev" title="Permalink to this definition">¶</a></dt>
+<dt id="gen_kernel_module.lkm.read_template.ReadTemplate.GEN_VERBOSE">
+<code class="descname">GEN_VERBOSE</code><em class="property"> = 'GEN_KERNEL_MODULE::LKM::READ_TEMPLATE'</em><a class="headerlink" href="#gen_kernel_module.lkm.read_template.ReadTemplate.GEN_VERBOSE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="gen_kernel_module.lkm.read_template.ReadTemplate.NetDev">
-<code class="descname">NetDev</code><em class="property"> = 2</em><a class="headerlink" href="#gen_kernel_module.lkm.read_template.ReadTemplate.NetDev" title="Permalink to this definition">¶</a></dt>
+<dt id="gen_kernel_module.lkm.read_template.ReadTemplate.LKM">
+<code class="descname">LKM</code><em class="property"> = 'lkm.template'</em><a class="headerlink" href="#gen_kernel_module.lkm.read_template.ReadTemplate.LKM" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="gen_kernel_module.lkm.read_template.ReadTemplate.LKM_MOD">
+<code class="descname">LKM_MOD</code><em class="property"> = '{0}.c'</em><a class="headerlink" href="#gen_kernel_module.lkm.read_template.ReadTemplate.LKM_MOD" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="gen_kernel_module.lkm.read_template.ReadTemplate.MAKEFILE">
+<code class="descname">MAKEFILE</code><em class="property"> = 'Makefile.template'</em><a class="headerlink" href="#gen_kernel_module.lkm.read_template.ReadTemplate.MAKEFILE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="gen_kernel_module.lkm.read_template.ReadTemplate.MAKEFILE_MOD">
+<code class="descname">MAKEFILE_MOD</code><em class="property"> = 'Makefile'</em><a class="headerlink" href="#gen_kernel_module.lkm.read_template.ReadTemplate.MAKEFILE_MOD" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="gen_kernel_module.lkm.read_template.ReadTemplate.ROOT_KEY">
+<code class="descname">ROOT_KEY</code><em class="property"> = 'templates'</em><a class="headerlink" href="#gen_kernel_module.lkm.read_template.ReadTemplate.ROOT_KEY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="gen_kernel_module.lkm.read_template.ReadTemplate.TEMPLATE_DIR">
+<code class="descname">TEMPLATE_DIR</code><em class="property"> = '/../conf/template/'</em><a class="headerlink" href="#gen_kernel_module.lkm.read_template.ReadTemplate.TEMPLATE_DIR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="gen_kernel_module.lkm.read_template.ReadTemplate.TEST">
+<code class="descname">TEST</code><em class="property"> = 'test.template'</em><a class="headerlink" href="#gen_kernel_module.lkm.read_template.ReadTemplate.TEST" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="gen_kernel_module.lkm.read_template.ReadTemplate.TEST_MOD">
+<code class="descname">TEST_MOD</code><em class="property"> = 'main.c'</em><a class="headerlink" href="#gen_kernel_module.lkm.read_template.ReadTemplate.TEST_MOD" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="gen_kernel_module.lkm.read_template.ReadTemplate.VERBOSE">
-<code class="descname">VERBOSE</code><em class="property"> = 'GEN_KERNEL_MODULE::LKM::READ_TEMPLATE'</em><a class="headerlink" href="#gen_kernel_module.lkm.read_template.ReadTemplate.VERBOSE" title="Permalink to this definition">¶</a></dt>
+<code class="descname">VERBOSE</code><em class="property"> = 'ATS_UTILITIES'</em><a class="headerlink" href="#gen_kernel_module.lkm.read_template.ReadTemplate.VERBOSE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
-
-<dl class="attribute">
-<dt id="gen_kernel_module.lkm.read_template.ReadTemplate.VMADev">
-<code class="descname">VMADev</code><em class="property"> = 3</em><a class="headerlink" href="#gen_kernel_module.lkm.read_template.ReadTemplate.VMADev" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="gen_kernel_module.lkm.read_template.ReadTemplate.get_check_cfg">
-<code class="descname">get_check_cfg</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gen_kernel_module/lkm/read_template.html#ReadTemplate.get_check_cfg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gen_kernel_module.lkm.read_template.ReadTemplate.get_check_cfg" title="Permalink to this definition">¶</a></dt>
-<dd><p>Getter for status of project configuration.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Project configuration status</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">&lt;bool&gt;</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Exceptions:</th><td class="field-body">None</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="gen_kernel_module.lkm.read_template.ReadTemplate.get_project_configurtion">
-<code class="descname">get_project_configurtion</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gen_kernel_module/lkm/read_template.html#ReadTemplate.get_project_configurtion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gen_kernel_module.lkm.read_template.ReadTemplate.get_project_configurtion" title="Permalink to this definition">¶</a></dt>
-<dd><p>Getter for project configuration.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Project configuration</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">&lt;Yaml2Object&gt;</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Exceptions:</th><td class="field-body">None</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="gen_kernel_module.lkm.read_template.ReadTemplate.get_template_directory">
-<code class="descname">get_template_directory</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gen_kernel_module/lkm/read_template.html#ReadTemplate.get_template_directory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gen_kernel_module.lkm.read_template.ReadTemplate.get_template_directory" title="Permalink to this definition">¶</a></dt>
-<dd><p>Getter for template directory object.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Template directory</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">&lt;str&gt;</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Exceptions:</th><td class="field-body">None</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
 
 <dl class="method">
 <dt id="gen_kernel_module.lkm.read_template.ReadTemplate.read">
@@ -320,16 +292,16 @@ It defines:</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>module_type</strong> (<em>&lt;int&gt;</em>) – Type of kernel module</li>
-<li><strong>module_name</strong> (<em>&lt;str&gt;</em>) – Parameter module name</li>
-<li><strong>verbose</strong> (<em>&lt;bool&gt;</em>) – Enable/disable verbose option</li>
+<li><strong>module_type</strong> (<em>&lt;dict&gt;</em>) – type of kernel module with templates.</li>
+<li><strong>module_name</strong> (<em>&lt;str&gt;</em>) – parameter module name.</li>
+<li><strong>verbose</strong> (<em>&lt;bool&gt;</em>) – enable/disable verbose option.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Template content for setup module | None</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">template list for generation, True | empty list, False.</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">&lt;str&gt; | &lt;NoneType&gt;</p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">&lt;list&gt;, &lt;bool&gt;</p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Exceptions:</th><td class="field-body"><p class="first last">ATSBadCallError | ATSTypeError</p>
@@ -354,7 +326,7 @@ It defines:</p>
         <a href="gen_kernel_module.lkm.write_template.html" class="btn btn-neutral float-right" title="gen_kernel_module.lkm.write_template module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="gen_kernel_module.lkm.module_selector.html" class="btn btn-neutral float-left" title="gen_kernel_module.lkm.module_selector module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="gen_kernel_module.lkm.config.pro_name.html" class="btn btn-neutral float-left" title="gen_kernel_module.lkm.config.pro_name module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -364,7 +336,7 @@ It defines:</p>
   <div role="contentinfo">
     <p>
         
-        &copy; Copyright 2020, Vladimir Roncevic &lt;elektron.ronca@gmail.com&gt;
+        &copy; Copyright 2017, Vladimir Roncevic &lt;elektron.ronca@gmail.com&gt;
 
     </p>
   </div>

@@ -1,7 +1,5 @@
 name: Python package gen_kernel_module
-
 on: [push]
-
 jobs:
   build:
     runs-on: ubuntu-latest
