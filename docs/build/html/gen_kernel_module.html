@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                1.0.0
+                1.2.0
               </div>
             
           
@@ -174,9 +174,18 @@
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="gen_kernel_module.lkm.html">gen_kernel_module.lkm package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="gen_kernel_module.lkm.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gen_kernel_module.lkm.config.html">gen_kernel_module.lkm.config package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gen_kernel_module.lkm.config.html#submodules">Submodules</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="gen_kernel_module.lkm.config.pro_name.html">gen_kernel_module.lkm.config.pro_name module</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="gen_kernel_module.lkm.config.html#module-gen_kernel_module.lkm.config">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="gen_kernel_module.lkm.html#submodules">Submodules</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="gen_kernel_module.lkm.gen_lkm.html">gen_kernel_module.lkm.gen_lkm module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="gen_kernel_module.lkm.module_selector.html">gen_kernel_module.lkm.module_selector module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="gen_kernel_module.lkm.read_template.html">gen_kernel_module.lkm.read_template module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="gen_kernel_module.lkm.write_template.html">gen_kernel_module.lkm.write_template module</a></li>
 </ul>
@@ -193,7 +202,7 @@
 <dt>Module</dt>
 <dd>gen_kernel_module.py</dd>
 <dt>Copyright</dt>
-<dd>Copyright (C) 2018 Vladimir Roncevic &lt;<a class="reference external" href="mailto:elektron&#46;ronca&#37;&#52;&#48;gmail&#46;com">elektron<span>&#46;</span>ronca<span>&#64;</span>gmail<span>&#46;</span>com</a>&gt;
+<dd>Copyright (C) 2017 Vladimir Roncevic &lt;<a class="reference external" href="mailto:elektron&#46;ronca&#37;&#52;&#48;gmail&#46;com">elektron<span>&#46;</span>ronca<span>&#64;</span>gmail<span>&#46;</span>com</a>&gt;
 gen_kernel_module is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by the
 Free Software Foundation, either version 3 of the License, or
@@ -206,14 +215,14 @@ You should have received a copy of the GNU General Public License along
 with this program. If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</dd>
 <dt>Info</dt>
 <dd>Define class GenKernelModule with attribute(s) and method(s).
-Load a settings, create a CL interface and run operation(s).</dd>
+Load a base info, create an CLI interface and run operation(s).</dd>
 </dl>
 <dl class="class">
 <dt id="gen_kernel_module.GenKernelModule">
 <em class="property">class </em><code class="descclassname">gen_kernel_module.</code><code class="descname">GenKernelModule</code><span class="sig-paren">(</span><em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gen_kernel_module.html#GenKernelModule"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gen_kernel_module.GenKernelModule" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ats_utilities.cfg_base.CfgBase</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ats_utilities.cli.cfg_cli.CfgCLI</span></code></p>
 <p>Define class GenKernelModule with attribute(s) and method(s).
-Load a settings, create a CL interface and run operation(s).
+Load a base info, create an CLI interface and run operation(s).
 It defines:</p>
 <blockquote>
 <div><table class="docutils field-list" frame="void" rules="none">
@@ -221,16 +230,19 @@ It defines:</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">attributes:</th><td class="field-body"><div class="first last line-block">
-<div class="line">__slots__ - Setting class slots</div>
-<div class="line">VERBOSE - Console text indicator for current process-phase</div>
-<div class="line">__CONFIG - Configuration file path</div>
-<div class="line">__OPS - Tool options (list)</div>
+<div class="line">__metaclass__ - setting cooperative metaclasses.</div>
+<div class="line">GEN_VERBOSE - console text indicator for process-phase.</div>
+<div class="line">CONFIG - tool info file path.</div>
+<div class="line">LOG - tool log file path.</div>
+<div class="line">OPS - list of tool options.</div>
+<div class="line">logger - logger object API.</div>
 </div>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">methods:</th><td class="field-body"><div class="first last line-block">
-<div class="line">__init__ - Initial constructor</div>
-<div class="line">process - Process and run tool option(s)</div>
+<div class="line">__init__ - initial constructor.</div>
+<div class="line">process - process and generate module setup.py.</div>
+<div class="line">__str__ - dunder method for GenKernelModule.</div>
 </div>
 </td>
 </tr>
@@ -238,8 +250,28 @@ It defines:</p>
 </table>
 </div></blockquote>
 <dl class="attribute">
+<dt id="gen_kernel_module.GenKernelModule.CONFIG">
+<code class="descname">CONFIG</code><em class="property"> = '/conf/gen_kernel_module.cfg'</em><a class="headerlink" href="#gen_kernel_module.GenKernelModule.CONFIG" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="gen_kernel_module.GenKernelModule.GEN_VERBOSE">
+<code class="descname">GEN_VERBOSE</code><em class="property"> = 'GEN_KERNEL_MODULE'</em><a class="headerlink" href="#gen_kernel_module.GenKernelModule.GEN_VERBOSE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="gen_kernel_module.GenKernelModule.LOG">
+<code class="descname">LOG</code><em class="property"> = '/log/gen_kernel_module.log'</em><a class="headerlink" href="#gen_kernel_module.GenKernelModule.LOG" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="gen_kernel_module.GenKernelModule.OPS">
+<code class="descname">OPS</code><em class="property"> = ['-g', '--gen', '-v', '--verbose', '--version']</em><a class="headerlink" href="#gen_kernel_module.GenKernelModule.OPS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
 <dt id="gen_kernel_module.GenKernelModule.VERBOSE">
-<code class="descname">VERBOSE</code><em class="property"> = 'GEN_KERNEL_MODULE'</em><a class="headerlink" href="#gen_kernel_module.GenKernelModule.VERBOSE" title="Permalink to this definition">¶</a></dt>
+<code class="descname">VERBOSE</code><em class="property"> = 'ATS_UTILITIES'</em><a class="headerlink" href="#gen_kernel_module.GenKernelModule.VERBOSE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -250,7 +282,7 @@ It defines:</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>verbose</strong> (<em>&lt;bool&gt;</em>) – Enable/disable verbose option</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>verbose</strong> (<em>&lt;bool&gt;</em>) – enable/disable verbose option</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">True (success) | False</td>
 </tr>
@@ -288,7 +320,7 @@ It defines:</p>
   <div role="contentinfo">
     <p>
         
-        &copy; Copyright 2020, Vladimir Roncevic &lt;elektron.ronca@gmail.com&gt;
+        &copy; Copyright 2017, Vladimir Roncevic &lt;elektron.ronca@gmail.com&gt;
 
     </p>
   </div>

@@ -55,8 +55,19 @@ To install this set of modules type the following:
     python setup.py install_lib
     python setup.py install_egg_info
     python setup.py install_data
+    pip3 install -r requirements.txt
+    python3 setup.py install_lib
+    python3 setup.py install_egg_info
+    python3 setup.py install_data
 
-You can use Docker to create image/container.
+You can use Docker to create image/container, or You can use pip to install:
+
+.. code-block:: bash
+
+    # python2
+    pip install gen-kernel-module
+    # python3
+    pip3 install gen-kernel-module
 
 |GitHub docker checker|
 
@@ -88,7 +99,7 @@ Code structure:
 
 .. code-block:: bash
 
-    .
+    gen_kernel_module/
     ├── conf/
     │   ├── gen_kernel_module.cfg
     │   ├── gen_kernel_module_util.cfg
@@ -112,9 +123,10 @@ Code structure:
     │           └── test.template
     ├── __init__.py
     ├── lkm/
-    │   ├── gen_lkm.py
+    │   ├── config/
+    │   │   ├── __init__.py
+    │   │   └── pro_name.py
     │   ├── __init__.py
-    │   ├── module_selector.py
     │   ├── read_template.py
     │   └── write_template.py
     ├── log/
@@ -133,7 +145,7 @@ Copyright and licence
 .. |License: Apache 2.0| image:: https://img.shields.io/badge/License-Apache%202.0-blue.svg
    :target: https://opensource.org/licenses/Apache-2.0
 
-Copyright (C) 2018 by `vroncevic.github.io/gen_kernel_module <https://vroncevic.github.io/gen_kernel_module>`_
+Copyright (C) 2017 by `vroncevic.github.io/gen_kernel_module <https://vroncevic.github.io/gen_kernel_module>`_
 
 **gen_kernel_module** is free software; you can redistribute it and/or modify
 it under the same terms as Python itself, either Python version 2.x/3.x or,

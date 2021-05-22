@@ -1,20 +1,28 @@
-lkm_charachter_device:
-    lkm_charachter_device/Makefile.template
-    lkm_charachter_device/lkm.template
-    lkm_charachter_device/test.template
-
-lkm_block_device:
-    lkm_block_device/Makefile.template
-    lkm_block_device/lkm.template
-    lkm_block_device/test.template
-
-lkm_network_interfaces:
-    lkm_network_interfaces/Makefile.template
-    lkm_network_interfaces/lkm.template
-    lkm_network_interfaces/test.template
-
-lkm_vma:
-    lkm_vma/Makefile.template
-    lkm_vma/lkm.template
-    lkm_vma/test.template
-
+modules:
+ - lkm_charachter_device:
+     - info: LKM Charachter Device
+     - templates:
+         - Makefile.template
+         - lkm.template
+         - test.template
+ - lkm_block_device:
+     - info: LKM Block Device
+     - templates:
+         - Makefile.template
+         - lkm.template
+         - test.template
+ - lkm_network_interfaces:
+     - info: LKM Network Interface
+     - templates:
+         - Makefile.template
+         - lkm.template
+         - test.template
+ - lkm_vma:
+     - info: LKM Virtual Memory Address
+     - templates:
+         - Makefile.template
+         - lkm.template
+         - test.template
+ - cancel:
+     - info: null
+     - templates: null
