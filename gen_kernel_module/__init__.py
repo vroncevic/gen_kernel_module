@@ -16,7 +16,7 @@
      You should have received a copy of the GNU General Public License along
      with this program. If not, see <http://www.gnu.org/licenses/>.
  Info
-     Define class GenKernelModule with attribute(s) and method(s).
+     Defined class GenKernelModule with attribute(s) and method(s).
      Load a base info, create an CLI interface and run operation(s).
 '''
 
@@ -40,7 +40,7 @@ __author__ = 'Vladimir Roncevic'
 __copyright__ = 'Copyright 2017, Free software to use and distributed it.'
 __credits__ = ['Vladimir Roncevic']
 __license__ = 'https://github.com/vroncevic/gen_kernel_module/blob/dev/LICENSE'
-__version__ = '1.2.0'
+__version__ = '1.2.1'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
@@ -48,7 +48,7 @@ __status__ = 'Updated'
 
 class GenKernelModule(CfgCLI):
     '''
-        Define class GenKernelModule with attribute(s) and method(s).
+        Defined class GenKernelModule with attribute(s) and method(s).
         Load a base info, create an CLI interface and run operation(s).
         It defines:
 
@@ -108,7 +108,7 @@ class GenKernelModule(CfgCLI):
 
             :param verbose: enable/disable verbose option
             :type verbose: <bool>
-            :return: True (success) | False
+            :return: boolean status, True (success) | False.
             :rtype: <bool>
             :exceptions: None
         '''
@@ -137,7 +137,7 @@ class GenKernelModule(CfgCLI):
                         '{0}'.format(args.gen), verbose=verbose
                     )
                     if status:
-                        success_message(GenKernelModule.GEN_VERBOSE, 'Done\n')
+                        success_message(GenKernelModule.GEN_VERBOSE, 'done\n')
                         self.logger.write_log(
                             '{0} {1} done'.format(
                                 'generating kernel module', args.gen
