@@ -8,7 +8,7 @@ sys.path.insert(0, os.path.abspath('../../'))
 project = u'gen_kernel_module'
 copyright = u'2017, Vladimir Roncevic <elektron.ronca@gmail.com>'
 author = u'Vladimir Roncevic <elektron.ronca@gmail.com>'
-version = u'1.2.1'
+version = u'1.2.2'
 release = u'https://github.com/vroncevic/gen_kernel_module/releases/'
 extensions = ['sphinx.ext.autodoc', 'sphinx.ext.viewcode']
 templates_path = ['_templates']

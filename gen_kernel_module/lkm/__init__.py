@@ -40,10 +40,10 @@ except ImportError as ats_error_message:
     sys.exit(MESSAGE)  # Force close python ATS ##############################
 
 __author__ = 'Vladimir Roncevic'
-__copyright__ = 'Copyright 2017, Free software to use and distributed it.'
+__copyright__ = 'Copyright 2017, https://vroncevic.github.io/gen_kernel_module'
 __credits__ = ['Vladimir Roncevic']
 __license__ = 'https://github.com/vroncevic/gen_kernel_module/blob/dev/LICENSE'
-__version__ = '1.2.1'
+__version__ = '1.2.2'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
@@ -57,7 +57,9 @@ class GenLKM(FileChecking, ProConfig, ProName):
 
             :attributes:
                 | GEN_VERBOSE - console text indicator for process-phase.
-                | PRO_STRUCTURE - template/project structure
+                | PRO_STRUCTURE - template/project structure.
+                | CANCEL - cancel id.
+                | MODULES - modules key.
                 | __reader - reader API.
                 | __writer - writer API.
             :methods:
@@ -70,6 +72,7 @@ class GenLKM(FileChecking, ProConfig, ProName):
 
     GEN_VERBOSE = 'GEN_KERNEL_MODULE::LKM::GEN_LKM'
     PRO_STRUCTURE = '/../conf/project.yaml'
+    CANCEL, MODULES = 4, 'modules'
 
     def __init__(self, verbose=False):
         '''
@@ -137,7 +140,7 @@ class GenLKM(FileChecking, ProConfig, ProName):
             raise ATSBadCallError(error)
         self.pro_name, status = module_name, False
         module_type, module_id = self.choose_module(verbose=verbose)
-        if module_id != 4:
+        if module_id != GenLKM.CANCEL:
             templates, status = self.__reader.read(
                 module_type, module_name, verbose=verbose
             )
@@ -160,7 +163,7 @@ class GenLKM(FileChecking, ProConfig, ProName):
             :exceptions: None
         '''
         type_selected, pro_type_id = None, None
-        types = self.config['modules']
+        types = self.config[GenLKM.MODULES]
         pro_types_len = len(types)
         for index, lkm_pro in enumerate(types):
             lkm_pro_key, lkm_option = lkm_pro.keys()[0], 'Cancel'
