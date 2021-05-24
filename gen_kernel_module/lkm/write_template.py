@@ -35,10 +35,10 @@ except ImportError as ats_error_message:
     sys.exit(MESSAGE)  # Force close python ATS ##############################
 
 __author__ = 'Vladimir Roncevic'
-__copyright__ = 'Copyright 2017, Free software to use and distributed it.'
+__copyright__ = 'Copyright 2017, https://vroncevic.github.io/gen_kernel_module'
 __credits__ = ['Vladimir Roncevic']
 __license__ = 'https://github.com/vroncevic/gen_kernel_module/blob/dev/LICENSE'
-__version__ = '1.2.1'
+__version__ = '1.2.2'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
