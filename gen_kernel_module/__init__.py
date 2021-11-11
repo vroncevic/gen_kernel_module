@@ -24,6 +24,7 @@ import sys
 from os import getcwd
 
 try:
+    from six import add_metaclass
     from pathlib import Path
     from gen_kernel_module.lkm import GenLKM
     from ats_utilities.logging import ATSLogger
@@ -40,12 +41,13 @@ __author__ = 'Vladimir Roncevic'
 __copyright__ = 'Copyright 2017, https://vroncevic.github.io/gen_kernel_module'
 __credits__ = ['Vladimir Roncevic']
 __license__ = 'https://github.com/vroncevic/gen_kernel_module/blob/dev/LICENSE'
-__version__ = '1.2.2'
+__version__ = '1.2.3'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
 
 
+@add_metaclass(CooperativeMeta)
 class GenKernelModule(CfgCLI):
     '''
         Defined class GenKernelModule with attribute(s) and method(s).
@@ -53,7 +55,6 @@ class GenKernelModule(CfgCLI):
         It defines:
 
             :attributes:
-                | __metaclass__ - setting cooperative metaclasses.
                 | GEN_VERBOSE - console text indicator for process-phase.
                 | CONFIG - tool info file path.
                 | LOG - tool log file path.
@@ -65,7 +66,6 @@ class GenKernelModule(CfgCLI):
                 | __str__ - dunder method for GenKernelModule.
     '''
 
-    __metaclass__ = CooperativeMeta
     GEN_VERBOSE = 'GEN_KERNEL_MODULE'
     CONFIG = '/conf/gen_kernel_module.cfg'
     LOG = '/log/gen_kernel_module.log'
