@@ -2,8 +2,14 @@ name: gen_kernel_module py checker
 on:
   push:
     branches: [ master ]
+    paths:
+      - 'gen_kernel_module/**'
+      - 'setup.py'
   pull_request:
     branches: [ master ]
+    paths:
+      - 'gen_kernel_module/**'
+      - 'setup.py'
 jobs:
   build:
     runs-on: ubuntu-latest

@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Generating Kernel Modules &mdash; gen_kernel_module https://github.com/vroncevic/gen_kernel_module/releases/ documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -38,7 +39,7 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Generating Kernel Modules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">gen_kernel_module</a></li>
@@ -68,7 +69,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="generating-kernel-modules">
+  <section id="generating-kernel-modules">
 <h1>Generating Kernel Modules<a class="headerlink" href="#generating-kernel-modules" title="Permalink to this headline"></a></h1>
 <p><strong>gen_kernel_module</strong> is tool for generation Linux Kernel Module project.</p>
 <p>Developed in <a class="reference external" href="https://www.python.org/">python</a> code: <strong>100%</strong>.</p>
@@ -77,7 +78,7 @@ how to install the modules, any machine dependencies it may have and any
 other information that should be provided before the modules are installed.</p>
 <p><a class="reference external" href="https://github.com/vroncevic/gen_kernel_module/workflows/Python%20package/badge.svg?branch=master"><img alt="Python package" src="https://github.com/vroncevic/gen_kernel_module/workflows/Python%20package/badge.svg" /></a> <a class="reference external" href="https://github.com/vroncevic/gen_kernel_module/issues"><img alt="GitHub issues" src="https://img.shields.io/github/issues/vroncevic/gen_kernel_module.svg" /></a> <a class="reference external" href="https://gen_kernel_module.readthedocs.io/projects/gen_kernel_module/en/latest/?badge=latest"><img alt="Documentation Status" src="https://readthedocs.org/projects/gen_kernel_module/badge/?version=latest" /></a> <a class="reference external" href="https://github.com/vroncevic/gen_kernel_module/graphs/contributors"><img alt="GitHub contributors" src="https://img.shields.io/github/contributors/vroncevic/gen_kernel_module.svg" /></a></p>
 <div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<p class="caption" role="heading"><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Generating Kernel Modules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">gen_kernel_module</a><ul>
@@ -93,12 +94,12 @@ other information that should be provided before the modules are installed.</p>
 </li>
 </ul>
 </div>
-</div>
-<div class="section" id="installation">
+</section>
+<section id="installation">
 <h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline"></a></h1>
 <p><a class="reference external" href="https://github.com/vroncevic/gen_kernel_module/workflows/Install%20Python2%20Package%20gen_kernel_module/badge.svg?branch=master"><img alt="Install Python2 Package" src="https://github.com/vroncevic/gen_kernel_module/workflows/Install%20Python2%20Package%20gen_kernel_module/badge.svg" /></a> <a class="reference external" href="https://github.com/vroncevic/gen_kernel_module/workflows/Install%20Python3%20Package%20gen_kernel_module/badge.svg?branch=master"><img alt="Install Python3 Package" src="https://github.com/vroncevic/gen_kernel_module/workflows/Install%20Python3%20Package%20gen_kernel_module/badge.svg" /></a></p>
 <p>Navigate to release <a class="reference external" href="https://github.com/vroncevic/gen_kernel_module/releases">page</a> download and extract release archive.</p>
-<p>To install this set of modules type the following:</p>
+<p>To install this set of modules type the following</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tar xvzf gen_kernel_module-x.y.z.tar.gz
 <span class="nb">cd</span> gen_kernel_module-x.y.z/
 pip install -r requirements.txt
@@ -111,7 +112,7 @@ python3 setup.py install_egg_info
 python3 setup.py install_data
 </pre></div>
 </div>
-<p>You can use Docker to create image/container, or You can use pip to install:</p>
+<p>You can use Docker to create image/container, or You can use pip to install</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># python2</span>
 pip install gen-kernel-module
 <span class="c1"># python3</span>
@@ -119,26 +120,27 @@ pip3 install gen-kernel-module
 </pre></div>
 </div>
 <p><a class="reference external" href="https://github.com/vroncevic/gen_kernel_module/actions?query=workflow%3A%22gen_kernel_module+docker+checker%22"><img alt="GitHub docker checker" src="https://github.com/vroncevic/gen_kernel_module/workflows/gen_kernel_module%20docker%20checker/badge.svg" /></a></p>
-</div>
-<div class="section" id="dependencies">
+</section>
+<section id="dependencies">
 <h1>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline"></a></h1>
-<p><strong>gen_kernel_module</strong> requires next modules and libraries:</p>
+<p><strong>gen_kernel_module</strong> requires next modules and libraries</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://pypi.org/project/ats-utilities/">ats-utilities - Python App/Tool/Script Utilities</a></p></li>
 </ul>
-</div>
-<div class="section" id="generation-flow">
+</section>
+<section id="generation-flow">
 <h1>Generation flow<a class="headerlink" href="#generation-flow" title="Permalink to this headline"></a></h1>
-<p>Base flow of generation process:</p>
+<p>Base flow of generation process</p>
 <img alt="https://raw.githubusercontent.com/vroncevic/gen_kernel_module/dev/docs/gen_kernel_module_flow.png" src="https://raw.githubusercontent.com/vroncevic/gen_kernel_module/dev/docs/gen_kernel_module_flow.png" />
-</div>
-<div class="section" id="tool-structure">
+</section>
+<section id="tool-structure">
 <h1>Tool structure<a class="headerlink" href="#tool-structure" title="Permalink to this headline"></a></h1>
-<p><strong>gen_kernel_module</strong> is based on OOP:</p>
+<p><strong>gen_kernel_module</strong> is based on OOP</p>
 <img alt="https://raw.githubusercontent.com/vroncevic/gen_kernel_module/dev/docs/gen_kernel_module.png" src="https://raw.githubusercontent.com/vroncevic/gen_kernel_module/dev/docs/gen_kernel_module.png" />
-<p>Code structure:</p>
+<p>Code structure</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gen_kernel_module/
 ├── conf/
+│   ├── gen_kernel_module.logo
 │   ├── gen_kernel_module.cfg
 │   ├── gen_kernel_module_util.cfg
 │   ├── project.yaml
@@ -173,8 +175,8 @@ pip3 install gen-kernel-module
     └── gen_kernel_module_run.py
 </pre></div>
 </div>
-</div>
-<div class="section" id="copyright-and-licence">
+</section>
+<section id="copyright-and-licence">
 <h1>Copyright and licence<a class="headerlink" href="#copyright-and-licence" title="Permalink to this headline"></a></h1>
 <p><a class="reference external" href="https://www.gnu.org/licenses/gpl-3.0"><img alt="License: GPL v3" src="https://img.shields.io/badge/License-GPLv3-blue.svg" /></a> <a class="reference external" href="https://opensource.org/licenses/Apache-2.0"><img alt="License: Apache 2.0" src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" /></a></p>
 <p>Copyright (C) 2017 by <a class="reference external" href="https://vroncevic.github.io/gen_kernel_module">vroncevic.github.io/gen_kernel_module</a></p>
@@ -184,15 +186,15 @@ at your option, any later version of Python 3 you may have available.</p>
 <p>Lets help and support PSF.</p>
 <p><a class="reference external" href="https://www.python.org/psf/"><img alt="Python Software Foundation" src="https://raw.githubusercontent.com/vroncevic/gen_kernel_module/dev/docs/psf-logo-alpha.png" /></a></p>
 <p><a class="reference external" href="https://psfmember.org/index.php?q=civicrm/contribute/transact&amp;reset=1&amp;id=2"><img alt="Donate" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" /></a></p>
-</div>
-<div class="section" id="indices-and-tables">
+</section>
+<section id="indices-and-tables">
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline"></a></h1>
 <ul class="simple">
 <li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
 <li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
 <li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
 </ul>
-</div>
+</section>
 
 
            </div>

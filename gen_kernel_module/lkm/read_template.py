@@ -21,10 +21,9 @@
 '''
 
 import sys
-from os.path import isdir
+from os.path import isdir, dirname, realpath
 
 try:
-    from pathlib import Path
     from ats_utilities.checker import ATSChecker
     from ats_utilities.console_io.error import error_message
     from ats_utilities.config_io.base_check import FileChecking
@@ -110,7 +109,7 @@ class ReadTemplate(FileChecking):
             raise ATSBadCallError(error)
         lkm_type = module_type.keys()[0]
         template_dir = '{0}{1}{2}/'.format(
-            Path(__file__).parent, ReadTemplate.TEMPLATE_DIR, lkm_type
+            dirname(realpath(__file__)), ReadTemplate.TEMPLATE_DIR, lkm_type
         )
         template_list, status = [], False
         if isdir(template_dir):

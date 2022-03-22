@@ -2,8 +2,20 @@ name: Install Python3 Package gen_kernel_module
 on:
   push:
     branches: [ master ]
+    paths:
+      - 'gen_kernel_module/**'
+      - 'MANIFEST.in'
+      - 'pyproject.toml'
+      - 'setup.cfg'
+      - 'setup.py'
   pull_request:
     branches: [ master ]
+    paths:
+      - 'gen_kernel_module/**'
+      - 'MANIFEST.in'
+      - 'pyproject.toml'
+      - 'setup.cfg'
+      - 'setup.py'
 jobs:
   deploy:
     runs-on: ubuntu-latest

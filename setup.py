@@ -119,6 +119,7 @@ setup(
     install_requires=['ats-utilities'],
     package_data = {
         'gen_kernel_module': [
+            'conf/gen_kernel_module.logo',
             'conf/gen_kernel_module.cfg',
             'conf/gen_kernel_module_util.cfg',
             'conf/project.yaml',
