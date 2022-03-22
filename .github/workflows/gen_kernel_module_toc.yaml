@@ -1,5 +1,8 @@
 name: TOC Generator gen_kernel_module
-on: push
+on:
+  push:
+    paths:
+      - '**.md'
 jobs:
   generateTOC:
     name: TOC Generator

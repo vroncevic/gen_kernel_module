@@ -21,9 +21,9 @@
 '''
 
 import sys
+from os.path import dirname, realpath
 
 try:
-    from pathlib import Path
     from gen_kernel_module.lkm.config import ProConfig
     from gen_kernel_module.lkm.config.pro_name import ProName
     from gen_kernel_module.lkm.read_template import ReadTemplate
@@ -89,7 +89,7 @@ class GenLKM(FileChecking, ProConfig, ProName):
         self.__reader = ReadTemplate(verbose=verbose)
         self.__writer = WriteTemplate(verbose=verbose)
         project_structure = '{0}{1}'.format(
-            Path(__file__).parent, GenLKM.PRO_STRUCTURE
+            dirname(realpath(__file__)), GenLKM.PRO_STRUCTURE
         )
         self.check_path(project_structure, verbose=verbose)
         self.check_mode('r', verbose=verbose)
@@ -171,14 +171,8 @@ class GenLKM(FileChecking, ProConfig, ProName):
                 lkm_option = lkm_pro[lkm_pro_key][0]['info']
             print('  {0} {1}'.format(index + 1, lkm_option))
         while True:
-            try:
-                try:
-                    input_type = raw_input(' select project type: ')
-                except NameError:
-                    input_type = input(' select project type: ')
-                options = xrange(1, pro_types_len + 1, 1)
-            except NameError:
-                options = range(1, pro_types_len + 1, 1)
+            input_type = input(' select project type: ')
+            options = range(1, pro_types_len + 1, 1)
             try:
                 if int(input_type) in list(options):
                     type_selected = types[int(input_type) - 1]

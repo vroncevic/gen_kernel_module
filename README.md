@@ -32,7 +32,7 @@ other information that should be provided before the modules are installed.
 
 ![Install Python2 Package](https://github.com/vroncevic/gen_kernel_module/workflows/Install%20Python2%20Package%20gen_kernel_module/badge.svg?branch=master) ![Install Python3 Package](https://github.com/vroncevic/gen_kernel_module/workflows/Install%20Python3%20Package%20gen_kernel_module/badge.svg?branch=master)
 
-Currently there are three ways to install tool:
+Currently there are three ways to install tool
 * Install process based on pip
 * Install process based on setup.py (setuptools)
 * Install process based on docker mechanism
@@ -77,27 +77,28 @@ You can use Dockerfile to create image/container.
 
 ### Dependencies
 
-**gen_kernel_module** requires next modules and libraries:
+**gen_kernel_module** requires next modules and libraries
 
 * [ats-utilities - Python App/Tool/Script Utilities](https://vroncevic.github.io/ats_utilities)
 
 ### Generation flow
 
-Base flow of generation process:
+Base flow of generation process
 
 ![alt tag](https://raw.githubusercontent.com/vroncevic/gen_kernel_module/dev/docs/gen_kernel_module_flow.png)
 
 ### Tool structure
 
-**gen_kernel_module** is based on Template mechanism:
+**gen_kernel_module** is based on Template mechanism
 
 ![alt tag](https://raw.githubusercontent.com/vroncevic/gen_kernel_module/dev/docs/gen_kernel_module.png)
 
-Generator structure:
+Generator structure
 
 ```
 gen_kernel_module/
 ├── conf/
+│   ├── gen_kernel_module.logo
 │   ├── gen_kernel_module.cfg
 │   ├── gen_kernel_module_util.cfg
 │   ├── project.yaml
@@ -136,7 +137,7 @@ gen_kernel_module/
 
 [![Documentation Status](https://readthedocs.org/projects/gen_kernel_module/badge/?version=latest)](https://gen_kernel_module.readthedocs.io/projects/gen_kernel_module/en/latest/?badge=latest)
 
-More documentation and info at:
+More documentation and info at
 * [gen_kernel_module.readthedocs.io](https://gen_kernel_module.readthedocs.io/en/latest/)
 * [www.python.org](https://www.python.org/)
 

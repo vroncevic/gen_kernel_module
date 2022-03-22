@@ -22,11 +22,12 @@
 
 import sys
 from os import getcwd
+from os.path import exists, dirname, realpath
 
 try:
     from six import add_metaclass
-    from pathlib import Path
     from gen_kernel_module.lkm import GenLKM
+    from ats_utilities.splash import Splash
     from ats_utilities.logging import ATSLogger
     from ats_utilities.cli.cfg_cli import CfgCLI
     from ats_utilities.cooperative import CooperativeMeta
@@ -58,6 +59,7 @@ class GenKernelModule(CfgCLI):
                 | GEN_VERBOSE - console text indicator for process-phase.
                 | CONFIG - tool info file path.
                 | LOG - tool log file path.
+                | LOGO - logo for splash screen.
                 | OPS - list of tool options.
                 | logger - logger object API.
             :methods:
@@ -69,6 +71,7 @@ class GenKernelModule(CfgCLI):
     GEN_VERBOSE = 'GEN_KERNEL_MODULE'
     CONFIG = '/conf/gen_kernel_module.cfg'
     LOG = '/log/gen_kernel_module.log'
+    LOGO = '/conf/gen_kernel_module.logo'
     OPS = ['-g', '--gen', '-v', '--verbose', '--version']
 
     def __init__(self, verbose=False):
@@ -79,7 +82,17 @@ class GenKernelModule(CfgCLI):
             :type verbose: <bool>
             :exceptions: None
         '''
-        current_dir = Path(__file__).resolve().parent
+        current_dir = dirname(realpath(__file__))
+        gen_kernel_module_property = {
+            'ats_organization': 'vroncevic',
+            'ats_repository': 'gen_kernel_module',
+            'ats_name': 'gen_kernel_module',
+            'ats_logo_path': '{0}{1}'.format(
+                current_dir, GenKernelModule.LOGO
+            ),
+            'ats_use_github_infrastructure': True
+        }
+        splash = Splash(gen_kernel_module_property, verbose=verbose)
         base_info = '{0}{1}'.format(current_dir, GenKernelModule.CONFIG)
         CfgCLI.__init__(self, base_info, verbose=verbose)
         verbose_message(GenKernelModule.GEN_VERBOSE, verbose, 'init tool info')
@@ -123,7 +136,7 @@ class GenKernelModule(CfgCLI):
                 sys.argv.append('-h')
             args, current_dir = self.parse_args(sys.argv[1:]), getcwd()
             setup_path = '{0}/{1}'.format(current_dir, args.gen)
-            setup_exists = Path(setup_path).exists()
+            setup_exists = exists(setup_path)
             if not setup_exists:
                 if bool(args.gen):
                     print(
