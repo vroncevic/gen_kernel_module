@@ -147,7 +147,7 @@ Generator structure
 
 ### Docs
 
-[![Documentation Status](https://readthedocs.org/projects/gen_kernel_module/badge/?version=latest)](https://gen-kernel-module.readthedocs.io/en/latest/?badge=latest
+[![Documentation Status](https://readthedocs.org/projects/gen_kernel_module/badge/?version=latest)](https://gen-kernel-module.readthedocs.io/en/latest/?badge=latest)
 
 More documentation and info at
 * [gen_kernel_module.readthedocs.io](https://gen-kernel-module.readthedocs.io/en/latest/)
