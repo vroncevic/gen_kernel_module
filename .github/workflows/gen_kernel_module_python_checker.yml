@@ -1,15 +1,15 @@
-name: gen_kernel_modeule_python_checker
+name: gen_kernel_module_python_checker
 on:
   push:
     branches: [ master ]
     paths:
-      - 'gen_kernel_modeule/**'
+      - 'gen_kernel_module/**'
       - 'tests/**'
       - 'setup.py'
   pull_request:
     branches: [ master ]
     paths:
-      - 'gen_kernel_modeule/**'
+      - 'gen_kernel_module/**'
       - 'tests/**'
       - 'setup.py'
 jobs:
@@ -21,13 +21,13 @@ jobs:
         id: long_line_checker
         run: |
           modules_ok=0
-          modules=($(find gen_kernel_modeule/ tests/ -type f -name '*.py' -exec echo '{}' \;))
+          modules=($(find gen_kernel_module/ tests/ -type f -name '*.py' -exec echo '{}' \;))
           for mod in "${modules[@]}"; do line_length=$(wc -L < "${mod}"); [[ $line_length -gt 80 ]] && modules_ok=1; done
           [[ $modules_ok -eq 0 ]] && echo ok || exit 1
       - name: Check max number of lines in modules
         id: num_line_checker
         run: |
           modules_ok=0
-          modules=($(find gen_kernel_modeule/ tests/ -type f -name '*.py' -exec echo '{}' \;))
+          modules=($(find gen_kernel_module/ tests/ -type f -name '*.py' -exec echo '{}' \;))
           for mod in "${modules[@]}"; do line_numbers=$(wc -l < "${mod}"); [[ $line_numbers -gt 300 ]] && modules_ok=1; done
           [[ $modules_ok -eq 0 ]] && echo ok || exit 1

@@ -1,15 +1,15 @@
-name: gen_kernel_modeule_package_checker
+name: gen_kernel_module_package_checker
 on:
   push:
     branches: [ master ]
     paths:
-      - 'gen_kernel_modeule/**'
+      - 'gen_kernel_module/**'
       - 'tests/**'
       - 'setup.py'
   pull_request:
     branches: [ master ]
     paths:
-      - 'gen_kernel_modeule/**'
+      - 'gen_kernel_module/**'
       - 'tests/**'
       - 'setup.py'
 jobs:

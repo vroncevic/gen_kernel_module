@@ -1,9 +1,9 @@
-name: gen_kernel_modeule_python3_build
+name: gen_kernel_module_python3_build
 on:
   push:
     branches: [ master ]
     paths:
-      - 'gen_kernel_modeule/**'
+      - 'gen_kernel_module/**'
       - 'MANIFEST.in'
       - 'pyproject.toml'
       - 'setup.cfg'
@@ -11,7 +11,7 @@ on:
   pull_request:
     branches: [ master ]
     paths:
-      - 'gen_kernel_modeule/**'
+      - 'gen_kernel_module/**'
       - 'MANIFEST.in'
       - 'pyproject.toml'
       - 'setup.cfg'
