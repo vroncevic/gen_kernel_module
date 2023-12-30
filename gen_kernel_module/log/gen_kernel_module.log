@@ -1,0 +1,77 @@
+12/30/2023 04:37:21 PM - ERROR - missing model name or type
+12/30/2023 04:37:23 PM - ERROR - project with name [fresh_new] exists
+12/30/2023 04:37:26 PM - ERROR - tool is not operational
+12/30/2023 04:37:27 PM - ERROR - missing model name or type
+12/30/2023 04:40:54 PM - ERROR - missing model name or type
+12/30/2023 04:40:55 PM - ERROR - project with name [fresh_new] exists
+12/30/2023 04:40:57 PM - ERROR - generation failed
+12/30/2023 04:40:58 PM - ERROR - tool is not operational
+12/30/2023 04:41:00 PM - ERROR - missing model name or type
+12/30/2023 04:42:51 PM - ERROR - missing model name or type
+12/30/2023 04:42:53 PM - ERROR - project with name [fresh_new] exists
+12/30/2023 04:42:54 PM - ERROR - generation failed
+12/30/2023 04:42:56 PM - ERROR - tool is not operational
+12/30/2023 04:42:57 PM - ERROR - missing model name or type
+12/30/2023 04:44:11 PM - ERROR - missing model name or type
+12/30/2023 04:44:12 PM - ERROR - project with name [fresh_new] exists
+12/30/2023 04:44:14 PM - ERROR - generation failed
+12/30/2023 04:44:15 PM - ERROR - tool is not operational
+12/30/2023 04:44:17 PM - ERROR - missing model name or type
+12/30/2023 04:47:21 PM - ERROR - missing model name or type
+12/30/2023 04:47:22 PM - ERROR - project with name [fresh_new] exists
+12/30/2023 04:47:24 PM - ERROR - generation failed
+12/30/2023 04:47:25 PM - ERROR - tool is not operational
+12/30/2023 04:47:27 PM - ERROR - missing model name or type
+12/30/2023 04:48:19 PM - ERROR - missing model name or type
+12/30/2023 04:48:20 PM - ERROR - project with name [fresh_new] exists
+12/30/2023 04:48:22 PM - ERROR - generation failed
+12/30/2023 04:48:23 PM - ERROR - tool is not operational
+12/30/2023 04:48:25 PM - ERROR - missing model name or type
+12/30/2023 04:54:36 PM - ERROR - missing model name or type
+12/30/2023 04:54:38 PM - ERROR - project with name [fresh_new] exists
+12/30/2023 04:54:39 PM - ERROR - generation failed
+12/30/2023 04:54:41 PM - ERROR - tool is not operational
+12/30/2023 04:54:42 PM - ERROR - missing model name or type
+12/30/2023 05:00:39 PM - ERROR - missing model name or type
+12/30/2023 05:00:40 PM - ERROR - project with name [fresh_new] exists
+12/30/2023 05:00:42 PM - ERROR - 
+mod: /usr/local/lib/python3.11/dist-packages/ats_utilities/console_io/verbose.py
+  def: verbose_message() 
+    expected control <bool> object at 0x9479e0 
+    expected message <list> object at 0x11c2310 wrong type format wrong during checking params
+12/30/2023 05:00:42 PM - ERROR - generation failed
+12/30/2023 05:00:43 PM - ERROR - tool is not operational
+12/30/2023 05:00:45 PM - ERROR - missing model name or type
+12/30/2023 05:01:41 PM - ERROR - missing model name or type
+12/30/2023 05:01:43 PM - ERROR - project with name [fresh_new] exists
+12/30/2023 05:01:46 PM - ERROR - tool is not operational
+12/30/2023 05:01:48 PM - ERROR - missing model name or type
+12/30/2023 05:06:16 PM - ERROR - missing model name or type
+12/30/2023 05:06:17 PM - ERROR - project with name [fresh_new] exists
+12/30/2023 05:06:20 PM - ERROR - tool is not operational
+12/30/2023 05:06:22 PM - ERROR - missing model name or type
+12/30/2023 05:07:40 PM - ERROR - missing model name or type
+12/30/2023 05:07:41 PM - ERROR - project with name [fresh_new] exists
+12/30/2023 05:07:46 PM - INFO - gen pro latest_pro done
+12/30/2023 05:07:47 PM - ERROR - tool is not operational
+12/30/2023 05:07:49 PM - ERROR - missing model name or type
+12/30/2023 05:08:22 PM - ERROR - missing model name or type
+12/30/2023 05:08:24 PM - ERROR - project with name [fresh_new] exists
+12/30/2023 05:08:26 PM - INFO - gen pro latest_pro done
+12/30/2023 05:08:27 PM - ERROR - tool is not operational
+12/30/2023 05:08:29 PM - ERROR - missing model name or type
+12/30/2023 05:09:44 PM - ERROR - missing model name or type
+12/30/2023 05:09:46 PM - ERROR - project with name [fresh_new] exists
+12/30/2023 05:09:47 PM - INFO - gen pro latest_pro done
+12/30/2023 05:09:49 PM - ERROR - tool is not operational
+12/30/2023 05:09:50 PM - ERROR - missing model name or type
+12/30/2023 05:10:37 PM - ERROR - missing model name or type
+12/30/2023 05:10:38 PM - ERROR - project with name [fresh_new] exists
+12/30/2023 05:10:40 PM - INFO - gen pro latest_pro done
+12/30/2023 05:10:41 PM - ERROR - tool is not operational
+12/30/2023 05:10:43 PM - ERROR - missing model name or type
+12/30/2023 05:21:40 PM - ERROR - missing model name or type
+12/30/2023 05:21:42 PM - ERROR - project with name [fresh_new] exists
+12/30/2023 05:21:43 PM - INFO - gen pro latest_pro done
+12/30/2023 05:21:45 PM - ERROR - tool is not operational
+12/30/2023 05:21:46 PM - ERROR - missing model name or type

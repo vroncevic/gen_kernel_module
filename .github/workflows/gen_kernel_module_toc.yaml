@@ -1,11 +1,12 @@
-name: TOC Generator gen_kernel_module
+name: gen_kernel_modeule_toc
 on:
   push:
+    branches: [ master ]
     paths:
       - '**.md'
 jobs:
   generateTOC:
-    name: TOC Generator
+    name: gen_kernel_modeule_toc
     runs-on: ubuntu-latest
     steps:
-      - uses: technote-space/toc-generator@v2
+      - uses: technote-space/toc-generator@v4

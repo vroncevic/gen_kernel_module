@@ -1,0 +1,225 @@
+/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 4; tab-width: 4 -*-  */
+/*
+ * ${LKM}.c
+ * Copyright (C) ${YEAR} Vladimir Roncevic <elektron.ronca@gmail.com>
+ * 
+ * ${LKM} is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the
+ * Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * ${LKM} is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License along
+ * with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#include <linux/module.h>
+#include <linux/moduleparam.h>
+#include <linux/init.h>
+#include <linux/kernel.h>
+#include <linux/fs.h>
+#include <linux/errno.h>
+#include <linux/types.h>
+#include <linux/vmalloc.h>
+#include <linux/genhd.h>
+#include <linux/blkdev.h>
+#include <linux/hdreg.h>
+
+#define    DRIVER_AUTHOR    "Vladimir Roncevic <elektron.ronca@gmail.com>"
+#define    DRIVER_DESC      "LKM Block Driver"
+#define    DRIVER_LICENSE   "GPL"
+#define    DRIVER_VERSION   "1.0.0"
+#define    DEVICE_NAME      "${LKM}_bd"
+#define    CLASS_NAME       "${LKM}"
+
+static int major_num = 0;
+module_param(major_num, int, 0);
+static int hardsect_size = 512;
+module_param(hardsect_size, int, 0);
+static int nsectors = 1024;  /* How big the drive is */
+module_param(nsectors, int, 0);
+
+#define KERNEL_SECTOR_SIZE 512
+
+static struct request_queue *Queue;
+
+static struct sbd_device
+{
+    unsigned long size;
+    spinlock_t lock;
+    u8 *data;
+    struct gendisk *gd;
+} Device;
+
+static void
+${LKM}_transfer(
+    struct sbd_device *dev, unsigned long sector,
+    unsigned long nsect, char *buffer, int write
+)
+{
+    unsigned long offset = sector * hardsect_size;
+    unsigned long nbytes = nsect * hardsect_size;
+
+    if((offset + nbytes) > dev->size)
+    {
+        printk(
+            KERN_NOTICE "${LKM}_bd: Beyond-end write (%ld %ld)\n",
+            offset, nbytes
+        );
+        return;
+    }
+
+    if(write)
+    {
+        memcpy(dev->data + offset, buffer, nbytes);
+    }
+    else
+    {
+        memcpy(buffer, dev->data + offset, nbytes);
+    }
+}
+
+static void ${LKM}_request(request_queue_t *q)
+{
+    struct request *req;
+
+    while((req = elv_next_request(q)) != NULL)
+    {
+        if(! blk_fs_request(req))
+        {
+            printk (KERN_NOTICE "Skip non-CMD request\n");
+            end_request(req, 0);
+            continue;
+        }
+
+        ${LKM}_transfer(
+            &Device, req->sector, req->current_nr_sectors,
+            req->buffer, rq_data_dir(req)
+        );
+        end_request(req, 1);
+    }
+}
+
+int
+${LKM}_ioctl(
+    struct inode *inode, struct file *filp,
+    unsigned int cmd, unsigned long arg
+)
+{
+    long size;
+    struct hd_geometry geo;
+
+    switch(cmd)
+    {
+       /**
+        * The only command we need to interpret is HDIO_GETGEO, since
+        * we can't partition the drive otherwise.  We have no real
+        * geometry, of course, so make something up.
+        */
+        case HDIO_GETGEO:
+            size = Device.size * (hardsect_size / KERNEL_SECTOR_SIZE);
+            geo.cylinders = (size & ~0x3f) >> 6;
+            geo.heads = 4;
+            geo.sectors = 16;
+            geo.start = 4;
+
+            if(copy_to_user((void *) arg, &geo, sizeof(geo)))
+            {
+                return -EFAULT;
+            }
+
+            return 0;
+    }
+
+    return -ENOTTY; /* unknown command */
+}
+
+static struct block_device_operations sbd_ops =
+{
+    .owner = THIS_MODULE,
+    .ioctl = ${LKM}_ioctl
+};
+
+static int __init ${LKM}_init(void)
+{
+    Device.size = nsectors * hardsect_size;
+    spin_lock_init(&Device.lock);
+    Device.data = vmalloc(Device.size);
+
+    if(Device.data == NULL)
+    {
+        return -ENOMEM;
+    }
+
+   /**
+    * Get a request queue.
+    */
+    Queue = blk_init_queue(${LKM}_request, &Device.lock);
+
+    if(Queue == NULL)
+    {
+        goto out;
+    }
+
+    blk_queue_hardsect_size(Queue, hardsect_size);
+
+   /**
+    * Get registered.
+    */
+    major_num = register_blkdev(major_num, "${LKM}_bd");
+
+    if(major_num <= 0)
+    {
+        printk(KERN_WARNING "${LKM}_bd: unable to get major number\n");
+        goto out;
+    }
+
+   /**
+    * And the gendisk structure.
+    */
+    Device.gd = alloc_disk(16);
+
+    if (! Device.gd)
+    {
+        goto out_unregister;
+    }
+
+    Device.gd->major = major_num;
+    Device.gd->first_minor = 0;
+    Device.gd->fops = &sbd_ops;
+    Device.gd->private_data = &Device;
+    strcpy(Device.gd->disk_name, "${LKM}_bd0");
+    set_capacity(Device.gd, nsectors * (hardsect_size / KERNEL_SECTOR_SIZE));
+    Device.gd->queue = Queue;
+    add_disk(Device.gd);
+
+    return 0;
+
+out_unregister:
+    unregister_blkdev(major_num, "${LKM}_bd");
+out:
+    vfree(Device.data);
+    return -ENOMEM;
+}
+
+static void __exit ${LKM}_exit(void)
+{
+    del_gendisk(Device.gd);
+    put_disk(Device.gd);
+    unregister_blkdev(major_num, "${LKM}_bd");
+    blk_cleanup_queue(Queue);
+    vfree(Device.data);
+}
+
+module_init(${LKM}_init);
+module_exit(${LKM}_exit);
+
+MODULE_AUTHOR(DRIVER_AUTHOR);
+MODULE_DESCRIPTION(DRIVER_DESC);
+MODULE_LICENSE(DRIVER_LICENSE);
+MODULE_VERSION(DRIVER_VERSION);
+
