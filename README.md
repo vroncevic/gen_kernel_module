@@ -10,7 +10,7 @@ The README is used to introduce the modules and provide instructions on
 how to install the modules, any machine dependencies it may have and any
 other information that should be provided before the modules are installed.
 
-[![gen_kernel_module python checker](https://github.com/vroncevic/gen_kernel_module/actions/workflows/armpicom_python_checker.yml/badge.svg)](https://github.com/vroncevic/gen_kernel_module/actions/workflows/armpicom_python_checker.yml) [![gen_kernel_module package checker](https://github.com/vroncevic/gen_kernel_module/actions/workflows/armpicom_package_checker.yml/badge.svg)](https://github.com/vroncevic/gen_kernel_module/actions/workflows/armpicom_package.yml) [![GitHub issues open](https://img.shields.io/github/issues/vroncevic/gen_kernel_module.svg)](https://github.com/vroncevic/gen_kernel_module/issues) [![GitHub contributors](https://img.shields.io/github/contributors/vroncevic/gen_kernel_module.svg)](https://github.com/vroncevic/gen_kernel_module/graphs/contributors)
+[![gen_kernel_module python checker](https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_python_checker.yml/badge.svg)](https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_python_checker.yml) [![gen_kernel_module package checker](https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_package_checker.yml/badge.svg)](https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_package.yml) [![GitHub issues open](https://img.shields.io/github/issues/vroncevic/gen_kernel_module.svg)](https://github.com/vroncevic/gen_kernel_module/issues) [![GitHub contributors](https://img.shields.io/github/contributors/vroncevic/gen_kernel_module.svg)](https://github.com/vroncevic/gen_kernel_module/graphs/contributors)
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -35,7 +35,7 @@ Used next development environment
 
 ![debian linux os](https://raw.githubusercontent.com/vroncevic/gen_kernel_module/dev/docs/debtux.png)
 
-[![gen_kernel_module python3 build](https://github.com/vroncevic/gen_kernel_module/actions/workflows/armpicom_python3_build.yml/badge.svg)](https://github.com/vroncevic/gen_kernel_module/actions/workflows/armpicom_python3_build.yml)
+[![gen_kernel_module python3 build](https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_python3_build.yml/badge.svg)](https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_python3_build.yml)
 
 Currently there are three ways to install package
 * Install process based on using pip mechanism
@@ -73,8 +73,8 @@ pip3 install -r requirements.txt
 python3 -m build --no-isolation --wheel
 pip3 install ./dist/gen_kernel_module-*-py3-none-any.whl
 rm -f get-pip.py
-chmod 755 /usr/local/lib/python3.10/dist-packages/usr/local/bin/armpicom_run.py
-ln -s /usr/local/lib/python3.10/dist-packages/usr/local/bin/armpicom_run.py /usr/local/bin/armpicom_run.py
+chmod 755 /usr/local/lib/python3.10/dist-packages/usr/local/bin/gen_kernel_module_run.py
+ln -s /usr/local/lib/python3.10/dist-packages/usr/local/bin/gen_kernel_module_run.py /usr/local/bin/gen_kernel_module_run.py
 ```
 
 ##### Install using py setup
