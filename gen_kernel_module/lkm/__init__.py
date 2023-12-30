@@ -1,203 +1,163 @@
 # -*- coding: UTF-8 -*-
 
 '''
- Module
-     __init__.py
- Copyright
-     Copyright (C) 2017 Vladimir Roncevic <elektron.ronca@gmail.com>
-     gen_kernel_module is free software: you can redistribute it and/or
-     modify it under the terms of the GNU General Public License as published
-     by the Free Software Foundation, either version 3 of the License, or
-     (at your option) any later version.
-     gen_kernel_module is distributed in the hope that it will be useful,
-     but WITHOUT ANY WARRANTY; without even the implied warranty of
-     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-     See the GNU General Public License for more details.
-     You should have received a copy of the GNU General Public License along
-     with this program. If not, see <http://www.gnu.org/licenses/>.
- Info
-     Defined class GenLKM with attribute(s) and method(s).
-     Generate kernel module by template and parameters.
+Module
+    __init__.py
+Copyright
+    Copyright (C) 2017 - 2024 Vladimir Roncevic <elektron.ronca@gmail.com>
+    gen_kernel_module is free software: you can redistribute it and/or
+    modify it under the terms of the GNU General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+    gen_kernel_module is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+    See the GNU General Public License for more details.
+    You should have received a copy of the GNU General Public License along
+    with this program. If not, see <http://www.gnu.org/licenses/>.
+Info
+    Defines class GenLKM with attribute(s) and method(s).
+    Generates LKM by templates and parameters.
 '''
 
 import sys
+from typing import List, Dict
 from os.path import dirname, realpath
 
 try:
-    from gen_kernel_module.lkm.config import ProConfig
-    from gen_kernel_module.lkm.config.pro_name import ProName
-    from gen_kernel_module.lkm.read_template import ReadTemplate
-    from gen_kernel_module.lkm.write_template import WriteTemplate
-    from ats_utilities.checker import ATSChecker
-    from ats_utilities.console_io.error import error_message
-    from ats_utilities.config_io.base_check import FileChecking
+    from ats_utilities.pro_config import ProConfig
+    from ats_utilities.pro_config.pro_name import ProName
+    from ats_utilities.config_io.file_check import FileCheck
     from ats_utilities.console_io.verbose import verbose_message
     from ats_utilities.config_io.yaml.yaml2object import Yaml2Object
     from ats_utilities.exceptions.ats_type_error import ATSTypeError
-    from ats_utilities.exceptions.ats_bad_call_error import ATSBadCallError
+    from ats_utilities.exceptions.ats_value_error import ATSValueError
+    from gen_kernel_module.lkm.read_template import ReadTemplate
+    from gen_kernel_module.lkm.write_template import WriteTemplate
 except ImportError as ats_error_message:
-    MESSAGE = '\n{0}\n{1}\n'.format(__file__, ats_error_message)
-    sys.exit(MESSAGE)  # Force close python ATS ##############################
+    # Force close python ATS ##################################################
+    sys.exit(f'\n{__file__}\n{ats_error_message}\n')
 
 __author__ = 'Vladimir Roncevic'
-__copyright__ = 'Copyright 2017, https://vroncevic.github.io/gen_kernel_module'
-__credits__ = ['Vladimir Roncevic']
+__copyright__ = '(C) 2024, https://vroncevic.github.io/gen_kernel_module'
+__credits__: List[str] = ['Vladimir Roncevic', 'Python Software Foundation']
 __license__ = 'https://github.com/vroncevic/gen_kernel_module/blob/dev/LICENSE'
-__version__ = '1.2.3'
+__version__ = '1.3.3'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
 
 
-class GenLKM(FileChecking, ProConfig, ProName):
+class GenLKM(FileCheck, ProConfig, ProName):
     '''
-        Defined class GenLKM with attribute(s) and method(s).
-        Generate kernel module by template and parameters.
+        Defines class GenLKM with attribute(s) and method(s).
+        Generates LKM by templates and parameters.
+
         It defines:
 
             :attributes:
-                | GEN_VERBOSE - console text indicator for process-phase.
-                | PRO_STRUCTURE - template/project structure.
-                | CANCEL - cancel id.
-                | MODULES - modules key.
-                | __reader - reader API.
-                | __writer - writer API.
+                | _GEN_VERBOSE - Console text indicator for process-phase.
+                | _PRO_STRUCTURE - Project setup (templates, modules).
+                | _reader - Reader API.
+                | _writer - Writer API.
             :methods:
-                | __init__ - initial constructor.
-                | get_reader - getter for template reader.
-                | get_writer - getter for template writer.
-                | gen_module - generate kernel module.
-                | __str__ - dunder method for GenLKM.
+                | __init__ - Initials GenLKM constructor.
+                | get_reader - Gets template reader.
+                | get_writer - Gets template writer.
+                | gen_module - Generates LKM.
     '''
 
-    GEN_VERBOSE = 'GEN_KERNEL_MODULE::LKM::GEN_LKM'
-    PRO_STRUCTURE = '/../conf/project.yaml'
-    CANCEL, MODULES = 4, 'modules'
+    _GEN_VERBOSE: str = 'GEN_KERNEL_MODULE::LKM::GEN_LKM'
+    _PRO_STRUCTURE: str = '/../conf/project.yaml'
 
-    def __init__(self, verbose=False):
+    def __init__(self, verbose: bool = False) -> None:
         '''
-            Initial constructor.
+            Initials GenLKM constructor.
 
-            :param verbose: enable/disable verbose option.
+            :param verbose: Enable/Disable verbose option
             :type verbose: <bool>
             :exceptions: None
         '''
-        FileChecking.__init__(self, verbose=verbose)
-        ProConfig.__init__(self, verbose=verbose)
-        ProName.__init__(self, verbose=verbose)
-        verbose_message(GenLKM.GEN_VERBOSE, verbose, 'init generator')
-        self.__reader = ReadTemplate(verbose=verbose)
-        self.__writer = WriteTemplate(verbose=verbose)
-        project_structure = '{0}{1}'.format(
-            dirname(realpath(__file__)), GenLKM.PRO_STRUCTURE
+        FileCheck.__init__(self, verbose)
+        ProConfig.__init__(self, verbose)
+        ProName.__init__(self, verbose)
+        verbose_message(
+            verbose, [f'{self._GEN_VERBOSE.lower()} init generator']
         )
-        self.check_path(project_structure, verbose=verbose)
-        self.check_mode('r', verbose=verbose)
-        self.check_format(project_structure, 'yaml', verbose=verbose)
+        self._reader: ReadTemplate | None = ReadTemplate(verbose)
+        self._writer: WriteTemplate | None = WriteTemplate(verbose)
+        current_dir: str = dirname(realpath(__file__))
+        pro_structure: str = f'{current_dir}{self._PRO_STRUCTURE}'
+        self.check_path(pro_structure, verbose)
+        self.check_mode('r', verbose)
+        self.check_format(pro_structure, 'yaml', verbose)
         if self.is_file_ok():
-            yml2obj = Yaml2Object(project_structure)
+            yml2obj: Yaml2Object | None = Yaml2Object(pro_structure)
             self.config = yml2obj.read_configuration()
 
-    def get_reader(self):
+    def get_reader(self) -> ReadTemplate | None:
         '''
-            Getter for template reader.
+            Gets template reader.
 
-            :return: template reader object.
-            :rtype: <ReadTemplate>
+            :return: Template reader object | None
+            :rtype: <ReadTemplate> | <NoneType>
             :exceptions: None
         '''
-        return self.__reader
+        return self._reader
 
-    def get_writer(self):
+    def get_writer(self) -> WriteTemplate | None:
         '''
-            Getter for template writer.
+            Gets template writer.
 
-            :return: template writer object.
-            :rtype: <WriteTemplate>
+            :return: Template writer object | none
+            :rtype: <WriteTemplate> | <NoneType
             :exceptions: None
         '''
-        return self.__writer
+        return self._writer
 
-    def gen_module(self, module_name, verbose=False):
+    def gen_module(
+        self,
+        lkm_name: str | None,
+        lkm_type: str | None,
+        verbose: bool = False
+    ) -> bool:
         '''
-            Generate kernel module.
+            Generates LKM.
 
-            :param module_name: parameter package name.
-            :type module_name: <str>
-            :param verbose: enable/disable verbose option.
+            :param lkm_name: Model type | None
+            :type lkm_name: <str> | <NoneType>
+            :param lkm_type: Model type | None
+            :type lkm_type: <str> | <NoneType>
+            :param verbose: Enable/Disable verbose option
             :type verbose: <bool>
-            :return: True (success) | False
+            :return: True (success operation) | False
             :rtype: <bool>
-            :exceptions: ATSTypeError | ATSBadCallError
+            :exceptions: ATSTypeError | ATSValueError
         '''
-        checker, error, status = ATSChecker(), None, False
-        error, status = checker.check_params([
-            ('str:module_name', module_name)
+        error_msg: str | None = None
+        error_id: int | None = None
+        error_msg, error_id = self.check_params([
+            ('str:lkm_name', lkm_name), ('str:lkm_type', lkm_type)
         ])
-        if status == ATSChecker.TYPE_ERROR:
-            raise ATSTypeError(error)
-        if status == ATSChecker.VALUE_ERROR:
-            raise ATSBadCallError(error)
-        self.pro_name, status = module_name, False
-        module_type, module_id = self.choose_module(verbose=verbose)
-        if module_id != GenLKM.CANCEL:
-            templates, status = self.__reader.read(
-                module_type, module_name, verbose=verbose
-            )
-            if all([bool(templates), status]):
-                status = self.__writer.write(
-                    templates, module_name, verbose=verbose
-                )
-        else:
-            status = True
-        return status
-
-    def choose_module(self, verbose=False):
-        '''
-            Choose type of kernel module.
-
-            :param verbose: enable/disable verbose option.
-            :type verbose: <bool>
-            :return: data model, type id {0, 1, 2, 3, 4}.
-            :rtype: <dict>, <int>
-            :exceptions: None
-        '''
-        type_selected, pro_type_id = None, None
-        types = self.config[GenLKM.MODULES]
-        pro_types_len = len(types)
-        for index, lkm_pro in enumerate(types):
-            lkm_pro_key, lkm_option = lkm_pro.keys()[0], 'Cancel'
-            if lkm_pro_key != 'cancel':
-                lkm_option = lkm_pro[lkm_pro_key][0]['info']
-            print('  {0} {1}'.format(index + 1, lkm_option))
-        while True:
-            input_type = input(' select project type: ')
-            options = range(1, pro_types_len + 1, 1)
-            try:
-                if int(input_type) in list(options):
-                    type_selected = types[int(input_type) - 1]
-                    pro_type_id = int(input_type) - 1
-                    break
-                raise ValueError
-            except ValueError:
-                error_message(
-                    GenLKM.GEN_VERBOSE, 'not an appropriate choice'
-                )
+        if error_id == self.TYPE_ERROR:
+            raise ATSTypeError(error_msg)
+        if not bool(lkm_name):
+            raise ATSValueError('missing LKM name')
+        if not bool(lkm_type):
+            raise ATSValueError('missing LKM type')
+        status: bool = False
         verbose_message(
-            GenLKM.GEN_VERBOSE, verbose, 'selected', type_selected
+            verbose, [
+                f'{self._GEN_VERBOSE.lower()}',
+                'generate', lkm_type, 'form', lkm_name
+            ]
         )
-        return type_selected, pro_type_id
-
-    def __str__(self):
-        '''
-            Dunder method for GenLKM.
-
-            :return: object in a human-readable format.
-            :rtype: <str>
-            :exceptions: None
-        '''
-        return '{0} ({1}, {2}, {3}, {4}, {5})'.format(
-            self.__class__.__name__, FileChecking.__str__(self),
-            ProConfig.__str__(self), ProName.__str__(self),
-            str(self.__reader), str(self.__writer)
-        )
+        template_content: Dict[str, str] | None = None
+        if bool(self._reader):
+            template_content = self._reader.read(
+                self.config, lkm_name, lkm_type, verbose
+            )
+        if all([bool(template_content), bool(self._writer)]):
+            if self._writer.write(template_content, lkm_name, verbose):
+                status = True
+        return status

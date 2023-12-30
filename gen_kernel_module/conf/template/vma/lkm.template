@@ -1,0 +1,165 @@
+/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 4; tab-width: 4 -*-  */
+/*
+ * ${LKM}.c
+ * Copyright (C) ${YEAR} Vladimir Roncevic <elektron.ronca@gmail.com>
+ * 
+ * ${LKM} is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the
+ * Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * ${LKM} is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License along
+ * with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+#include <linux/init.h>
+#include <linux/module.h>
+#include <linux/device.h>
+#include <linux/kernel.h>
+#include <linux/uaccess.h>
+#include <linux/fs.h>
+#include <linux/moduleparam.h>
+#include <linux/slab.h>
+#include <linux/errno.h>
+#include <linux/types.h>
+#include <linux/mm.h>
+#include <linux/kdev_t.h>
+#include <asm/page.h>
+#include <linux/cdev.h>
+
+#define    DRIVER_AUTHOR    "Vladimir Roncevic <elektron.ronca@gmail.com>"
+#define    DRIVER_DESC      "LKM Virtual Memory Addressing"
+#define    DRIVER_LICENSE   "GPL"
+#define    DRIVER_VERSION   "1.0.0"
+#define    DEVICE_NAME      "${LKM}_vma"
+#define    CLASS_NAME       "${LKM}"
+#define    MSG_SIZE         256
+
+static int major_number;
+module_param(major_number, int, 0);
+
+static char message[MSG_SIZE] = {0};
+static short size_of_message;
+static int number_opens = 0;
+static struct class* ${LKM}CharClass = NULL;
+
+static int dev_open(struct inode*, struct file*);
+static int dev_release(struct inode*, struct file*);
+static ssize_t dev_read(struct file*, char*, size_t, loff_t*);
+static ssize_t dev_write(struct file*, const char*, size_t, loff_t*);
+
+static struct vm_operations_struct ${LKM}_remap_vm_ops =
+{
+    .open =  dev_open,
+    .close = ${LKM}_vma_close
+};
+
+void ${LKM}_vma_open(struct vm_area_struct *vma)
+{
+    printk(
+        KERN_NOTICE "${LKM} VMA open, virt %lx, phys %lx\n",
+        vma->vm_start, vma->vm_pgoff << PAGE_SHIFT
+    );
+}
+
+void ${LKM}_vma_close(struct vm_area_struct *vma)
+{
+    printk(KERN_NOTICE "${LKM} VMA close.\n");
+}
+
+static struct file_operations fops =
+{
+    .open = dev_open,
+    .read = dev_read,
+    .write = dev_write,
+    .release = dev_release
+};
+
+static int __init ${LKM}_init(void)
+{
+    printk(KERN_INFO "${LKM}_vma: Initializing the ${LKM}_vma LKM\n");
+    /* TODO */
+    printk(KERN_INFO "${LKM}_vma: device class created correctly\n");
+
+    return 0;
+}
+
+static void __exit ${LKM}_exit(void)
+{
+    device_destroy(${LKM}CharClass, MKDEV(major_number, 0));
+    class_unregister(${LKM}CharClass);
+    class_destroy(${LKM}CharClass);
+    unregister_chrdev(major_number, DEVICE_NAME);
+    printk(KERN_INFO "${LKM}_vma: goodbye from the LKM!\n");
+}
+
+static int dev_open(struct inode *inodep, struct file *filep)
+{
+    number_opens++;
+    printk(
+        KERN_INFO "${LKM}_vma: device has been opened %d time(s)\n",
+        number_opens
+    );
+
+    return 0;
+}
+
+static ssize_t dev_read(
+    struct file *filep, char *buffer, size_t len, loff_t *offset
+)
+{
+    int error_count = 0;
+    error_count = copy_to_user(buffer, message, size_of_message);
+
+    if(error_count==0)
+    {
+        printk(
+            KERN_INFO "${LKM}_vma: sent %d bytes to the user\n",
+            size_of_message
+        );
+        return (size_of_message=0);
+    }
+    else
+    {
+        printk(
+            KERN_INFO "${LKM}_vma: failed to send %d bytes to the user\n",
+            error_count
+        );
+
+        return -EFAULT;
+    }
+}
+
+static ssize_t dev_write(
+    struct file *filep, const char *buffer, size_t len, loff_t *offset
+)
+{
+    sprintf(message, "%s(%zu letters)", buffer, len);
+    size_of_message = strlen(message);
+
+    printk(
+        KERN_INFO "${LKM}_vma: received %zu bytes from the user\n", len
+    );
+
+    return len;
+}
+
+static int dev_release(struct inode *inodep, struct file *filep)
+{
+    printk(KERN_INFO "${LKM}_vma: device successfully closed\n");
+
+    return 0;
+}
+
+module_init(${LKM}_init);
+module_exit(${LKM}_exit);
+
+MODULE_AUTHOR(DRIVER_AUTHOR);
+MODULE_DESCRIPTION(DRIVER_DESC);
+MODULE_LICENSE(DRIVER_LICENSE);
+MODULE_VERSION(DRIVER_VERSION);
+
