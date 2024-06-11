@@ -85,3 +85,6 @@ mod: /usr/local/lib/python3.11/dist-packages/ats_utilities/console_io/verbose.py
 12/30/2023 05:45:33 PM - INFO - gen pro latest_pro done
 12/30/2023 05:45:34 PM - ERROR - tool is not operational
 12/30/2023 05:45:36 PM - ERROR - missing model name or type
+06/11/2024 07:44:37 PM - ERROR - tool is not operational
+06/11/2024 07:49:41 PM - INFO - generation latest_pro done
+06/11/2024 07:49:42 PM - ERROR - tool is not operational

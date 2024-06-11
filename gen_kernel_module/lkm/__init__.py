@@ -42,7 +42,7 @@ __author__ = 'Vladimir Roncevic'
 __copyright__ = '(C) 2024, https://vroncevic.github.io/gen_kernel_module'
 __credits__: List[str] = ['Vladimir Roncevic', 'Python Software Foundation']
 __license__ = 'https://github.com/vroncevic/gen_kernel_module/blob/dev/LICENSE'
-__version__ = '1.3.6'
+__version__ = '1.3.7'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
@@ -124,7 +124,7 @@ class GenLKM(FileCheck, ProConfig, ProName):
         '''
             Generates LKM.
 
-            :param lkm_name: Model type | None
+            :param lkm_name: Module name | None
             :type lkm_name: <str> | <NoneType>
             :param lkm_type: Model type | None
             :type lkm_type: <str> | <NoneType>
@@ -152,12 +152,12 @@ class GenLKM(FileCheck, ProConfig, ProName):
                 'generate', lkm_type, 'form', lkm_name
             ]
         )
-        template_content: Dict[str, str] | None = None
-        if bool(self._reader):
-            template_content = self._reader.read(
+        if bool(self._reader) and bool(self.config):
+            template_content: Dict[str, str] = self._reader.read(
                 self.config, lkm_name, lkm_type, verbose
             )
-        if all([bool(template_content), bool(self._writer)]):
-            if self._writer.write(template_content, lkm_name, verbose):
-                status = True
+            if bool(template_content) and bool(self._writer):
+                status = self._writer.write(
+                    template_content, lkm_name, verbose
+                )
         return status

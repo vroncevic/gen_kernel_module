@@ -1,6 +1,6 @@
-<img align="right" src="https://raw.githubusercontent.com/vroncevic/gen_kernel_module/dev/docs/gen_kernel_module_logo.png" width="25%">
-
 # Generating Kernel Modules
+
+<img align="right" src="https://raw.githubusercontent.com/vroncevic/gen_kernel_module/dev/docs/gen_kernel_module_logo.png" width="25%">
 
 **gen_kernel_module** is tool for generation Linux Kernel Module project.
 
@@ -82,7 +82,8 @@ ln -s /usr/local/lib/python3.10/dist-packages/usr/local/bin/gen_kernel_module_ru
 Navigate to release **[page](https://github.com/vroncevic/gen_kernel_module/releases/)** download and extract release archive.
 
 To install **gen_kernel_module** locate and run setup.py with arguments
-```
+
+```bash
 tar xvzf gen_kernel_module-x.y.z.tar.gz
 cd gen_kernel_module-x.y.z/
 # python3
