@@ -40,7 +40,7 @@ __author__ = 'Vladimir Roncevic'
 __copyright__ = '(C) 2024, https://vroncevic.github.io/gen_kernel_module'
 __credits__: List[str] = ['Vladimir Roncevic', 'Python Software Foundation']
 __license__ = 'https://github.com/vroncevic/gen_kernel_module/blob/dev/LICENSE'
-__version__ = '1.3.6'
+__version__ = '1.3.7'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
@@ -89,9 +89,9 @@ class ReadTemplateTestCase(TestCase):
         '''Test read templates None'''
         template_read = ReadTemplate()
         with self.assertRaises(ATSTypeError):
-            self.assertFalse(
-                bool(template_read.read(None, 'simple_read', 'char'))
-            )
+            self.assertFalse(bool(
+                template_read.read(None, 'simple_read', 'char')  # type: ignore
+            ))
 
     def test_read_template(self) -> None:
         '''Test read templates'''

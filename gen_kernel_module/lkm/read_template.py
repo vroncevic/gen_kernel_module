@@ -37,7 +37,7 @@ __author__ = 'Vladimir Roncevic'
 __copyright__ = '(C) 2024, https://vroncevic.github.io/gen_kernel_module'
 __credits__: List[str] = ['Vladimir Roncevic', 'Python Software Foundation']
 __license__ = 'https://github.com/vroncevic/gen_kernel_module/blob/dev/LICENSE'
-__version__ = '1.3.6'
+__version__ = '1.3.7'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
@@ -105,7 +105,7 @@ class ReadTemplate(FileCheck):
             raise ATSValueError('missing LKM type')
         current_dir: str = dirname(realpath(__file__))
         pro_structure: str = f'{current_dir}{self._TEMPLATE_DIR}'
-        template_dir = f'{pro_structure}{lkm_type}/'
+        template_dir: str = f'{pro_structure}{lkm_type}/'
         template_content: Dict[str, str] = {}
         templates: List[str] = []
         index: int = -1

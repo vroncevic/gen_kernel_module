@@ -1,20 +1,16 @@
-
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../../">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>gen_kernel_module.lkm &#8212; gen_kernel_modeule https://github.com/electux/gen_kernel_modeule/releases documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/classic.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/classic.css?v=514cf933" />
     
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/jquery.js"></script>
-    <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/documentation_options.js?v=fb752337"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
@@ -85,13 +81,15 @@
 <span class="n">__copyright__</span> <span class="o">=</span> <span class="s1">&#39;(C) 2024, https://vroncevic.github.io/gen_kernel_module&#39;</span>
 <span class="n">__credits__</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Vladimir Roncevic&#39;</span><span class="p">,</span> <span class="s1">&#39;Python Software Foundation&#39;</span><span class="p">]</span>
 <span class="n">__license__</span> <span class="o">=</span> <span class="s1">&#39;https://github.com/vroncevic/gen_kernel_module/blob/dev/LICENSE&#39;</span>
-<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;1.3.6&#39;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;1.3.7&#39;</span>
 <span class="n">__maintainer__</span> <span class="o">=</span> <span class="s1">&#39;Vladimir Roncevic&#39;</span>
 <span class="n">__email__</span> <span class="o">=</span> <span class="s1">&#39;elektron.ronca@gmail.com&#39;</span>
 <span class="n">__status__</span> <span class="o">=</span> <span class="s1">&#39;Updated&#39;</span>
 
 
-<div class="viewcode-block" id="GenLKM"><a class="viewcode-back" href="../../gen_kernel_module.lkm.html#gen_kernel_module.lkm.GenLKM">[docs]</a><span class="k">class</span> <span class="nc">GenLKM</span><span class="p">(</span><span class="n">FileCheck</span><span class="p">,</span> <span class="n">ProConfig</span><span class="p">,</span> <span class="n">ProName</span><span class="p">):</span>
+<div class="viewcode-block" id="GenLKM">
+<a class="viewcode-back" href="../../gen_kernel_module.lkm.html#gen_kernel_module.lkm.GenLKM">[docs]</a>
+<span class="k">class</span> <span class="nc">GenLKM</span><span class="p">(</span><span class="n">FileCheck</span><span class="p">,</span> <span class="n">ProConfig</span><span class="p">,</span> <span class="n">ProName</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Defines class GenLKM with attribute(s) and method(s).</span>
 <span class="sd">        Generates LKM by templates and parameters.</span>
@@ -138,7 +136,9 @@
             <span class="n">yml2obj</span><span class="p">:</span> <span class="n">Yaml2Object</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">Yaml2Object</span><span class="p">(</span><span class="n">pro_structure</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="n">yml2obj</span><span class="o">.</span><span class="n">read_configuration</span><span class="p">()</span>
 
-<div class="viewcode-block" id="GenLKM.get_reader"><a class="viewcode-back" href="../../gen_kernel_module.lkm.html#gen_kernel_module.lkm.GenLKM.get_reader">[docs]</a>    <span class="k">def</span> <span class="nf">get_reader</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ReadTemplate</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<div class="viewcode-block" id="GenLKM.get_reader">
+<a class="viewcode-back" href="../../gen_kernel_module.lkm.html#gen_kernel_module.lkm.GenLKM.get_reader">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_reader</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ReadTemplate</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">            Gets template reader.</span>
 
@@ -148,7 +148,10 @@
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reader</span></div>
 
-<div class="viewcode-block" id="GenLKM.get_writer"><a class="viewcode-back" href="../../gen_kernel_module.lkm.html#gen_kernel_module.lkm.GenLKM.get_writer">[docs]</a>    <span class="k">def</span> <span class="nf">get_writer</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">WriteTemplate</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+
+<div class="viewcode-block" id="GenLKM.get_writer">
+<a class="viewcode-back" href="../../gen_kernel_module.lkm.html#gen_kernel_module.lkm.GenLKM.get_writer">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_writer</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">WriteTemplate</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">            Gets template writer.</span>
 
@@ -158,7 +161,10 @@
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_writer</span></div>
 
-<div class="viewcode-block" id="GenLKM.gen_module"><a class="viewcode-back" href="../../gen_kernel_module.lkm.html#gen_kernel_module.lkm.GenLKM.gen_module">[docs]</a>    <span class="k">def</span> <span class="nf">gen_module</span><span class="p">(</span>
+
+<div class="viewcode-block" id="GenLKM.gen_module">
+<a class="viewcode-back" href="../../gen_kernel_module.lkm.html#gen_kernel_module.lkm.GenLKM.gen_module">[docs]</a>
+    <span class="k">def</span> <span class="nf">gen_module</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">lkm_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">lkm_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
@@ -167,7 +173,7 @@
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">            Generates LKM.</span>
 
-<span class="sd">            :param lkm_name: Model type | None</span>
+<span class="sd">            :param lkm_name: Module name | None</span>
 <span class="sd">            :type lkm_name: &lt;str&gt; | &lt;NoneType&gt;</span>
 <span class="sd">            :param lkm_type: Model type | None</span>
 <span class="sd">            :type lkm_type: &lt;str&gt; | &lt;NoneType&gt;</span>
@@ -195,15 +201,17 @@
                 <span class="s1">&#39;generate&#39;</span><span class="p">,</span> <span class="n">lkm_type</span><span class="p">,</span> <span class="s1">&#39;form&#39;</span><span class="p">,</span> <span class="n">lkm_name</span>
             <span class="p">]</span>
         <span class="p">)</span>
-        <span class="n">template_content</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="k">if</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_reader</span><span class="p">):</span>
-            <span class="n">template_content</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span>
+        <span class="k">if</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_reader</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">):</span>
+            <span class="n">template_content</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">,</span> <span class="n">lkm_name</span><span class="p">,</span> <span class="n">lkm_type</span><span class="p">,</span> <span class="n">verbose</span>
             <span class="p">)</span>
-        <span class="k">if</span> <span class="nb">all</span><span class="p">([</span><span class="nb">bool</span><span class="p">(</span><span class="n">template_content</span><span class="p">),</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_writer</span><span class="p">)]):</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_writer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">template_content</span><span class="p">,</span> <span class="n">lkm_name</span><span class="p">,</span> <span class="n">verbose</span><span class="p">):</span>
-                <span class="n">status</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="k">return</span> <span class="n">status</span></div></div>
+            <span class="k">if</span> <span class="nb">bool</span><span class="p">(</span><span class="n">template_content</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_writer</span><span class="p">):</span>
+                <span class="n">status</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_writer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
+                    <span class="n">template_content</span><span class="p">,</span> <span class="n">lkm_name</span><span class="p">,</span> <span class="n">verbose</span>
+                <span class="p">)</span>
+        <span class="k">return</span> <span class="n">status</span></div>
+</div>
+
 </pre></div>
 
             <div class="clearer"></div>
@@ -242,8 +250,8 @@
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2024, Vladimir Roncevic &lt;elektron.ronca@gmail.com&gt;.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    &#169; Copyright 2024, Vladimir Roncevic &lt;elektron.ronca@gmail.com&gt;.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
     </div>
   </body>
 </html>
