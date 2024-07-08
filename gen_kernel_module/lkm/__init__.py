@@ -21,7 +21,7 @@ Info
 '''
 
 import sys
-from typing import List, Dict
+from typing import List, Dict, Optional
 from os.path import dirname, realpath
 
 try:
@@ -42,7 +42,7 @@ __author__ = 'Vladimir Roncevic'
 __copyright__ = '(C) 2024, https://vroncevic.github.io/gen_kernel_module'
 __credits__: List[str] = ['Vladimir Roncevic', 'Python Software Foundation']
 __license__ = 'https://github.com/vroncevic/gen_kernel_module/blob/dev/LICENSE'
-__version__ = '1.3.7'
+__version__ = '1.3.8'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
@@ -84,58 +84,58 @@ class GenLKM(FileCheck, ProConfig, ProName):
         verbose_message(
             verbose, [f'{self._GEN_VERBOSE.lower()} init generator']
         )
-        self._reader: ReadTemplate | None = ReadTemplate(verbose)
-        self._writer: WriteTemplate | None = WriteTemplate(verbose)
+        self._reader: Optional[ReadTemplate] = ReadTemplate(verbose)
+        self._writer: Optional[WriteTemplate] = WriteTemplate(verbose)
         current_dir: str = dirname(realpath(__file__))
         pro_structure: str = f'{current_dir}{self._PRO_STRUCTURE}'
         self.check_path(pro_structure, verbose)
         self.check_mode('r', verbose)
         self.check_format(pro_structure, 'yaml', verbose)
         if self.is_file_ok():
-            yml2obj: Yaml2Object | None = Yaml2Object(pro_structure)
+            yml2obj: Optional[Yaml2Object] = Yaml2Object(pro_structure)
             self.config = yml2obj.read_configuration()
 
-    def get_reader(self) -> ReadTemplate | None:
+    def get_reader(self) -> Optional[ReadTemplate]:
         '''
             Gets template reader.
 
             :return: Template reader object | None
-            :rtype: <ReadTemplate> | <NoneType>
+            :rtype: <Optional[ReadTemplate]>
             :exceptions: None
         '''
         return self._reader
 
-    def get_writer(self) -> WriteTemplate | None:
+    def get_writer(self) -> Optional[WriteTemplate]:
         '''
             Gets template writer.
 
             :return: Template writer object | none
-            :rtype: <WriteTemplate> | <NoneType
+            :rtype: <Optional[WriteTemplate]>
             :exceptions: None
         '''
         return self._writer
 
     def gen_module(
         self,
-        lkm_name: str | None,
-        lkm_type: str | None,
+        lkm_name: Optional[str],
+        lkm_type: Optional[str],
         verbose: bool = False
     ) -> bool:
         '''
             Generates LKM.
 
             :param lkm_name: Module name | None
-            :type lkm_name: <str> | <NoneType>
+            :type lkm_name: <Optional[str]>
             :param lkm_type: Model type | None
-            :type lkm_type: <str> | <NoneType>
+            :type lkm_type: <Optional[str]>
             :param verbose: Enable/Disable verbose option
             :type verbose: <bool>
             :return: True (success operation) | False
             :rtype: <bool>
             :exceptions: ATSTypeError | ATSValueError
         '''
-        error_msg: str | None = None
-        error_id: int | None = None
+        error_msg: Optional[str] = None
+        error_id: Optional[int] = None
         error_msg, error_id = self.check_params([
             ('str:lkm_name', lkm_name), ('str:lkm_type', lkm_type)
         ])

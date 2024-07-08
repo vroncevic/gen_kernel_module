@@ -1,2 +1,5 @@
 theme: jekyll-theme-modernist
+markdown: kramdown
 safe: true
+kramdown:
+  parse_block_html: true

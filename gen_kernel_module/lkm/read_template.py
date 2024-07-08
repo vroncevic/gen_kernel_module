@@ -21,7 +21,7 @@ Info
 '''
 
 import sys
-from typing import Any, List, Dict
+from typing import Any, List, Dict, Optional
 from os.path import dirname, realpath
 
 try:
@@ -37,7 +37,7 @@ __author__ = 'Vladimir Roncevic'
 __copyright__ = '(C) 2024, https://vroncevic.github.io/gen_kernel_module'
 __credits__: List[str] = ['Vladimir Roncevic', 'Python Software Foundation']
 __license__ = 'https://github.com/vroncevic/gen_kernel_module/blob/dev/LICENSE'
-__version__ = '1.3.7'
+__version__ = '1.3.8'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
@@ -75,8 +75,8 @@ class ReadTemplate(FileCheck):
     def read(
         self,
         config: Dict[Any, Any],
-        lkm_name: str | None,
-        lkm_type: str | None,
+        lkm_name: Optional[str],
+        lkm_type: Optional[str],
         verbose: bool = False
     ) -> Dict[str, str]:
         '''
@@ -85,15 +85,15 @@ class ReadTemplate(FileCheck):
             :param config: LKM configuration
             :type config: <Dict[Any, Any]>
             :param lkm_type: LKM type | None
-            :type lkm_type: <str> | <NoneType>
+            :type lkm_type: <Optional[str]>
             :param verbose: Enable/Disable verbose option
             :type verbose: <bool>
             :return: Loaded templates
             :rtype: <Dict[str, str]>
             :exceptions: ATSTypeError | ATSValueError
         '''
-        error_msg: str | None = None
-        error_id: int | None = None
+        error_msg: Optional[str] = None
+        error_id: Optional[int] = None
         error_msg, error_id = self.check_params([
             ('dict:config', config), ('str:lkm_type', lkm_type)
         ])
@@ -121,7 +121,7 @@ class ReadTemplate(FileCheck):
         for template in templates:
             template_file: str = f'{template_dir}{template}'
             with open(template_file, 'r', encoding='utf-8') as module_file:
-                module_key: str | None = None
+                module_key: Optional[str] = None
                 if 'lkm' in template_file:
                     module_key = f'{lkm_name}.c'
                 if 'Makefile' in template_file:

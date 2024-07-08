@@ -27,7 +27,9 @@ RUN DEBIAN_FRONTEND=noninteractive \
     python3-pip \
     python3-wheel \
     libyaml-dev \
-    build-essential
+    build-essential \
+    kmod \
+    apt install linux-headers-`uname -r`
 
 RUN wget https://bootstrap.pypa.io/get-pip.py
 RUN python3 get-pip.py

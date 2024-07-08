@@ -146,6 +146,16 @@ Generator structure
         10 directories, 22 files
 ```
 
+### Code coverage
+
+| Name | Stmts | Miss | Cover |
+|------|-------|------|-------|
+| `gen_kernel_module/__init__.py` | 75 | 14 | 81% |
+| `gen_kernel_module/lkm/__init__.py` | 62 | 2 | 97% |
+| `gen_kernel_module/lkm/read_template.py` | 63 | 9 | 86% |
+| `gen_kernel_module/lkm/write_template.py` | 54 | 3 | 94% |
+| **Total** | 254 | 28 | 89% |
+
 ### Docs
 
 [![Documentation Status](https://readthedocs.org/projects/gen_kernel_module/badge/?version=latest)](https://gen-kernel-module.readthedocs.io/en/latest/?badge=latest)
