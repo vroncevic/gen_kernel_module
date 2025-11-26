@@ -1,7 +1,7 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 4; tab-width: 4 -*-  */
 /*
  * full_simple_new.c
- * Copyright (C) 2024 Vladimir Roncevic <elektron.ronca@gmail.com>
+ * Copyright (C) 2025 Vladimir Roncevic <elektron.ronca@gmail.com>
  * 
  * full_simple_new is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
