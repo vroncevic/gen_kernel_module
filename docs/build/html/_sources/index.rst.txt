@@ -133,7 +133,7 @@ Copyright and licence
 .. |license: apache 2.0| image:: https://img.shields.io/badge/license-apache%202.0-blue.svg
    :target: https://opensource.org/licenses/apache-2.0
 
-Copyright (C) 2017 - 2024 by `vroncevic.github.io/gen_kernel_module <https://vroncevic.github.io/gen_kernel_module>`_
+Copyright (C) 2017 - 2026 by `vroncevic.github.io/gen_kernel_module <https://vroncevic.github.io/gen_kernel_module>`_
 
 **gen_kernel_module** is free software; you can redistribute it and/or modify
 it under the same terms as Python itself, either Python version 3.x or,

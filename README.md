@@ -23,6 +23,7 @@ other information that should be provided before the modules are installed.
     - [Install using docker](#install-using-docker)
 - [Dependencies](#dependencies)
 - [Tool structure](#tool-structure)
+- [Code coverage](#code-coverage)
 - [Docs](#docs)
 - [Contributing](#contributing)
 - [Copyright and licence](#copyright-and-licence)
@@ -150,11 +151,11 @@ Generator structure
 
 | Name | Stmts | Miss | Cover |
 |------|-------|------|-------|
-| `gen_kernel_module/__init__.py` | 75 | 14 | 81% |
-| `gen_kernel_module/lkm/__init__.py` | 62 | 2 | 97% |
-| `gen_kernel_module/lkm/read_template.py` | 63 | 9 | 86% |
-| `gen_kernel_module/lkm/write_template.py` | 54 | 3 | 94% |
-| **Total** | 254 | 28 | 89% |
+| `gen_kernel_module/__init__.py` | 73 | 12 | 84%|
+| `gen_kernel_module/lkm/__init__.py` | 60 | 0 | 100%|
+| `gen_kernel_module/lkm/read_template.py` | 61 | 7 | 89%|
+| `gen_kernel_module/lkm/write_template.py` | 52 | 1 | 98%|
+| **Total** | 246 | 20 | 92% |
 
 ### Docs
 
@@ -168,7 +169,7 @@ More documentation and info at
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-Copyright (C) 2017 - 2024 by [vroncevic.github.io/gen_kernel_module](https://vroncevic.github.io/gen_kernel_module)
+Copyright (C) 2017 - 2026 by [vroncevic.github.io/gen_kernel_module](https://vroncevic.github.io/gen_kernel_module)
 
 **gen_kernel_module** is free software; you can redistribute it and/or modify
 it under the same terms as Python itself, either Python version 3.x or,

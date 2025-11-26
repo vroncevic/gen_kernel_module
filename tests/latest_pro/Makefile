@@ -1,6 +1,6 @@
 #
 # Makefile
-# Copyright (C) 2024 Vladimir Roncevic <elektron.ronca@gmail.com>
+# Copyright (C) 2025 Vladimir Roncevic <elektron.ronca@gmail.com>
 # 
 # latest_pro is free software: you can redistribute it and/or modify it
 # under the terms of the GNU General Public License as published by the
