@@ -1,14 +1,14 @@
-# Generating Kernel Modules
+# Create KernelModule project skeleton
 
 <img align="right" src="https://raw.githubusercontent.com/vroncevic/gen_kernel_module/dev/docs/gen_kernel_module_logo.png" width="25%">
 
-**gen_kernel_module** is tool for generation Linux Kernel Module project.
+**gen_kernel_module** is tool for creating KernelModule project skeleton.
 
-Developed in **[python](https://www.python.org/)** code: **100%**.
+Developed in **[python](https://www.python.org/)** code.
 
-The README is used to introduce the modules and provide instructions on
-how to install the modules, any machine dependencies it may have and any
-other information that should be provided before the modules are installed.
+The README is used to introduce the tool and provide instructions on
+how to install the tool, any machine dependencies it may have and any
+other information that should be provided before the tool is installed.
 
 [![gen_kernel_module python checker](https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_python_checker.yml/badge.svg)](https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_python_checker.yml) [![gen_kernel_module package checker](https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_package_checker.yml/badge.svg)](https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_package.yml) [![GitHub issues open](https://img.shields.io/github/issues/vroncevic/gen_kernel_module.svg)](https://github.com/vroncevic/gen_kernel_module/issues) [![GitHub contributors](https://img.shields.io/github/contributors/vroncevic/gen_kernel_module.svg)](https://github.com/vroncevic/gen_kernel_module/graphs/contributors)
 
@@ -16,21 +16,23 @@ other information that should be provided before the modules are installed.
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**
 
-- [Installation](#installation)
+- [🚀 Installation](#-installation)
     - [Install using pip](#install-using-pip)
     - [Install using build](#install-using-build)
     - [Install using py setup](#install-using-py-setup)
     - [Install using docker](#install-using-docker)
-- [Dependencies](#dependencies)
-- [Tool structure](#tool-structure)
-- [Code coverage](#code-coverage)
-- [Docs](#docs)
-- [Contributing](#contributing)
-- [Copyright and licence](#copyright-and-licence)
+- [📦 Dependencies](#-dependencies)
+- [📁 Tool structure](#-tool-structure)
+  - [✨ Features](#-features)
+- [📊 Code coverage](#-code-coverage)
+- [🛠 Usage](#-usage)
+- [📚 Docs](#-docs)
+- [👥 Contributing](#-contributing)
+- [📄 Copyright and licence](#-copyright-and-licence)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-### Installation
+### 🚀 Installation
 
 Used next development environment
 
@@ -38,7 +40,7 @@ Used next development environment
 
 [![gen_kernel_module python3 build](https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_python3_build.yml/badge.svg)](https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_python3_build.yml)
 
-Currently there are three ways to install package
+Currently there are four ways to install package
 * Install process based on using pip mechanism
 * Install process based on build mechanism
 * Install process based on setup.py mechanism
@@ -46,13 +48,13 @@ Currently there are three ways to install package
 
 ##### Install using pip
 
-Python package is located at **[pypi.org](https://pypi.org/project/gen_kernel_module/)**.
+**gen_kernel_module** is located at **[pypi.org](https://pypi.org/project/gen_kernel_module/)**.
 
 You can install by using pip
 
 ```bash
 # python3
-pip3 install gen-kernel-module
+pip3 install gen_kernel_module
 ```
 
 ##### Install using build
@@ -67,6 +69,8 @@ cd gen_kernel_module-x.y.z/
 # python3
 wget https://bootstrap.pypa.io/get-pip.py
 python3 get-pip.py 
+# python3
+python3 get-pip.py
 python3 -m pip install --upgrade setuptools
 python3 -m pip install --upgrade pip
 python3 -m pip install --upgrade build
@@ -74,23 +78,20 @@ pip3 install -r requirements.txt
 python3 -m build --no-isolation --wheel
 pip3 install ./dist/gen_kernel_module-*-py3-none-any.whl
 rm -f get-pip.py
-chmod 755 /usr/local/lib/python3.10/dist-packages/usr/local/bin/gen_kernel_module_run.py
-ln -s /usr/local/lib/python3.10/dist-packages/usr/local/bin/gen_kernel_module_run.py /usr/local/bin/gen_kernel_module_run.py
 ```
 
 ##### Install using py setup
 
-Navigate to release **[page](https://github.com/vroncevic/gen_kernel_module/releases/)** download and extract release archive.
+Navigate to **[release page](https://github.com/vroncevic/gen_kernel_module/releases)** download and extract release archive.
 
 To install **gen_kernel_module** locate and run setup.py with arguments
 
 ```bash
 tar xvzf gen_kernel_module-x.y.z.tar.gz
-cd gen_kernel_module-x.y.z/
+cd gen_kernel_module-x.y.z
 # python3
 pip3 install -r requirements.txt
 python3 setup.py install_lib
-python3 setup.py install_data
 python3 setup.py install_egg_info
 ```
 
@@ -98,78 +99,181 @@ python3 setup.py install_egg_info
 
 You can use Dockerfile to create image/container.
 
-### Dependencies
+### 📦 Dependencies
 
 **gen_kernel_module** requires next modules and libraries
 
-* [ats-utilities - Python App/Tool/Script Utilities](https://vroncevic.github.io/ats_utilities)
+* [ats-utilities - Python App/Tool/Script Utilities](https://pypi.org/project/ats-utilities/)
 
-### Tool structure
+### 📁 Tool structure
 
 **gen_kernel_module** is based on OOP.
 
-Generator structure
+Tool structure
+
+<details>
+<summary><b>Click to expand framework structure</b></summary>
 
 ```bash
     gen_kernel_module/
-        ├── conf/
-        │   ├── gen_kernel_module.cfg
-        │   ├── gen_kernel_module.logo
-        │   ├── gen_kernel_module_util.cfg
-        │   ├── project.yaml
-        │   └── template/
-        │       ├── block/
-        │       │   ├── lkm.template
-        │       │   ├── Makefile.template
-        │       │   └── test.template
-        │       ├── char/
-        │       │   ├── lkm.template
-        │       │   ├── Makefile.template
-        │       │   └── test.template
-        │       ├── net/
-        │       │   ├── lkm.template
-        │       │   ├── Makefile.template
-        │       │   └── test.template
-        │       └── vma/
-        │           ├── lkm.template
-        │           ├── Makefile.template
-        │           └── test.template
-        ├── __init__.py
-        ├── lkm/
-        │   ├── __init__.py
-        │   ├── read_template.py
-        │   └── write_template.py
-        ├── log/
-        │   └── gen_kernel_module.log
-        └── run/
-            └── gen_kernel_module_run.py
-        
-        10 directories, 22 files
-```
+         ├── core/
+         │   ├── __init__.py
+         │   ├── model/
+         │   │   ├── __init__.py
+         │   │   └── project_setup.py
+         │   └── service/
+         │       ├── engine.py
+         │       ├── __init__.py
+         │       ├── iservice.py
+         │       └── isubprocessor.py
+         ├── engine.py
+         ├── infrastructure/
+         │   ├── cli/
+         │   │   ├── engine.py
+         │   │   ├── icli.py
+         │   │   ├── __init__.py
+         │   │   └── setup/
+         │   │       ├── bundle.py
+         │   │       ├── dep_validator.py
+         │   │       ├── dependencies.py
+         │   │       ├── factory.py
+         │   │       ├── __init__.py
+         │   │       ├── keys.py
+         │   │       ├── opt_validator.py
+         │   │       ├── options.py
+         │   │       ├── registry.py
+         │   │       └── validator.py
+         │   ├── command/
+         │   │   ├── command.py
+         │   │   ├── gen_kernel_module_command_definition.py
+         │   │   ├── gen_kernel_module_command_executor.py
+         │   │   ├── icommand_definition.py
+         │   │   ├── icommand_executor.py
+         │   │   └── __init__.py
+         │   ├── config/
+         │   │   ├── gen_kernel_module.cfg
+         │   │   ├── gen_kernel_module.logo
+         │   │   ├── scheme.json
+         │   │   └── templates.tgz
+         │   ├── __init__.py
+         │   └── subprocessor.py
+         ├── __init__.py
+         ├── py.typed
+         └── setup/
+             ├── bundle.py
+             ├── dep_validator.py
+             ├── dependencies.py
+             ├── factory.py
+             ├── __init__.py
+             ├── keys.py
+             ├── opt_validator.py
+             ├── options.py
+             ├── registry.py
+             └── validator.py
 
-### Code coverage
+       10 directories, 45 files
+```
+</details>
+
+#### ✨ Features
+
+* Automatically scaffolds KernelModule projects with build/make files.
+* Provides a modular and extensible architecture based on OOP and SOLID principles.
+* Includes command line interface (CLI) support via a command/executor structure.
+* Robust validation of project bundles, dependencies, and options.
+* Comes with configurable templates and JSON schema definitions.
+* High code quality with full type checking and 100% unit test coverage.
+
+### 📊 Code coverage
+
+<details>
+<summary><b>Click to expand code coverage</b></summary>
 
 | Name | Stmts | Miss | Cover |
 |------|-------|------|-------|
-| `gen_kernel_module/__init__.py` | 73 | 12 | 84%|
-| `gen_kernel_module/lkm/__init__.py` | 60 | 0 | 100%|
-| `gen_kernel_module/lkm/read_template.py` | 61 | 7 | 89%|
-| `gen_kernel_module/lkm/write_template.py` | 52 | 1 | 98%|
-| **Total** | 246 | 20 | 92% |
+| `gen_kernel_module/__init__.py` | 8 | 0 | 100%|
+| `gen_kernel_module/core/__init__.py` | 9 | 0 | 100%|
+| `gen_kernel_module/core/model/__init__.py` | 9 | 0 | 100%|
+| `gen_kernel_module/core/model/project_setup.py` | 14 | 0 | 100%|
+| `gen_kernel_module/core/service/__init__.py` | 9 | 0 | 100%|
+| `gen_kernel_module/core/service/engine.py` | 27 | 3 | 89%|
+| `gen_kernel_module/core/service/iservice.py` | 16 | 2 | 88%|
+| `gen_kernel_module/core/service/isubprocessor.py` | 16 | 2 | 88%|
+| `gen_kernel_module/engine.py` | 57 | 0 | 100%|
+| `gen_kernel_module/infrastructure/__init__.py` | 8 | 0 | 100%|
+| `gen_kernel_module/infrastructure/cli/__init__.py` | 9 | 0 | 100%|
+| `gen_kernel_module/infrastructure/cli/engine.py` | 39 | 7 | 82%|
+| `gen_kernel_module/infrastructure/cli/icli.py` | 16 | 2 | 88%|
+| `gen_kernel_module/infrastructure/cli/setup/__init__.py` | 9 | 0 | 100%|
+| `gen_kernel_module/infrastructure/cli/setup/bundle.py` | 22 | 1 | 95%|
+| `gen_kernel_module/infrastructure/cli/setup/dep_validator.py` | 28 | 0 | 100%|
+| `gen_kernel_module/infrastructure/cli/setup/dependencies.py` | 18 | 0 | 100%|
+| `gen_kernel_module/infrastructure/cli/setup/factory.py` | 32 | 0 | 100%|
+| `gen_kernel_module/infrastructure/cli/setup/keys.py` | 26 | 0 | 100%|
+| `gen_kernel_module/infrastructure/cli/setup/opt_validator.py` | 28 | 0 | 100%|
+| `gen_kernel_module/infrastructure/cli/setup/options.py` | 15 | 0 | 100%|
+| `gen_kernel_module/infrastructure/cli/setup/registry.py` | 21 | 0 | 100%|
+| `gen_kernel_module/infrastructure/cli/setup/validator.py` | 35 | 0 | 100%|
+| `gen_kernel_module/infrastructure/command/__init__.py` | 9 | 0 | 100%|
+| `gen_kernel_module/infrastructure/command/command.py` | 16 | 0 | 100%|
+| `gen_kernel_module/infrastructure/command/gen_kernel_module_command_definition.py` | 24 | 1 | 96%|
+| `gen_kernel_module/infrastructure/command/gen_kernel_module_command_executor.py` | 21 | 2 | 90%|
+| `gen_kernel_module/infrastructure/command/icommand_definition.py` | 15 | 0 | 100%|
+| `gen_kernel_module/infrastructure/command/icommand_executor.py` | 14 | 1 | 93%|
+| `gen_kernel_module/infrastructure/subprocessor.py` | 57 | 20 | 65%|
+| `gen_kernel_module/setup/__init__.py` | 9 | 0 | 100%|
+| `gen_kernel_module/setup/bundle.py` | 23 | 1 | 96%|
+| `gen_kernel_module/setup/dep_validator.py` | 28 | 0 | 100%|
+| `gen_kernel_module/setup/dependencies.py` | 19 | 0 | 100%|
+| `gen_kernel_module/setup/factory.py` | 45 | 1 | 98%|
+| `gen_kernel_module/setup/keys.py` | 27 | 1 | 96%|
+| `gen_kernel_module/setup/opt_validator.py` | 26 | 9 | 65%|
+| `gen_kernel_module/setup/options.py` | 12 | 0 | 100%|
+| `gen_kernel_module/setup/registry.py` | 29 | 0 | 100%|
+| `gen_kernel_module/setup/validator.py` | 40 | 0 | 100%|
+| **Total** | 877 | 53 | 94% |
 
-### Docs
+</details>
 
-[![Documentation Status](https://readthedocs.org/projects/gen_kernel_module/badge/?version=latest)](https://gen-kernel-module.readthedocs.io/en/latest/?badge=latest)
+### 🛠 Usage
+
+Install package
+
+```bash
+pip3 install gen_kernel_module
+```
+
+Prepare main entry point by downloading [main.py](https://raw.githubusercontent.com/vroncevic/gen_kernel_module/main/main.py) or create your own.
+
+
+```bash
+wget -O main.py https://raw.githubusercontent.com/vroncevic/gen_kernel_module/main/main.py
+```
+
+Running tool for creating new KernelModule project skeleton
+
+```bash
+python3 main.py create --name mytool --type char --output ./demo/
+```
+
+### 📚 Docs
+
+[![Documentation Status](https://readthedocs.org/projects/gen-kernel_module/badge/?version=latest)](https://gen-kernel_module.readthedocs.io/en/latest/?badge=latest)
 
 More documentation and info at
-* [gen_kernel_module.readthedocs.io](https://gen-kernel-module.readthedocs.io/en/latest/)
+
+* [gen_kernel_module.readthedocs.io](https://gen-kernel_module.readthedocs.io)
 * [www.python.org](https://www.python.org/)
 
-### Copyright and licence
+### 👥 Contributing
+
+[Contributing to gen_kernel_module](CONTRIBUTING.md)
+
+### 📄 Copyright and licence
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-Copyright (C) 2017 - 2026 by [vroncevic.github.io/gen_kernel_module](https://vroncevic.github.io/gen_kernel_module)
+Copyright (C) 2025 - 2026 by [vroncevic.github.io/gen_kernel_module](https://vroncevic.github.io/gen_kernel_module/)
 
 **gen_kernel_module** is free software; you can redistribute it and/or modify
 it under the same terms as Python itself, either Python version 3.x or,
