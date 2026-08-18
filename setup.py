@@ -29,7 +29,7 @@ __author__: str = 'Vladimir Roncevic'
 __copyright__: str = '(C) 2026, https://vroncevic.github.io/gen_kernel_module'
 __credits__: list[str] = ['Vladimir Roncevic', 'Python Software Foundation']
 __license__: str = 'https://github.com/vroncevic/gen_kernel_module/blob/dev/LICENSE'
-__version__: str = '1.4.0'
+__version__: str = '1.4.1'
 __maintainer__: str = 'Vladimir Roncevic'
 __email__: str = 'elektron.ronca@gmail.com'
 __status__: str = 'Updated'
@@ -71,7 +71,7 @@ def find_package_data(pkg: str) -> list[str]:
 
 setup(
     name='gen_kernel_module',
-    version='1.4.0',
+    version='1.4.1',
     description='Generating kernel module project',
     author='Vladimir Roncevic',
     author_email='elektron.ronca@gmail.com',

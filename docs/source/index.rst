@@ -23,8 +23,8 @@ other information that should be provided before the tool is installed.
 .. |github contributors| image:: https://img.shields.io/github/contributors/vroncevic/gen_kernel_module.svg
    :target: https://github.com/vroncevic/gen_kernel_module/graphs/contributors
 
-.. |documentation status| image:: https://readthedocs.org/projects/gen-kernel_module/badge/?version=latest
-   :target: https://gen-kernel_module.readthedocs.io/en/latest/?badge=latest
+.. |documentation status| image:: https://readthedocs.org/projects/gen-kernel-module/badge/?version=latest
+   :target: https://gen-kernel-module.readthedocs.io/en/latest/?badge=latest
 
 .. toctree::
    :maxdepth: 4
@@ -36,10 +36,19 @@ other information that should be provided before the tool is installed.
 🚀 Installation
 ------------------
 
-|gen_kernel_module python3 build|
+|gen_kernel_module python3 build| |gen_kernel_module interface checker| |gen_kernel_module isp checker| |gen_kernel_module srp checker|
 
 .. |gen_kernel_module python3 build| image:: https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_python3_build.yml/badge.svg
    :target: https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_python3_build.yml
+
+.. |gen_kernel_module interface checker| image:: https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_interface_checker.yml/badge.svg
+   :target: https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_interface_checker.yml
+
+.. |gen_kernel_module isp checker| image:: https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_isp_checker.yml/badge.svg
+   :target: https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_isp_checker.yml
+
+.. |gen_kernel_module srp checker| image:: https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_srp_checker.yml/badge.svg
+   :target: https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_srp_checker.yml
 
 Navigate to release `page`_ download and extract release archive.
 
@@ -186,7 +195,7 @@ Running tool for creating new KernelModule project skeleton
 
 More documentation and info at
 
-* `gen_kernel_module.readthedocs.io <https://gen-kernel_module.readthedocs.io>`_
+* `gen_kernel_module.readthedocs.io <https://gen-kernel-module.readthedocs.io>`_
 * `www.python.org <https://www.python.org/>`_
 
 👥 Contributing
