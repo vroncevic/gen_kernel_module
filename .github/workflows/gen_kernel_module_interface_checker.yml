@@ -5,12 +5,12 @@ permissions:
 
 on:
   push:
-    branches: [ dev ]
+    branches: [ master ]
     paths:
       - 'gen_kernel_module/**/*.py'
       - 'setup.py'
   pull_request:
-    branches: [ dev ]
+    branches: [ master ]
     paths:
       - 'gen_kernel_module/**/*.py'
       - 'setup.py'
