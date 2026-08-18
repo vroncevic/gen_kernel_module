@@ -72,4 +72,4 @@ class TestGenKernelModuleBundleRegistry(unittest.TestCase):
             GenKernelModuleBundleRegistry.create_bundle(None)
 
     def test_get_version(self) -> None:
-        self.assertEqual(GenKernelModuleBundleRegistry.get_version(), '1.4.0')
+        self.assertEqual(GenKernelModuleBundleRegistry.get_version(), '1.4.1')

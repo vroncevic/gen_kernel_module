@@ -49,4 +49,4 @@ class TestCLIBundleRegistry(unittest.TestCase):
             CLIBundleRegistry.create_bundle(None)
 
     def test_get_version(self) -> None:
-        self.assertEqual(CLIBundleRegistry.get_version(), '1.4.0')
+        self.assertEqual(CLIBundleRegistry.get_version(), '1.4.1')

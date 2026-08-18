@@ -256,11 +256,11 @@ python3 main.py create --name mytool --type char --output ./demo/
 
 ### 📚 Docs
 
-[![Documentation Status](https://readthedocs.org/projects/gen-kernel_module/badge/?version=latest)](https://gen-kernel_module.readthedocs.io/en/latest/?badge=latest)
+[![Documentation Status](https://readthedocs.org/projects/gen-kernel-module/badge/?version=latest)](https://gen-kernel-module.readthedocs.io/en/latest/?badge=latest)
 
 More documentation and info at
 
-* [gen_kernel_module.readthedocs.io](https://gen-kernel_module.readthedocs.io)
+* [gen_kernel_module.readthedocs.io](https://gen-kernel-module.readthedocs.io)
 * [www.python.org](https://www.python.org/)
 
 ### 👥 Contributing

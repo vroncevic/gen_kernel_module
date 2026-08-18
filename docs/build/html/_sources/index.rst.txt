@@ -23,8 +23,8 @@ other information that should be provided before the tool is installed.
 .. |github contributors| image:: https://img.shields.io/github/contributors/vroncevic/gen_kernel_module.svg
    :target: https://github.com/vroncevic/gen_kernel_module/graphs/contributors
 
-.. |documentation status| image:: https://readthedocs.org/projects/gen-kernel_module/badge/?version=latest
-   :target: https://gen-kernel_module.readthedocs.io/en/latest/?badge=latest
+.. |documentation status| image:: https://readthedocs.org/projects/gen-kernel-module/badge/?version=latest
+   :target: https://gen-kernel-module.readthedocs.io/en/latest/?badge=latest
 
 .. toctree::
    :maxdepth: 4
@@ -186,7 +186,7 @@ Running tool for creating new KernelModule project skeleton
 
 More documentation and info at
 
-* `gen_kernel_module.readthedocs.io <https://gen-kernel_module.readthedocs.io>`_
+* `gen_kernel_module.readthedocs.io <https://gen-kernel-module.readthedocs.io>`_
 * `www.python.org <https://www.python.org/>`_
 
 👥 Contributing
