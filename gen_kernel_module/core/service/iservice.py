@@ -28,7 +28,7 @@ __author__ = 'Vladimir Roncevic'
 __copyright__ = '(C) 2026, https://vroncevic.github.io/gen_kernel_module'
 __credits__ = ['Vladimir Roncevic', 'Python Software Foundation']
 __license__ = 'https://github.com/vroncevic/gen_kernel_module/blob/dev/LICENSE'
-__version__ = '1.0.5'
+__version__ = '1.4.0'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
@@ -54,7 +54,6 @@ class IService[ServiceParamsType, ExecuteResultType](Protocol):
             :param params: The parameters for the service execution.
             :return: The result of the execution.
         '''
-        pass
 
     def is_initialized(self) -> bool:
         '''
@@ -62,4 +61,3 @@ class IService[ServiceParamsType, ExecuteResultType](Protocol):
 
             :return: True if the service is initialized, False otherwise.
         '''
-        pass

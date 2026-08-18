@@ -1,0 +1,29 @@
+name: gen_kernel_module_srp_checker
+
+permissions:
+  contents: read
+
+on:
+  push:
+    branches: [ dev ]
+    paths:
+      - 'gen_kernel_module/**/*.py'
+      - 'setup.py'
+  pull_request:
+    branches: [ dev ]
+    paths:
+      - 'gen_kernel_module/**/*.py'
+      - 'setup.py'
+
+jobs:
+  srp_gate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository code
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Check Single Responsibility Principle violations
+        run: |
+          python3 gates/gates/srp_checker.py gen_kernel_module

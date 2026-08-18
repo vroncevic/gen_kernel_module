@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 
 '''
@@ -20,6 +19,8 @@ Info
     Defines setup for tool gen_kernel_module.
 '''
 
+from __future__ import annotations
+
 from os import walk
 from os.path import abspath, dirname, join, relpath
 from setuptools import setup, find_packages
@@ -28,7 +29,7 @@ __author__: str = 'Vladimir Roncevic'
 __copyright__: str = '(C) 2026, https://vroncevic.github.io/gen_kernel_module'
 __credits__: list[str] = ['Vladimir Roncevic', 'Python Software Foundation']
 __license__: str = 'https://github.com/vroncevic/gen_kernel_module/blob/dev/LICENSE'
-__version__: str = '1.0.3'
+__version__: str = '1.4.0'
 __maintainer__: str = 'Vladimir Roncevic'
 __email__: str = 'elektron.ronca@gmail.com'
 __status__: str = 'Updated'
@@ -50,9 +51,7 @@ def find_package_data(pkg: str) -> list[str]:
         Finds all files in package to include in package_data.
 
         :param pkg: Package folder name.
-        :type pkg: <str>
         :return: List of package files relative to the package folder.
-        :rtype: <list[str]>
         :exceptions: None.
     '''
     package_data: list[str] = []
@@ -70,10 +69,9 @@ def find_package_data(pkg: str) -> list[str]:
 
     return package_data
 
-
 setup(
     name='gen_kernel_module',
-    version='1.0.3',
+    version='1.4.0',
     description='Generating kernel module project',
     author='Vladimir Roncevic',
     author_email='elektron.ronca@gmail.com',

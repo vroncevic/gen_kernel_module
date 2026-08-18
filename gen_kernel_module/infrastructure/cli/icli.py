@@ -27,7 +27,7 @@ __author__ = 'Vladimir Roncevic'
 __copyright__ = '(C) 2026, https://vroncevic.github.io/gen_kernel_module'
 __credits__ = ['Vladimir Roncevic', 'Python Software Foundation']
 __license__ = 'https://github.com/vroncevic/gen_kernel_module/blob/dev/LICENSE'
-__version__ = '1.0.5'
+__version__ = '1.4.0'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
@@ -52,7 +52,6 @@ class ICLI(Protocol):
             :return: The execution result.
             :exceptions: None.
         '''
-        ...
 
     def is_initialized(self) -> bool:
         '''
@@ -61,4 +60,3 @@ class ICLI(Protocol):
             :return: True if initialized, False otherwise.
             :exceptions: None.
         '''
-        ...

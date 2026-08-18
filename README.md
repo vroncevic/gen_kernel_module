@@ -117,46 +117,45 @@ Tool structure
 ```bash
     gen_kernel_module/
          ├── core/
-         │   ├── __init__.py
-         │   ├── model/
-         │   │   ├── __init__.py
-         │   │   └── project_setup.py
-         │   └── service/
-         │       ├── engine.py
-         │       ├── __init__.py
-         │       ├── iservice.py
-         │       └── isubprocessor.py
+         │   ├── __init__.py
+         │   ├── model/
+         │   │   ├── __init__.py
+         │   │   └── project_setup.py
+         │   └── service/
+         │       ├── engine.py
+         │       ├── __init__.py
+         │       ├── iservice.py
+         │       └── isubprocessor.py
          ├── engine.py
          ├── infrastructure/
-         │   ├── cli/
-         │   │   ├── engine.py
-         │   │   ├── icli.py
-         │   │   ├── __init__.py
-         │   │   └── setup/
-         │   │       ├── bundle.py
-         │   │       ├── dep_validator.py
-         │   │       ├── dependencies.py
-         │   │       ├── factory.py
-         │   │       ├── __init__.py
-         │   │       ├── keys.py
-         │   │       ├── opt_validator.py
-         │   │       ├── options.py
-         │   │       ├── registry.py
-         │   │       └── validator.py
-         │   ├── command/
-         │   │   ├── command.py
-         │   │   ├── gen_kernel_module_command_definition.py
-         │   │   ├── gen_kernel_module_command_executor.py
-         │   │   ├── icommand_definition.py
-         │   │   ├── icommand_executor.py
-         │   │   └── __init__.py
-         │   ├── config/
-         │   │   ├── gen_kernel_module.cfg
-         │   │   ├── gen_kernel_module.logo
-         │   │   ├── scheme.json
-         │   │   └── templates.tgz
-         │   ├── __init__.py
-         │   └── subprocessor.py
+         │   ├── cli/
+         │   │   ├── engine.py
+         │   │   ├── icli.py
+         │   │   ├── __init__.py
+         │   │   └── setup/
+         │   │       ├── bundle.py
+         │   │       ├── dep_validator.py
+         │   │       ├── dependencies.py
+         │   │       ├── factory.py
+         │   │       ├── __init__.py
+         │   │       ├── keys.py
+         │   │       ├── opt_validator.py
+         │   │       ├── options.py
+         │   │       ├── registry.py
+         │   │       └── validator.py
+         │   ├── command/
+         │   │   ├── command.py
+         │   │   ├── gen_kernel_module_command_definition.py
+         │   │   ├── gen_kernel_module_command_executor.py
+         │   │   ├── icommand_definition.py
+         │   │   ├── icommand_executor.py
+         │   │   └── __init__.py
+         │   ├── config/
+         │   │   ├── gen_kernel_module.cfg
+         │   │   ├── gen_kernel_module.logo
+         │   │   ├── scheme.json
+         │   │   └── templates.tgz
+         │   └── subprocessor.py
          ├── __init__.py
          ├── py.typed
          └── setup/
@@ -171,7 +170,7 @@ Tool structure
              ├── registry.py
              └── validator.py
 
-       10 directories, 45 files
+     10 directories, 44 files
 ```
 </details>
 
@@ -196,42 +195,41 @@ Tool structure
 | `gen_kernel_module/core/model/__init__.py` | 9 | 0 | 100%|
 | `gen_kernel_module/core/model/project_setup.py` | 14 | 0 | 100%|
 | `gen_kernel_module/core/service/__init__.py` | 9 | 0 | 100%|
-| `gen_kernel_module/core/service/engine.py` | 27 | 3 | 89%|
-| `gen_kernel_module/core/service/iservice.py` | 16 | 2 | 88%|
-| `gen_kernel_module/core/service/isubprocessor.py` | 16 | 2 | 88%|
+| `gen_kernel_module/core/service/engine.py` | 27 | 0 | 100%|
+| `gen_kernel_module/core/service/iservice.py` | 14 | 0 | 100%|
+| `gen_kernel_module/core/service/isubprocessor.py` | 14 | 0 | 100%|
 | `gen_kernel_module/engine.py` | 57 | 0 | 100%|
-| `gen_kernel_module/infrastructure/__init__.py` | 8 | 0 | 100%|
 | `gen_kernel_module/infrastructure/cli/__init__.py` | 9 | 0 | 100%|
-| `gen_kernel_module/infrastructure/cli/engine.py` | 39 | 7 | 82%|
-| `gen_kernel_module/infrastructure/cli/icli.py` | 16 | 2 | 88%|
+| `gen_kernel_module/infrastructure/cli/engine.py` | 39 | 0 | 100%|
+| `gen_kernel_module/infrastructure/cli/icli.py` | 14 | 0 | 100%|
 | `gen_kernel_module/infrastructure/cli/setup/__init__.py` | 9 | 0 | 100%|
-| `gen_kernel_module/infrastructure/cli/setup/bundle.py` | 22 | 1 | 95%|
-| `gen_kernel_module/infrastructure/cli/setup/dep_validator.py` | 28 | 0 | 100%|
+| `gen_kernel_module/infrastructure/cli/setup/bundle.py` | 22 | 0 | 100%|
+| `gen_kernel_module/infrastructure/cli/setup/dep_validator.py` | 36 | 0 | 100%|
 | `gen_kernel_module/infrastructure/cli/setup/dependencies.py` | 18 | 0 | 100%|
-| `gen_kernel_module/infrastructure/cli/setup/factory.py` | 32 | 0 | 100%|
+| `gen_kernel_module/infrastructure/cli/setup/factory.py` | 35 | 0 | 100%|
 | `gen_kernel_module/infrastructure/cli/setup/keys.py` | 26 | 0 | 100%|
-| `gen_kernel_module/infrastructure/cli/setup/opt_validator.py` | 28 | 0 | 100%|
+| `gen_kernel_module/infrastructure/cli/setup/opt_validator.py` | 36 | 0 | 100%|
 | `gen_kernel_module/infrastructure/cli/setup/options.py` | 15 | 0 | 100%|
-| `gen_kernel_module/infrastructure/cli/setup/registry.py` | 21 | 0 | 100%|
-| `gen_kernel_module/infrastructure/cli/setup/validator.py` | 35 | 0 | 100%|
+| `gen_kernel_module/infrastructure/cli/setup/registry.py` | 24 | 0 | 100%|
+| `gen_kernel_module/infrastructure/cli/setup/validator.py` | 43 | 0 | 100%|
 | `gen_kernel_module/infrastructure/command/__init__.py` | 9 | 0 | 100%|
 | `gen_kernel_module/infrastructure/command/command.py` | 16 | 0 | 100%|
-| `gen_kernel_module/infrastructure/command/gen_kernel_module_command_definition.py` | 24 | 1 | 96%|
-| `gen_kernel_module/infrastructure/command/gen_kernel_module_command_executor.py` | 21 | 2 | 90%|
-| `gen_kernel_module/infrastructure/command/icommand_definition.py` | 15 | 0 | 100%|
-| `gen_kernel_module/infrastructure/command/icommand_executor.py` | 14 | 1 | 93%|
-| `gen_kernel_module/infrastructure/subprocessor.py` | 57 | 20 | 65%|
+| `gen_kernel_module/infrastructure/command/gen_kernel_module_command_definition.py` | 24 | 0 | 100%|
+| `gen_kernel_module/infrastructure/command/gen_kernel_module_command_executor.py` | 21 | 0 | 100%|
+| `gen_kernel_module/infrastructure/command/icommand_definition.py` | 14 | 0 | 100%|
+| `gen_kernel_module/infrastructure/command/icommand_executor.py` | 13 | 0 | 100%|
+| `gen_kernel_module/infrastructure/subprocessor.py` | 55 | 0 | 100%|
 | `gen_kernel_module/setup/__init__.py` | 9 | 0 | 100%|
-| `gen_kernel_module/setup/bundle.py` | 23 | 1 | 96%|
-| `gen_kernel_module/setup/dep_validator.py` | 28 | 0 | 100%|
+| `gen_kernel_module/setup/bundle.py` | 23 | 0 | 100%|
+| `gen_kernel_module/setup/dep_validator.py` | 36 | 0 | 100%|
 | `gen_kernel_module/setup/dependencies.py` | 19 | 0 | 100%|
-| `gen_kernel_module/setup/factory.py` | 45 | 1 | 98%|
-| `gen_kernel_module/setup/keys.py` | 27 | 1 | 96%|
-| `gen_kernel_module/setup/opt_validator.py` | 26 | 9 | 65%|
+| `gen_kernel_module/setup/factory.py` | 48 | 0 | 100%|
+| `gen_kernel_module/setup/keys.py` | 27 | 0 | 100%|
+| `gen_kernel_module/setup/opt_validator.py` | 34 | 0 | 100%|
 | `gen_kernel_module/setup/options.py` | 12 | 0 | 100%|
-| `gen_kernel_module/setup/registry.py` | 29 | 0 | 100%|
-| `gen_kernel_module/setup/validator.py` | 40 | 0 | 100%|
-| **Total** | 877 | 53 | 94% |
+| `gen_kernel_module/setup/registry.py` | 32 | 0 | 100%|
+| `gen_kernel_module/setup/validator.py` | 48 | 0 | 100%|
+| **Total** | 927 | 0 | 100% |
 
 </details>
 
