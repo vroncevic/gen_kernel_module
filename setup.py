@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 
 '''
@@ -20,74 +19,70 @@ Info
     Defines setup for tool gen_kernel_module.
 '''
 
-from __future__ import print_function
-from typing import List
-from os.path import abspath, dirname, join
-from setuptools import setup
+from __future__ import annotations
+
+from os import walk
+from os.path import abspath, dirname, join, relpath
+from setuptools import setup, find_packages
 
 __author__: str = 'Vladimir Roncevic'
 __copyright__: str = '(C) 2026, https://vroncevic.github.io/gen_kernel_module'
-__credits__: List[str] = ['Vladimir Roncevic', 'Python Software Foundation']
+__credits__: list[str] = ['Vladimir Roncevic', 'Python Software Foundation']
 __license__: str = 'https://github.com/vroncevic/gen_kernel_module/blob/dev/LICENSE'
-__version__: str = '1.3.9'
+__version__: str = '1.4.0'
 __maintainer__: str = 'Vladimir Roncevic'
 __email__: str = 'elektron.ronca@gmail.com'
 __status__: str = 'Updated'
 
-TOOL_DIR = 'gen_kernel_module/'
-CONF: str = 'conf'
-TEMPLATE: str = 'conf/template'
-LOG: str = 'log'
 THIS_DIR: str = abspath(dirname(__file__))
 long_description: str | None = None
+
 with open(join(THIS_DIR, 'README.md'), encoding='utf-8') as readme:
     long_description = readme.read()
+
 PROGRAMMING_LANG: str = 'Programming Language :: Python ::'
-VERSIONS: List[str] = ['3.10', '3.11', '3.12']
-SUPPORTED_PY_VERSIONS: List[str] = [
-    f'{PROGRAMMING_LANG} {VERSION}' for VERSION in VERSIONS
-]
-PYP_CLASSIFIERS: List[str] = SUPPORTED_PY_VERSIONS
+VERSIONS: list[str] = ['3.12', '3.13', '3.14']
+SUPPORTED_PY_VERSIONS: list[str] = [f'{PROGRAMMING_LANG} {VERSION}' for VERSION in VERSIONS]
+PYP_CLASSIFIERS: list[str] = SUPPORTED_PY_VERSIONS
+
+
+def find_package_data(pkg: str) -> list[str]:
+    '''
+        Finds all files in package to include in package_data.
+
+        :param pkg: Package folder name.
+        :return: List of package files relative to the package folder.
+        :exceptions: None.
+    '''
+    package_data: list[str] = []
+
+    for root, dirs, files in walk(pkg):
+        dirs[:] = [d for d in dirs if d != '__pycache__']
+
+        for file in files:
+            if file.endswith('.pyc') or file == '.editorconfig':
+                continue
+
+            full_path: str = join(root, file)
+            rel_path: str = relpath(full_path, pkg)
+            package_data.append(rel_path)
+
+    return package_data
+
 setup(
     name='gen_kernel_module',
-    version='1.3.9',
-    description='Python App/Tool/Script Utilities',
+    version='1.4.0',
+    description='Generating kernel module project',
     author='Vladimir Roncevic',
     author_email='elektron.ronca@gmail.com',
     url='https://vroncevic.github.io/gen_kernel_module/',
     license='GPL-3.0-or-later',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    keywords='tool, generator, kernel, unix, linux, os, lkm',
+    keywords='Unix, Linux, Development, Kernel, LKM, Driver, generator',
     platforms='POSIX',
     classifiers=PYP_CLASSIFIERS,
-    packages=['gen_kernel_module', 'gen_kernel_module.lkm'],
+    packages=find_packages(exclude=['tests', 'tests.*', '*.*.pyc', '*.pyo']),
     install_requires=['ats-utilities'],
-    package_data={
-        'gen_kernel_module': [
-            'py.typed',
-            f'{CONF}/gen_kernel_module.logo',
-            f'{CONF}/gen_kernel_module.cfg',
-            f'{CONF}/gen_kernel_module_util.cfg',
-            f'{CONF}/project.yaml',
-            f'{TEMPLATE}/block/lkm.template',
-            f'{TEMPLATE}/block/Makefile.template',
-            f'{TEMPLATE}/block/test.template',
-            f'{TEMPLATE}/char/lkm.template',
-            f'{TEMPLATE}/char/Makefile.template',
-            f'{TEMPLATE}/char/test.template',
-            f'{TEMPLATE}/net/lkm.template',
-            f'{TEMPLATE}/net/Makefile.template',
-            f'{TEMPLATE}/net/test.template',
-            f'{TEMPLATE}/vma/lkm.template',
-            f'{TEMPLATE}/vma/Makefile.template',
-            f'{TEMPLATE}/vma/test.template',
-            f'{LOG}/gen_kernel_module.log'
-        ]
-    },
-    data_files=[(
-        '/usr/local/bin/', [
-            f'{TOOL_DIR}run/gen_kernel_module_run.py'
-        ]
-    )]
+    package_data={'gen_kernel_module': find_package_data('gen_kernel_module')}
 )

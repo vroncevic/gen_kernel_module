@@ -16,7 +16,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="gen_kernel_module package" href="gen_kernel_module.html" />
-    <link rel="prev" title="Generating Kernel Modules" href="index.html" /> 
+    <link rel="prev" title="Create KernelModule project skeleton" href="index.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -31,7 +31,7 @@
           <a href="gen_kernel_module.html" title="gen_kernel_module package"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="index.html" title="Generating Kernel Modules"
+          <a href="index.html" title="Create KernelModule project skeleton"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">gen_kernel_modeule https://github.com/electux/gen_kernel_modeule/releases documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">gen_kernel_module</a></li> 
@@ -49,25 +49,30 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="gen_kernel_module.html">gen_kernel_module package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="gen_kernel_module.html#subpackages">Subpackages</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="gen_kernel_module.lkm.html">gen_kernel_module.lkm package</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="gen_kernel_module.lkm.html#submodules">Submodules</a></li>
-<li class="toctree-l4"><a class="reference internal" href="gen_kernel_module.lkm.html#module-gen_kernel_module.lkm">Module contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gen_kernel_module.core.html">gen_kernel_module.core package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gen_kernel_module.core.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="gen_kernel_module.core.html#module-gen_kernel_module.core">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gen_kernel_module.setup.html">gen_kernel_module.setup package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gen_kernel_module.setup.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="gen_kernel_module.setup.html#module-gen_kernel_module.setup">Module contents</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="gen_kernel_module.html#module-gen_kernel_module">Module contents</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="gen_kernel_module.html#gen_kernel_module.GenKernelModule"><code class="docutils literal notranslate"><span class="pre">GenKernelModule</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="gen_kernel_module.html#gen_kernel_module.GenKernelModule._CONFIG"><code class="docutils literal notranslate"><span class="pre">GenKernelModule._CONFIG</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="gen_kernel_module.html#gen_kernel_module.GenKernelModule._GEN_VERBOSE"><code class="docutils literal notranslate"><span class="pre">GenKernelModule._GEN_VERBOSE</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="gen_kernel_module.html#gen_kernel_module.GenKernelModule._LOG"><code class="docutils literal notranslate"><span class="pre">GenKernelModule._LOG</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="gen_kernel_module.html#gen_kernel_module.GenKernelModule._LOGO"><code class="docutils literal notranslate"><span class="pre">GenKernelModule._LOGO</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="gen_kernel_module.html#gen_kernel_module.GenKernelModule._OPS"><code class="docutils literal notranslate"><span class="pre">GenKernelModule._OPS</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="gen_kernel_module.html#gen_kernel_module.GenKernelModule.process"><code class="docutils literal notranslate"><span class="pre">GenKernelModule.process()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="gen_kernel_module.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gen_kernel_module.engine.html">gen_kernel_module.engine module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gen_kernel_module.engine.html#gen_kernel_module.engine.GenKernelModule"><code class="docutils literal notranslate"><span class="pre">GenKernelModule</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="gen_kernel_module.html#module-gen_kernel_module">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="main.html">main module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="main.html#main.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -84,7 +89,7 @@
   <div>
     <h4>Previous topic</h4>
     <p class="topless"><a href="index.html"
-                          title="previous chapter">Generating Kernel Modules</a></p>
+                          title="previous chapter">Create KernelModule project skeleton</a></p>
   </div>
   <div>
     <h4>Next topic</h4>
@@ -125,7 +130,7 @@
           <a href="gen_kernel_module.html" title="gen_kernel_module package"
              >next</a> |</li>
         <li class="right" >
-          <a href="index.html" title="Generating Kernel Modules"
+          <a href="index.html" title="Create KernelModule project skeleton"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">gen_kernel_modeule https://github.com/electux/gen_kernel_modeule/releases documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">gen_kernel_module</a></li> 

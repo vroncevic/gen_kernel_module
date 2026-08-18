@@ -7,7 +7,16 @@ Subpackages
 .. toctree::
    :maxdepth: 4
 
-   gen_kernel_module.lkm
+   gen_kernel_module.core
+   gen_kernel_module.setup
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   gen_kernel_module.engine
 
 Module contents
 ---------------

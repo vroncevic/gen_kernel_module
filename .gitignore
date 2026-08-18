@@ -1,3 +1,11 @@
 __pycache__/
 *.py[cod]
 *$py.class
+
+# Reports
+*.report
+*.xml
+*.json
+.coverage
+.coverage.gen_kernel_module
+htmlcov/

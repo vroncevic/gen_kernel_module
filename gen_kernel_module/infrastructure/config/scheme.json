@@ -1,0 +1,46 @@
+{
+    "char": {
+        "source_dir": "char",
+        "path_replacements": {
+            "lkm": "project_name"
+        },
+        "exclude": [
+            "**/.coverage",
+            "**/.vscode/**",
+            "**/.git/**"
+        ]
+    },
+    "block": {
+        "source_dir": "block",
+        "path_replacements": {
+            "lkm": "project_name"
+        },
+        "exclude": [
+            "**/.coverage",
+            "**/.vscode/**",
+            "**/.git/**"
+        ]
+    },
+    "net": {
+        "source_dir": "net",
+        "path_replacements": {
+            "lkm": "project_name"
+        },
+        "exclude": [
+            "**/.coverage",
+            "**/.vscode/**",
+            "**/.git/**"
+        ]
+    },
+    "vma": {
+        "source_dir": "vma",
+        "path_replacements": {
+            "lkm": "project_name"
+        },
+        "exclude": [
+            "**/.coverage",
+            "**/.vscode/**",
+            "**/.git/**"
+        ]
+    }
+}
