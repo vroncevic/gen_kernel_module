@@ -1,14 +1,14 @@
 name: gen_kernel_module_python3_build
 on:
   push:
-    branches: [ master ]
+    branches: [ master, main ]
     paths:
       - 'gen_kernel_module/**'
       - 'MANIFEST.in'
       - 'pyproject.toml'
       - 'setup.py'
   pull_request:
-    branches: [ master ]
+    branches: [ master, main ]
     paths:
       - 'gen_kernel_module/**'
       - 'MANIFEST.in'

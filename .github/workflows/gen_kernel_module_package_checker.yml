@@ -1,13 +1,13 @@
 name: gen_kernel_module_package_checker
 on:
   push:
-    branches: [ master ]
+    branches: [ master, main ]
     paths:
       - 'gen_kernel_module/**'
       - 'tests/**'
       - 'setup.py'
   pull_request:
-    branches: [ master ]
+    branches: [ master, main ]
     paths:
       - 'gen_kernel_module/**'
       - 'tests/**'

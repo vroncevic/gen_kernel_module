@@ -32,7 +32,7 @@ __author__ = 'Vladimir Roncevic'
 __copyright__ = '(C) 2026, https://vroncevic.github.io/gen_kernel_module'
 __credits__ = ['Vladimir Roncevic', 'Python Software Foundation']
 __license__ = 'https://github.com/vroncevic/gen_kernel_module/blob/dev/LICENSE'
-__version__ = '1.4.1'
+__version__ = '1.4.2'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
@@ -48,6 +48,7 @@ class GenKernelModuleCommandExecutor:
                 | definition - The command CLI metadata definition.
             :methods:
                 | execute - Executes the subcommand.
+                | get_definition - Returns the command definition metadata.
                 | __str__ - Returns the GenKernelModuleCommandExecutor as string representation.
     '''
 
@@ -72,6 +73,15 @@ class GenKernelModuleCommandExecutor:
         return service.execute(params=params) if service.is_initialized() else {
             'returncode': 1, 'stdout': '', 'stderr': 'service not initialized'
         }
+
+    def get_definition(self) -> ICommandDefinition:
+        '''
+            Returns the command definition metadata.
+
+            :return: The command definition metadata.
+            :exceptions: None.
+        '''
+        return self.definition
 
     def __str__(self) -> str:
         '''

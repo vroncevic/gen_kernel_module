@@ -9,13 +9,22 @@ The README is used to introduce the tool and provide instructions on
 how to install the tool, any machine dependencies it may have and any
 other information that should be provided before the tool is installed.
 
-|gen_kernel_module python checker| |gen_kernel_module python package| |github issues| |documentation status| |github contributors|
+|gen_kernel_module python checker| |gen_kernel_module python package| |gen_kernel_module interface checker| |gen_kernel_module isp checker| |gen_kernel_module srp checker| |github issues| |documentation status| |github contributors|
 
 .. |gen_kernel_module python checker| image:: https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_python_checker.yml/badge.svg
    :target: https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_python_checker.yml
 
 .. |gen_kernel_module python package| image:: https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_package_checker.yml/badge.svg
    :target: https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_package.yml
+
+.. |gen_kernel_module interface checker| image:: https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_interface_checker.yml/badge.svg
+   :target: https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_interface_checker.yml
+
+.. |gen_kernel_module isp checker| image:: https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_isp_checker.yml/badge.svg
+   :target: https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_isp_checker.yml
+
+.. |gen_kernel_module srp checker| image:: https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_srp_checker.yml/badge.svg
+   :target: https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_srp_checker.yml
 
 .. |github issues| image:: https://img.shields.io/github/issues/vroncevic/gen_kernel_module.svg
    :target: https://github.com/vroncevic/gen_kernel_module/issues
@@ -36,19 +45,10 @@ other information that should be provided before the tool is installed.
 🚀 Installation
 ------------------
 
-|gen_kernel_module python3 build| |gen_kernel_module interface checker| |gen_kernel_module isp checker| |gen_kernel_module srp checker|
+|gen_kernel_module python3 build|
 
 .. |gen_kernel_module python3 build| image:: https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_python3_build.yml/badge.svg
    :target: https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_python3_build.yml
-
-.. |gen_kernel_module interface checker| image:: https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_interface_checker.yml/badge.svg
-   :target: https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_interface_checker.yml
-
-.. |gen_kernel_module isp checker| image:: https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_isp_checker.yml/badge.svg
-   :target: https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_isp_checker.yml
-
-.. |gen_kernel_module srp checker| image:: https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_srp_checker.yml/badge.svg
-   :target: https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_srp_checker.yml
 
 Navigate to release `page`_ download and extract release archive.
 

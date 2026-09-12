@@ -5,7 +5,9 @@ __pycache__/
 # Reports
 *.report
 *.xml
-*.json
+*report*.json
+*coverage*.json
+/*.json
 .coverage
-.coverage.gen_kernel_module
 htmlcov/
+.coverage.gen_kernel_module

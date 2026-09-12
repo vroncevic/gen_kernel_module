@@ -10,7 +10,7 @@ The README is used to introduce the tool and provide instructions on
 how to install the tool, any machine dependencies it may have and any
 other information that should be provided before the tool is installed.
 
-[![gen_kernel_module python checker](https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_python_checker.yml/badge.svg)](https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_python_checker.yml) [![gen_kernel_module package checker](https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_package_checker.yml/badge.svg)](https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_package.yml) [![GitHub issues open](https://img.shields.io/github/issues/vroncevic/gen_kernel_module.svg)](https://github.com/vroncevic/gen_kernel_module/issues) [![GitHub contributors](https://img.shields.io/github/contributors/vroncevic/gen_kernel_module.svg)](https://github.com/vroncevic/gen_kernel_module/graphs/contributors)
+[![gen_kernel_module python checker](https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_python_checker.yml/badge.svg)](https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_python_checker.yml) [![gen_kernel_module package checker](https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_package_checker.yml/badge.svg)](https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_package.yml) [![gen_kernel_module interface checker](https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_interface_checker.yml/badge.svg)](https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_interface_checker.yml) [![gen_kernel_module isp checker](https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_isp_checker.yml/badge.svg)](https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_isp_checker.yml) [![gen_kernel_module srp checker](https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_srp_checker.yml/badge.svg)](https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_srp_checker.yml) [![GitHub issues open](https://img.shields.io/github/issues/vroncevic/gen_kernel_module.svg)](https://github.com/vroncevic/gen_kernel_module/issues) [![GitHub contributors](https://img.shields.io/github/contributors/vroncevic/gen_kernel_module.svg)](https://github.com/vroncevic/gen_kernel_module/graphs/contributors)
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -38,7 +38,7 @@ Used next development environment
 
 ![debian linux os](https://raw.githubusercontent.com/vroncevic/gen_kernel_module/dev/docs/debtux.png)
 
-[![gen_kernel_module python3 build](https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_python3_build.yml/badge.svg)](https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_python3_build.yml) [![gen_kernel_module_interface_checker](https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_interface_checker.yml/badge.svg)](https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_interface_checker.yml) [![gen_kernel_module_isp_checker](https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_isp_checker.yml/badge.svg)](https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_isp_checker.yml) [![gen_kernel_module_srp_checker](https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_srp_checker.yml/badge.svg)](https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_srp_checker.yml)
+[![gen_kernel_module python3 build](https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_python3_build.yml/badge.svg)](https://github.com/vroncevic/gen_kernel_module/actions/workflows/gen_kernel_module_python3_build.yml)
 
 Currently there are four ways to install package
 * Install process based on using pip mechanism
@@ -190,7 +190,7 @@ Tool structure
 
 | Name | Stmts | Miss | Cover |
 |------|-------|------|-------|
-| `gen_kernel_module/__init__.py` | 8 | 0 | 100%|
+| `gen_kernel_module/__init__.py` | 9 | 0 | 100%|
 | `gen_kernel_module/core/__init__.py` | 9 | 0 | 100%|
 | `gen_kernel_module/core/model/__init__.py` | 9 | 0 | 100%|
 | `gen_kernel_module/core/model/project_setup.py` | 14 | 0 | 100%|
@@ -215,21 +215,21 @@ Tool structure
 | `gen_kernel_module/infrastructure/command/__init__.py` | 9 | 0 | 100%|
 | `gen_kernel_module/infrastructure/command/command.py` | 16 | 0 | 100%|
 | `gen_kernel_module/infrastructure/command/gen_kernel_module_command_definition.py` | 24 | 0 | 100%|
-| `gen_kernel_module/infrastructure/command/gen_kernel_module_command_executor.py` | 21 | 0 | 100%|
+| `gen_kernel_module/infrastructure/command/gen_kernel_module_command_executor.py` | 23 | 0 | 100%|
 | `gen_kernel_module/infrastructure/command/icommand_definition.py` | 14 | 0 | 100%|
-| `gen_kernel_module/infrastructure/command/icommand_executor.py` | 13 | 0 | 100%|
+| `gen_kernel_module/infrastructure/command/icommand_executor.py` | 14 | 0 | 100%|
 | `gen_kernel_module/infrastructure/subprocessor.py` | 55 | 0 | 100%|
 | `gen_kernel_module/setup/__init__.py` | 9 | 0 | 100%|
 | `gen_kernel_module/setup/bundle.py` | 23 | 0 | 100%|
 | `gen_kernel_module/setup/dep_validator.py` | 36 | 0 | 100%|
 | `gen_kernel_module/setup/dependencies.py` | 19 | 0 | 100%|
-| `gen_kernel_module/setup/factory.py` | 48 | 0 | 100%|
+| `gen_kernel_module/setup/factory.py` | 49 | 0 | 100%|
 | `gen_kernel_module/setup/keys.py` | 27 | 0 | 100%|
 | `gen_kernel_module/setup/opt_validator.py` | 34 | 0 | 100%|
 | `gen_kernel_module/setup/options.py` | 12 | 0 | 100%|
 | `gen_kernel_module/setup/registry.py` | 32 | 0 | 100%|
 | `gen_kernel_module/setup/validator.py` | 48 | 0 | 100%|
-| **Total** | 927 | 0 | 100% |
+| **Total** | 932 | 0 | 100% |
 
 </details>
 

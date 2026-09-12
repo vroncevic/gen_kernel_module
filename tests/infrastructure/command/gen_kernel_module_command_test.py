@@ -55,3 +55,8 @@ class TestGenKernelModuleCommand(unittest.TestCase):
         definition = GenKernelModuleCommandDefinition()
         executor = GenKernelModuleCommandExecutor(definition)
         self.assertTrue(isinstance(str(executor), str))
+
+    def test_executor_get_definition(self) -> None:
+        definition = GenKernelModuleCommandDefinition()
+        executor = GenKernelModuleCommandExecutor(definition)
+        self.assertEqual(executor.get_definition(), definition)
